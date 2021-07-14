@@ -25,8 +25,10 @@
 
 <dt> test.pyでテストを実行する
 
+  
+  
 <details>
-  <sammary>ちょっと詳しい解説</sammary>
+  <summary>ちょっと詳しい解説</summary>
 """ requirement.txtの使い方 """
 # クローンしてきたリポジトリに、requirements.txtが存在することを確認する。ファイル階層も確認
 # 普段使用する環境にinstall したくなければ、新規で適当な場所に環境を作る
