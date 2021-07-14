@@ -13,7 +13,7 @@
 
 <dt> Modelを定義
 
-<dd> <em>アプリケーション</em>/models.pyに、モデルの定義を記述
+<dd> アプリケーション/models.pyに、モデルの定義を記述
 
 <dt> <em>Viewを定義(繰り返し)</em>
 
