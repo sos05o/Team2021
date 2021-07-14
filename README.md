@@ -29,6 +29,8 @@
   
 <details>
   <summary>ちょっと詳しい解説</summary>
+  
+  ```python:sampleDjango.py
 """ requirement.txtの使い方 """
 # クローンしてきたリポジトリに、requirements.txtが存在することを確認する。ファイル階層も確認
 # 普段使用する環境にinstall したくなければ、新規で適当な場所に環境を作る
@@ -75,5 +77,6 @@ def index():
 # しかし、上記のpathでは、二段目のurlにマッチしません(させる方法もありますが必要ないです)。なので、
     path('userdata/<int:pk>', views.index, name='userIndex'),
 # も追加してあげましょう。ここで、/<int:pk>が増えています。これは、htmlでurlを記述する際、値を一緒にあげる為に記述しています
+```
   
 </details>
