@@ -15,7 +15,7 @@
 
 <dd> <em>アプリケーション</em>/models.pyに、モデルの定義を記述
 
-dt <em>Viewを定義(繰り返し)</em>
+<dt> <em>Viewを定義(繰り返し)</em>
 
   - <em>アプリケーション名</em>/views.pyに、機能を実装
   
@@ -23,4 +23,4 @@ dt <em>Viewを定義(繰り返し)</em>
   
   - <em>アプリケーション名</em>/urls.py に、urlを追加 ファイルが無ければ作成する
 
-dt test.pyでテストを実行する
+<dt> test.pyでテストを実行する
