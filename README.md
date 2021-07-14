@@ -67,6 +67,7 @@ http://localhost:8000/admin/
 http://localhost:8000/admin/userdata/
 http://localhost:8000/admin/userdata/1/
 # 上記のurlは、admin アプリケーションへ送られてくるurlです。
+  
 # このurlは、
     path('userdata/', views.index, name='user'),
 # にマッチします。この中で、views.indexというのは、views.pyのindex()関数を実行するということです
@@ -74,6 +75,7 @@ http://localhost:8000/admin/userdata/1/
 @app.route('admin/userdata'):
 def index():
 # と同じ働きです。
+  
 # しかし、上記のpathでは、二段目のurlにマッチしません(させる方法もありますが必要ないです)。なので、
     path('userdata/<int:pk>', views.index, name='userIndex'),
 # も追加してあげましょう。ここで、/<int:pk>が増えています。これは、htmlでurlを記述する際、値を一緒にあげる為に記述しています
