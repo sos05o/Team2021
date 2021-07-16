@@ -2,7 +2,7 @@
 class beanDBUser:
 
     def __init__(self):
-        self.__NAME = ""  # DBテーブルの名前を入力
+        self.__NAME = "table"  # DBテーブルの名前を入力
         self.__USER = ""  # Dbアクセスに使用するユーザ名を入力
         self.__PASSWORD = ""  # 上記ユーザのパスワードを入力
         self.__HOST = ""  # 上記ユーザのホスト(localhost)を入力
