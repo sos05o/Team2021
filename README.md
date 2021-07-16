@@ -82,3 +82,9 @@ def index():
 ```
   
 </details>
+
+<details>
+
+    <summary>実際に使用するであろうコード</summary>
+
+</details>
