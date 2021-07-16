@@ -14,21 +14,21 @@
  
 ### DBアクセスに使用するユーザの設定
 
-  2. クローンしてきたプロジェクトは、DBアクセスに使用するユーザや、データベースを設定してないため、実行できません
+  1. クローンしてきたプロジェクトは、DBアクセスに使用するユーザや、データベースを設定してないため、実行できません
   
-  2. Team2021/dbUserData.pyの必要な項目を入力しよう
+  1. Team2021/dbUserData.pyの必要な項目を入力しよう
   
 ### SECRET_KEYを生成しよう
 
-  3. クローンしてきたプロジェクトは、SECRET_KEYが設定されていないため、実行できません
+  1. クローンしてきたプロジェクトは、SECRET_KEYが設定されていないため、実行できません
   
-  3. ターミナルで、```python Team2021/generate_secretkey_setting.py > Team2021/local_secret_key.py```を実行しよう
+  1. ターミナルで、```python Team2021/generate_secretkey_setting.py > Team2021/local_secret_key.py```を実行しよう
   
 ### 確認作業 
 
-  4. 左の "コミット" を押下して、"無視対象ファイル" に dbUserData.py が存在しているか
+  1. 左の "コミット" を押下して、"無視対象ファイル" に dbUserData.py が存在しているか
   
-  4. 同上 に、local_settings.py が存在しているか
+  1. 同上 に、local_settings.py が存在しているか
 
 ## *基本的な開発の流れ*
 
