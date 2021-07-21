@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from . import local_secret_key as secret
+
 
 from . import dbUserData
 
@@ -131,7 +133,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR+'../static/'),
 )
 
-try:
-    from . import local_secret_key
-except ImportError:
-    pass
+SECRET_KEY = secret.SECRET_KEY
