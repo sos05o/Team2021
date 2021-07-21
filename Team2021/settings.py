@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sample.apps.SampleConfig',
-    'createRingisyo.apps.CreateRingiConfig'
+    'createRingisyo.apps.CreateRingiConfig',
+    'ringiView.apps.RingiviewConfig',
+    'createAccount.apps.CreateaccountConfig',
+    'createDep.apps.CreatedepConfig',
 ]
 
 MIDDLEWARE = [
