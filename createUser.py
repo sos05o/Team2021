@@ -315,19 +315,20 @@ def main():
     # file = open("usersql.txt", mode="w", encoding='utf-8')
     startid = 90000001
     start_position_id = 2
-    file = open("usersql.txt", mode="w", encoding='utf-8')
+    file = open("usersql.txt", mode="x", encoding='utf-8')
     b_pw = bytes('user', 'utf-8')
     rd_list = string.digits + string.ascii_letters
-    for i in range(3, 8):
+    for i in range(2, 8):
         salt = create_salt(rd_list)
         b_salt = bytes(salt, 'utf-8')
         hashed_pw = hashlib.pbkdf2_hmac('sha256', b_pw, b_salt, 100).hex()
+        mail = create_salt(rd_list)
         text = f"insert into user values ({startid}, '{rd.choice(array_last)}', '{rd.choice(array_first)}', " \
-               f"'{rd.choice(array_birth)}', 00000002, 4, {i},  'r.arihara.sys20', '{salt}', '{hashed_pw}', false);\n"
+               f"'{rd.choice(array_birth)}', 00000002, 4, {i},  '{mail}', '{salt}', '{hashed_pw}', false);\n"
         file.write(text)
         startid += 1
 
-    boss_id = 90000001
+    boss_id = 90000002
 
     add_id = 100
     for i in range(3, 8):
@@ -335,15 +336,19 @@ def main():
             salt = create_salt(rd_list)
             b_salt = bytes(salt, 'utf-8')
             hashed_pw = create_hashed_pw(b_salt, b_pw)
+            mail = create_salt(rd_list)
+            # user_id 90000002-90000005 が部長
+            # user_id 6-20 が主任
             text = f"insert into user values ({startid}, '{rd.choice(array_last)}', '{rd.choice(array_first)}', " \
-                   f"'{rd.choice(array_birth)}',{boss_id} , 5, {i},  'r.arihara.sys20', '{salt}', '{hashed_pw}', false);\n"
+                   f"'{rd.choice(array_birth)}',{boss_id} , 5, {i},  '{mail}', '{salt}', '{hashed_pw}', false);\n"
             file.write(text)
             for k in range(10):
                 salt = create_salt(rd_list)
                 b_salt = bytes(salt, 'utf-8')
                 hashed_pw = create_hashed_pw(b_salt, b_pw)
+                mail = create_salt(rd_list)
                 text = f"insert into user values ({startid + add_id}, '{rd.choice(array_last)}', '{rd.choice(array_first)}', " \
-                       f"'{rd.choice(array_birth)}',{startid} , 6, {i},  'r.arihara.sys20', '{salt}', '{hashed_pw}', false);\n"
+                       f"'{rd.choice(array_birth)}',{startid} , 6, {i},  '{mail}', '{salt}', '{hashed_pw}', false);\n"
                 file.write(text)
                 add_id += 1
 
