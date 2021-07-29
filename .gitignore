@@ -220,3 +220,4 @@ cython_debug/
 # Cython debug symbols
 
 # End of https://www.toptal.com/developers/gitignore/api/django,python
+/Team2021/slack_bot_token_file.py
