@@ -26,4 +26,5 @@ urlpatterns = [
     path('login/', include('login.urls')),
     path('list/', include('ringiList.urls')),
     path('top/', include('topPage.urls')),
+    path('sample/', include('sample.urls')),
 ]

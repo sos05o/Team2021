@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sample.apps.SampleConfig',
     'createRingisyo.apps.CreateRingiConfig',
-    'ringiView.apps.RingiviewConfig',
     'createAccount.apps.CreateaccountConfig',
     'createDep.apps.CreatedepConfig',
 ]
@@ -129,8 +128,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR+'../static/'),
-)
+STATIC_ROOT = '../static'
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR+'../static/'),
+# )
 
 SECRET_KEY = secret.SECRET_KEY
