@@ -20,7 +20,10 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('create/', include('createRingisyo.urls')),
-    path('view/', include('ringiView.urls')),
     path('account/', include('createAccount.urls')),
     path('dep/', include('createDep.urls')),
+    path('position/', include('changePosition.urls')),
+    path('login/', include('login.urls')),
+    path('list/', include('ringiList.urls')),
+    path('top/', include('topPage.urls')),
 ]
