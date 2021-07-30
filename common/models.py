@@ -38,6 +38,9 @@ class Department(models.Model):
         managed = True
         db_table = 'department'
 
+    def __str__(self):
+        return self.department_name
+
 
 class Position(models.Model):
     position_id = models.IntegerField(primary_key=True)

@@ -22,9 +22,9 @@ urlpatterns = [
     path('create/', include('createRingisyo.urls')),
     path('account/', include('createAccount.urls')),
     path('dep/', include('createDep.urls')),
-    path('position/', include('changePosition.urls')),
+    path('position/', include('position.urls')),
     path('login/', include('login.urls')),
     path('list/', include('ringiList.urls')),
     path('top/', include('topPage.urls')),
-    path('sample/', include('sample.urls')),
+    path('common/', include('common.urls')),
 ]

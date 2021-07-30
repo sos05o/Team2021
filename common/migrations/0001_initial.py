@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'approval',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'department',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'position',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -71,18 +71,18 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'user',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
             name='Remarks',
             fields=[
-                ('approval', models.OneToOneField(on_delete=django.db.models.deletion.DO_NOTHING, primary_key=True, serialize=False, to='sample.Approval')),
+                ('approval', models.OneToOneField(on_delete=django.db.models.deletion.DO_NOTHING, primary_key=True, serialize=False, to='common.Approval')),
                 ('remarks', models.CharField(blank=True, max_length=512, null=True)),
             ],
             options={
                 'db_table': 'remarks',
-                'managed': False,
+                'managed': True,
             },
         ),
     ]

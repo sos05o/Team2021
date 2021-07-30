@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'sample/css/bootstrap.min.css' %}">
-{#    <link rel="stylesheet" href="{% static 'sample/css/bootstrap.min.css.map' %}">#}
+    <link rel="stylesheet" href="{% static 'position/css/bootstrap.min.css' %}">
+{#    <link rel="stylesheet" href="{% static 'common/css/bootstrap.min.css.map' %}">#}
 {% block addCSS %}{% endblock %}
 </head>
 <body>
 {% block body %}{% endblock %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="{% static 'sample/js/bootstrap.min.js' %}"></script>
-{#<script src="{% static 'sample/js/bootstrap.min.js.map' %}"></script>#}
+<script src="{% static 'position/js/bootstrap.min.js' %}"></script>
+{#<script src="{% static 'common/js/bootstrap.min.js.map' %}"></script>#}
 {% block addJS %}{% endblock %}
 </body>
 </html>

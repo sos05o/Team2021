@@ -34,16 +34,20 @@ ALLOWED_HOSTS = []
 # アプリケーションを追加した際に、ここに記述を追加しないと認識されない
 
 INSTALLED_APPS = [
+    'createRingisyo.apps.CreateRingiConfig',
+    'createAccount.apps.CreateaccountConfig',
+    'createDep.apps.CreatedepConfig',
+    'login.apps.LoginConfig',
+    'position.apps.positionConfig',
+    'ringiList.apps.RingilistConfig',
+    'topPage.apps.ToppageConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sample.apps.SampleConfig',
-    'createRingisyo.apps.CreateRingiConfig',
-    'createAccount.apps.CreateaccountConfig',
-    'createDep.apps.CreatedepConfig',
+    'common.apps.SampleConfig',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +65,7 @@ ROOT_URLCONF = 'Team2021.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates'],
+        'DIRS': [BASE_DIR + 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

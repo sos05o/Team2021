@@ -1,7 +1,7 @@
 from django.urls import path
 from createAccount import views
 
-app_name = 'changePosition'
+app_name = 'position'
 
 urlpatterns = [
     # .../account/にアクセスがあった時、views.pyのindex関数を呼び出す
