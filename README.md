@@ -58,7 +58,7 @@
 <details>
   <summary>ちょっと詳しい解説</summary>
   
-  ```python:sampleDjango.py
+  ```python:sampleDjango1.py
 """ requirement.txtの使い方 """
 # クローンしてきたリポジトリに、requirements.txtが存在することを確認する。ファイル階層も確認
 # 普段使用する環境にinstall したくなければ、新規で適当な場所に環境を作る
@@ -114,5 +114,31 @@ def index():
 <details>
 
     <summary>実際に使用するであろうコード</summary>
+  
+    ```python:sampleDjango2.py
+  
+   """commonアプリケーションのmodels.pyの継承"""
+  
+   # 継承先のアプリケーションに移動します。
+  
+   # views.pyの先頭に、
+    from common.models import *
+  # を記述します。こうすると、models.pyの中のモデルを定義しているクラスを全てimportできます。
+  
+  # なので、もしmodels.pyに何か記述しているなら、中身を全て削除して問題ありません。
+   
+  """別のhtmlファイルを継承する方法"""
+  
+  # your_application/templatesに移動します。
+  
+  # your_application/templates/your_application/your_template_file.htmlとなるようにファイル、ディレクトリを作成します。
+  
+  # your_template_file.htmlと同じ階層に前述のhtmlを継承するhtmlファイルを作成します。
+  
+  """staticの中身""" 
+  # staticディレクトリの中身は、css/bootstrap.css, ~.css.mapと、js/bootstrap.js, ~.js.map という、cssのプラグインであるbootstrapを使用するために必要なファイルになっています。
+  
+  # もし、common/template.common/ 内のbase.htmlをコピペして使用したいなら、staticディレクトリも同じような階層になるようにコピペしましょう。
+    ```
 
 </details>
