@@ -115,7 +115,7 @@ def index():
 
     <summary>実際に使用するであろうコード</summary>
   
-    ### commonアプリケーションのmodels.pyの継承
+  ### commonアプリケーションのmodels.pyの継承
   
    - 継承先のアプリケーションに移動します。
   
@@ -125,7 +125,7 @@ def index():
   
    - なので、もしmodels.pyに何か記述しているなら、中身を全て削除して問題ありません。
    
-    ### 別のhtmlファイルを継承する方法
+  ### 別のhtmlファイルを継承する方法
   
   - your_application/templatesに移動します。
   
@@ -133,7 +133,8 @@ def index():
   
   - your_template_file.htmlと同じ階層に前述のhtmlを継承するhtmlファイルを作成します。
   
-    ### staticの中身 
+  ### staticの中身 
+  
   - staticディレクトリの中身は、css/bootstrap.css, ~.css.mapと、js/bootstrap.js, ~.js.map という、cssのプラグインであるbootstrapを使用するために必要なファイルになっています。
   
   - もし、common/template.common/ 内のbase.htmlをコピペして使用したいなら、staticディレクトリも同じような階層になるようにコピペしましょう。
