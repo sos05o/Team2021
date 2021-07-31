@@ -1,0 +1,80 @@
+#slider {
+    z-index: 99;
+    cursor: pointer;
+    position: fixed;
+    top: 40%;
+    right: -340px;
+    width: 380px;
+    background: #0DCEA8;
+    color: #fff;
+    font-size: 16px;
+    height: 250px;
+}
+
+#slider ul {
+    position: relative;
+    padding: 10px 10px 10px 60px;
+}
+
+#slider .input{
+    width: 200px;
+    height: 25px;
+}
+
+.search_li {
+    position: relative;
+    display: inline-block;
+}
+
+.search_li input,
+.search_li input:blank {
+    width: 200px;
+    height: 25px;
+    font-size: 17px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    /* outline: none; */
+    border: none;
+    margin-bottom: 20px;
+}
+
+.search_li input[type="text"] {
+    text-indent: 60px;
+}
+
+.search_li input:focus~label,
+.search_li input:valid~label {
+    left: -60px;
+    transition: .3s;
+}
+
+
+
+.search_li label {
+    position: absolute;
+    top: 2.5px;
+    left: 0;
+    padding-left: 65px;
+    font-size: 16px;
+    pointer-events: none;
+    color: rgb(119, 119, 119);
+}
+
+.search_li input[type="date"] {
+    position: relative;
+    color: #999;
+    text-indent: 25px;
+}
+
+.search_li:nth-of-type(2):before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: -43px;
+    width: 25px;
+    height: 25px;
+    background-color: #06c;
+    background-image: url("icon_calendar.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 3px;
+}
