@@ -119,26 +119,26 @@ def index():
   
    """commonアプリケーションのmodels.pyの継承"""
   
-   # 継承先のアプリケーションに移動します。
+   1. 継承先のアプリケーションに移動します。
   
-   # views.pyの先頭に、
+   1. views.pyの先頭に、
     from common.models import *
-  # を記述します。こうすると、models.pyの中のモデルを定義しているクラスを全てimportできます。
+   1. を記述します。こうすると、models.pyの中のモデルを定義しているクラスを全てimportできます。
   
-  # なので、もしmodels.pyに何か記述しているなら、中身を全て削除して問題ありません。
+   1. なので、もしmodels.pyに何か記述しているなら、中身を全て削除して問題ありません。
    
   """別のhtmlファイルを継承する方法"""
   
-  # your_application/templatesに移動します。
+  1. your_application/templatesに移動します。
   
-  # your_application/templates/your_application/your_template_file.htmlとなるようにファイル、ディレクトリを作成します。
+  1. your_application/templates/your_application/your_template_file.htmlとなるようにファイル、ディレクトリを作成します。
   
-  # your_template_file.htmlと同じ階層に前述のhtmlを継承するhtmlファイルを作成します。
+  1. your_template_file.htmlと同じ階層に前述のhtmlを継承するhtmlファイルを作成します。
   
   """staticの中身""" 
-  # staticディレクトリの中身は、css/bootstrap.css, ~.css.mapと、js/bootstrap.js, ~.js.map という、cssのプラグインであるbootstrapを使用するために必要なファイルになっています。
+  1. staticディレクトリの中身は、css/bootstrap.css, ~.css.mapと、js/bootstrap.js, ~.js.map という、cssのプラグインであるbootstrapを使用するために必要なファイルになっています。
   
-  # もし、common/template.common/ 内のbase.htmlをコピペして使用したいなら、staticディレクトリも同じような階層になるようにコピペしましょう。
+  1. もし、common/template.common/ 内のbase.htmlをコピペして使用したいなら、staticディレクトリも同じような階層になるようにコピペしましょう。
     ```
 
 </details>
