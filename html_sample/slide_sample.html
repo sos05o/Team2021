@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="slide_sample.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- ここから -->
+    <nav id="slider">
+        <ul>
+            <form action="#" autocomplete="off">
+                <li class="search_li">
+                    <input type="text" name="input_1" class="input" id="search_1">
+                    <label for="input_1">商品名</label>
+                </li>
+                <li class="search_li">
+                    <input type="date" name="input_2" class="input input_date" id="search_2">
+                </li>
+                <li class="search_li">
+                    <input type="text" name="input_3" class="input" id="search_3">
+                    <label for="input_3">業者名</label>
+                </li>
+            </form>
+            <input type="submit" value="送信" id="search_button" onclick="">
+        </ul>
+    </nav>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script>
+        //マウスオーバーで表示
+        $(function() {
+            $('#slider').hover(
+                function() {
+                    $(this).animate({
+                        'marginRight': '340px'
+                    }, 300);
+                },
+                function() {
+                    $(this).animate({
+                        'marginRight': '0'
+                    }, 500);
+                }
+            );
+        });
+
+        function clickEvent() {
+            let text1 = document.getElementById("search_1")
+        }
+    </script>
+    <!-- ここまでコピペ -->
+</body>
+
+</html>
