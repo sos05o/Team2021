@@ -115,8 +115,6 @@ def index():
 
     <summary>実際に使用するであろうコード</summary>
   
-    ```python:sampleDjango2.py
-  
    """commonアプリケーションのmodels.pyの継承"""
   
    - 継承先のアプリケーションに移動します。
@@ -139,6 +137,5 @@ def index():
   - staticディレクトリの中身は、css/bootstrap.css, ~.css.mapと、js/bootstrap.js, ~.js.map という、cssのプラグインであるbootstrapを使用するために必要なファイルになっています。
   
   - もし、common/template.common/ 内のbase.htmlをコピペして使用したいなら、staticディレクトリも同じような階層になるようにコピペしましょう。
-    ```
 
 </details>
