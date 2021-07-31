@@ -1,4 +1,4 @@
-@charset 'utf-8';
+@charset "utf-8";
 
 #body {
     min-height: 100vh;
@@ -15,11 +15,11 @@
 
 #header {
     display: grid;
-    grid-template-columns: 1fr 200px 200px;
+    grid-template-columns: 1fr 200px 200px 160px;
     grid-template-rows: 110px;
     gap: 0px 0px;
     grid-template-areas:
-        ". . .";
+        ". . . .";
     grid-area: header;
 }
 
@@ -31,38 +31,112 @@
     margin: auto 0 auto 75px;
 }
 
-#header #header_select_1,
-#header #header_select_2 {
-    margin: auto;
-    position: relative;
+/*#header #header_select_1,*/
+/*#header #header_select_2 {*/
+/*    margin: auto;*/
+/*    position: relative;*/
+/*}*/
+
+/*#header_create_select::-ms-expand, */
+/*#header_view_select::-ms-expand {*/
+/*    display: none;*/
+/*}*/
+
+/*#header_create_select, */
+/*#header_view_select {*/
+/*    -webkit-appearance: none;*/
+/*    -moz-appearance: none;*/
+/*    appearance: none;*/
+/*    text-align: -webkit;*/
+/*    position: relative;*/
+/*    text-align: center;*/
+/*    cursor: pointer;*/
+/*    z-index: 2;*/
+/*}*/
+
+/*#header_create_select:focus, */
+/*#header_view_select:focus {*/
+/*    z-index: -1;*/
+/*}*/
+
+
+.in_select_div {
+	overflow: hidden;
+	width: 90%;
+	margin: 2em auto;
+	text-align: center;
 }
 
-#header_create_select::-ms-expand, 
-#header_view_select::-ms-expand {
+.in_select_div select {
+	width: 100%;
+	padding-right: 1em;
+	cursor: pointer;
+	text-indent: 0.01px;
+	text-overflow: ellipsis;
+	border: none;
+	outline: none;
+	background: transparent;
+	background-image: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.in_select_div select::-ms-expand {
     display: none;
 }
 
-#header_create_select, 
-#header_view_select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    text-align: -webkit;
-    position: relative;
+.in_select_div.in_select_div_sub {
+	position: relative;
+	border: 2px solid #232f3e;
+    border-radius: 8px;
+	background: #232f3e;
+}
+
+.in_select_div.in_select_div_sub::before {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #ffffff;
+	pointer-events: none;
+}
+.in_select_div.in_select_div_sub select {
+	padding: 8px 38px 8px 8px;
+	color: #ffffff;
+    font-size: 24px ;
+}
+
+.in_select_div option {
+    color: #000000;
+}
+
+#header_user_info_div {
+    display: grid;
+}
+
+#header_user_info_div div,
+#header_user_info_div a{
+    height: 100%;
+    color: white;
     text-align: center;
-    cursor: pointer;
-    z-index: 2;
+    line-height: 3.3;
+    text-decoration: none;
 }
 
-#header_create_select:focus, 
-#header_view_select:focus {
-    z-index: -1;
-}
-
-
-
-
-
+/*#header_user_info_div a {*/
+/*    display: block;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    text-decoration: none;*/
+/*    color: white;*/
+/*    border-bottom: none;*/
+/*}*/
 
 
 #main {
