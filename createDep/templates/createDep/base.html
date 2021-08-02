@@ -4,15 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'createDep/css/base_1.css' %}">
+    <link rel="stylesheet" href="{% static 'createDep/css/base_2.css' %}">
     <link rel="stylesheet" href="{% static 'createDep/css/bootstrap.min.css' %}">
-{#    <link rel="stylesheet" href="{% static 'createDep/css/bootstrap.min.css.map' %}">#}
-{% block addCSS %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'createDep/css/bootstrap.min.css.map' %}">
+    {% block addCSS %}{% endblock %}
 </head>
 <body>
-{% block body %}{% endblock %}
+
+    <div id="body">
+
+    <header id="header">
+        <div id="header_title">
+            <a href="#">タイトル</a>
+        </div>
+        <div class="in_select_div in_select_div_sub">
+            <select name="header_create_select" id="header_create_select">
+                <option value="0" hidden>作成</option>
+                <option value="1">稟議書</option>
+            </select>
+        </div>
+        <div class="in_select_div in_select_div_sub">
+            <select name="header_view_select" id="header_view_select">
+                <option value="0" hidden>一覧</option>
+                <option value="1">稟議書</option>
+            </select>
+        </div>
+
+        <div id="header_user_info_div">
+            <div class="info_1">user01</div>
+            <a href="#" class="info_2">ログアウト</a>
+        </div>
+    </header>
+    <main id="main">
+        <div>
+            aaa
+            {% block body %}{% endblock %}
+            <br><br><br><br><br><br><br><br><br><br>
+        </div>
+    </main>
+    <footer id="footer">
+        <div id="footer_toplink">
+            <a href="#header">
+                <div id="footer_linkdiv">トップへ戻る</div>
+            </a>
+        </div>
+        <div id="footer_infodiv">
+            <div id="footer_copyright">
+                <div>
+                    <p>&copy;2021 morijyobi</p>
+                </div>
+                <a href="#">ログアウト</a>
+            </div>
+        </div>
+    </footer>
+    </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{% static 'createDep/js/bootstrap.min.js' %}"></script>
-{#<script src="{% static 'createDep/js/bootstrap.min.js.map' %}"></script>#}
+<script src="{% static 'createDep/js/bootstrap.min.js.map' %}"></script>
 {% block addJS %}{% endblock %}
 </body>
 </html>

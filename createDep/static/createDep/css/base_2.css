@@ -1,0 +1,92 @@
+@charset "utf-8";
+
+:root {
+    --font_color_1: rgb(77, 77, 77);
+    --font_color_2: rgb(255, 255, 255);
+    --font_color_3: rgb(0, 0, 0);
+    --header_bgcolor: rgb(35, 47, 62);
+    --main_bgcolor: rgb(243, 243, 243);
+    --footer_bgcolor1: rgb(55, 71, 90);
+    --footer_bgcolor2: rgb(35, 47, 62);
+    --box_shadow: 3px 3px 6px rgb(0,0,0);
+    --border_solid1: solid 2px rgb(112, 112, 112);
+    --border_solid2: solid 1px rgb(112, 112, 112);
+    --border_solid3: solid 2px hsl(0, 0%, 100%);
+    --border_dummy: solid 2px rgba(0, 0, 0, 0);
+    --border_radius: 8px;
+
+/* ------------------------------------- */
+    --header_font_size1: 50px;
+    --header_font_size2: 40px;
+    --header_font_size3: 23px;
+    --footer_font_size: 14px;
+
+/* ------------------------------------- */
+
+    --header_select_width: 170px;
+    --header_select_height: 65px;
+
+}
+
+
+#header {
+    background-color: var(--header_bgcolor);
+}
+
+#header #header_title a {
+    color: var(--font_color_2);
+    font-size: var(--header_font_size1);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+/*#header_create_select, */
+/*#header_view_select {*/
+/*    width: var(--header_select_width);*/
+/*    height: var(--header_select_height);*/
+/*    outline: none;*/
+/*    border: var(--border_dummy);*/
+/*    border-collapse: collapse;*/
+/*    border-radius: var(--border_radius);*/
+/*    !* --------------------------------- *!*/
+/*    color: var(--font_color_2);*/
+/*    font-size: var(--header_font_size2);*/
+/*    font-weight: bold;*/
+/*    background-color: var(--header_bgcolor);*/
+/*    padding-left: 40px;*/
+/*}   */
+
+/*#header_create_select:hover, */
+/*#header_view_select:hover {*/
+/*    border: var(--border_solid3);*/
+/*    border-collapse: collapse;*/
+/*}*/
+
+/*#header_create_select::after, */
+/*#header_view_select::after {*/
+/*    color: #000;*/
+/*} */
+
+
+
+
+
+
+
+
+
+#footer a,
+#footer p{
+    color: var(--font_color_2);
+    text-decoration: none;
+    font-size: var(--footer_font_size);
+}
+
+#footer #footer_toplink {
+    background-color: var(--footer_bgcolor1);
+}
+
+#footer #footer_infodiv {
+    background-color: var(--footer_bgcolor2);
+}

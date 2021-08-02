@@ -1,0 +1,43 @@
+<!-- {% extends 'createDep/base.html' %} -->
+<html lang="ja">
+
+{% block title %}
+    一般社員1
+{% endblock %}
+
+<head>
+    {% block addCSS %}
+        <link rel="stylesheet" href="{% static 'createDep/css/change3.css' %}">
+    {% endblock %}
+
+    <title>list</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/createDep/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/createDep/css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="../../static/createDep/css/change3.css">
+</head>
+
+<body>
+{% block body %}
+    <div class="d-grid gap-2 center-block">
+        <h1>主任を選択してください</h1>
+        <div class="d-flex justify-content-start">
+            <div class="id">ID:<span>00000000</span></div>
+            <div class="name">有原隆乃介</div>
+        </div>
+        <div class="d-flex justify-content-start">
+            <div class="id">ID:<span>00000000</span></div>
+            <div class="name">有原隆乃介</div>
+        </div>
+        <div class="group_btn d-flex justify-content-end">
+            <button class="btn btn-primary back_btn">戻る</button>
+            <button class="btn btn-primary create_btn">決定</button>
+        </div>
+    </div>
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../static/createDep/js/bootstrap.min.js"></script>
+<script src="../../static/createDep/js/bootstrap.min.js.map"></script>
+</body>
+</html>

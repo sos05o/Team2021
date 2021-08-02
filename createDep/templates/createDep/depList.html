@@ -1,0 +1,40 @@
+{% extends 'createDep/base.html' %}
+<html lang="ja">
+
+{% block title%}
+部署一覧
+{% endblock %}
+
+<head>
+    {% block addCSS %}
+        <link rel="stylesheet" href="{% static 'createDep/css/list.css' %}">
+    {% endblock %}
+
+    <title>list</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/createDep/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/createDep/css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="../../static/createDep/css/list.css">
+</head>
+
+<body>
+    {% block body %}
+    <div class="d-grid gap-2 center-block">
+        <h1>部署一覧</h1>
+        {% for i in range(5) %}
+        <button class="btn btn-primary" type="button">
+            <div class="div_in_dep_name"><span></span>部</div>
+            <div class="div_in_text">
+                <div class="director align-middle">部長 : <span></span></div>
+                <div class="error align-middle"></div>
+            </div>
+        </button>
+        {% endfor %}
+    </div>
+    {% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../static/createDep/js/bootstrap.min.js"></script>
+    <script src="../../static/createDep/js/bootstrap.min.js.map"></script>
+</body>
+</html>
