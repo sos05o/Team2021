@@ -1,0 +1,92 @@
+.d-grid {
+  width: 560px;
+  border: solid 1px #707070;
+  border-radius: 8px;
+  padding: 0 50px;
+  -webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.d-grid h1 {
+  width: 100%;
+  color: #707070;
+  text-align: center;
+  padding-top: 39px;
+}
+
+.d-grid .link {
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.d-grid .btn {
+  height: 65px;
+  background-color: #ffffff;
+  color: #4D4D4D;
+  border: solid 1px #707070;
+  margin-bottom: 38px;
+  -webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 9px 9px 7px 9px;
+}
+
+.d-grid .btn:hover {
+  border: 2px solid #707070;
+}
+
+.d-grid .btn div:nth-child(1) {
+  width: 40%;
+  height: 100%;
+}
+
+.d-grid .btn .div_in_position_name {
+  font-size: 35px;
+  color: #4D4D4D;
+  text-align: start;
+  line-height: 1.2;
+}
+
+.d-grid .btn .div_in_text {
+  color: #4D4D4D;
+}
+
+.d-grid .btn .div_in_text div {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.d-grid .btn .div_in_text .text {
+  font-size: 35px;
+  line-height: 1.25;
+}
+
+.d-grid .back_btn {
+  width: 110px;
+  height: 50px;
+  margin-left: 76%;
+  font-size: 25px;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  line-height: 1.1;
+  color: #707070;
+  background-color: #ffffff;
+  border: solid 1px #707070;
+  border-radius: 8px;
+}
+
+.d-grid .back_btn:hover {
+  color: white;
+  background-color: #535353;
+}
+
+.center-block {
+  margin: auto;
+}
+/*# sourceMappingURL=position.css.map */

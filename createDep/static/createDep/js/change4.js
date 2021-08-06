@@ -1,3 +1,4 @@
+'use strict'
 $(function() {
     $(".fas").on("click", function() {
         $(".fa-lock-open").toggleClass("icon_disabled");
