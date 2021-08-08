@@ -1,3 +1,10 @@
+.position-relative {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .d-grid {
   width: 560px;
   border: solid 1px #707070;
@@ -6,6 +13,9 @@
   -webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
           box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
   margin: auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .d-grid h1 {
