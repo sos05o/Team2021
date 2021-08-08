@@ -1,4 +1,5 @@
 {% extends 'createDep/base.html' %}
+{% load static %}
 <html lang="ja">
 
 {% block title %}
@@ -22,30 +23,33 @@
 
 <body>
 {% block body %}
-    <div class="d-grid gap-2 center-block">
+<div class="position-relative">
+
+    <div class="d-grid gap-2 position-absolute top-50 start-50 translate-middle">
         <h1>主任</h1>
         <button class="btn btn-secondary">追加</button>
         <table class="table table-bordered">
             <thead>
-            <tr class="th_row">
-                <th class="th_id th">社員ID</th>
-                <th class="th_name th">名前</th>
-                <th class="th_lift th">解除</th>
-            </tr>
+                <tr class="th_row">
+                    <th class="th_id th">社員ID</th>
+                    <th class="th_name th">名前</th>
+                    <th class="th_lift th">解除</th>
+                </tr>
             </thead>
             <tbody>
-            <tr class="tr_main">
-                <td class="td_id">00000000</td>
-                <td class="td_name">有原隆乃介</td>
-                <td class="td_lift"><i class="fas fa-lock-open icon_disabled"></i><i class="fas fa-lock"></i></td>
-            </tr>
+                <tr class="tr_main">
+                    <td class="td_id">00000000</td>
+                    <td class="td_name">有原隆乃介</td>
+                    <td class="td_lift"><i class="fas fa-lock-open icon_disabled"></i><i class="fas fa-lock"></i></td>
+                </tr>
             </tbody>
         </table>
         <button class="btn btn-secondary">決定</button>
     </div>
-{% endblock %}
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</div>
+    {% endblock %}
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="../../static/createDep/js/bootstrap.min.js"></script>
 <script src="../../static/createDep/js/bootstrap.min.js.map"></script>
 <script src="../../static/createDep/js/change2.js"></script>

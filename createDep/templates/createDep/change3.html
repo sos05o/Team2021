@@ -1,4 +1,5 @@
-<!-- {% extends 'createDep/base.html' %} -->
+{% extends 'createDep/base.html' %}
+{% load static %}
 <html lang="ja">
 
 {% block title %}
@@ -19,7 +20,9 @@
 
 <body>
 {% block body %}
-    <div class="d-grid gap-2 center-block">
+<div class="position-relative">
+
+    <div class="d-grid gap-2 position-absolute top-50 start-50 translate-middle">
         <h1>主任を選択してください</h1>
         <div class="d-flex justify-content-start">
             <div class="id">ID:<span>00000000</span></div>
@@ -34,10 +37,11 @@
             <button class="btn btn-primary create_btn">決定</button>
         </div>
     </div>
-{% endblock %}
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="../../static/createDep/js/bootstrap.min.js"></script>
-<script src="../../static/createDep/js/bootstrap.min.js.map"></script>
+</div>
+    {% endblock %}
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../static/createDep/js/bootstrap.min.js"></script>
+    <script src="../../static/createDep/js/bootstrap.min.js.map"></script>
 </body>
 </html>
