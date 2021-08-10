@@ -20,17 +20,21 @@
 
 <body>
 {% block body %}
-    <div class="position-relative">
-        <div class="d-grid gap-2 position-absolute top-50 start-50 translate-middle">
-            <form action="{% url 'dep:create' %}" method="post">
-
+    <div class="overflow">
+        <div class="d-grid gap-2">
+            <form action="{% url 'dep:create' %}" method="post">{% csrf_token %}
                 <h1>部署作成</h1>
-                <input type="text" name="dep_name" id="" class="form-control-lg" placeholder="部署名">
-                <button class="btn btn-secondary" onclick="location.href=&quot;{% url "dep:user-list" %}&quot;">所属社員
-                </button>
+                {% if dep_name %}
+                    <input type="text" name="dep_name" id="dep_name" class="form-control-lg"
+                           value="{{ dep_name }}">
+                {% else %}
+                    <input type="text" name="dep_name" id="dep_name" class="form-control-lg" placeholder="部署名">
+                {% endif %}
+                <button class="btn btn-secondary" name="select">所属社員</button>
+                {# onclick="location.href=&quot;{% url "dep:user-list" %}&quot;" #}
                 <div class=" group_btn d-flex justify-content-end">
-                    <button class="btn btn-primary back_btn" value="back">戻る</button>
-                    <button class="btn btn-primary create_btn" value="create">作成</button>
+                    <button class="btn btn-primary back_btn" name="back">戻る</button>
+                    <button class="btn btn-primary create_btn" name="create">作成</button>
                 </div>
             </form>
         </div>
