@@ -12,5 +12,7 @@ urlpatterns = [
     path('chief/', views.chief, name='chief'),
     path('employee-1/', views.employee_1, name='employee-1'),
     path('employee-2/', views.employee_2, name='employee-2'),
+
+    path('', views.top, name='top')
     #     position-list,
 ]

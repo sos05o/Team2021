@@ -23,13 +23,21 @@
             <th class="th_position th">役職</th>
             <th class="th_lift th">解除</th>
         </tr>
-        <tr class="tr_main">
-            <td class="td_id">00000000</td>
-            <td class="td_name">有原隆乃介</td>
-            <td class="td_dep">企業連携事業部</td>
-            <td class="td_position">常務取締役</td>
-            <td class="td_lift form-check"><input type="checkbox" class="form-check-input" value=""></td>
-        </tr>
+        <form id="form" action="{% url 'dep:create' %}">
+
+            {% for array in user_array %}
+                <tr class="tr_main">
+                    <td class="td_id">{{ array.user_id }}</td>
+                    <td class="td_name">{{ array.last_name }}{{ array.first_name }}</td>
+                    <td class="td_dep">{{ array.department.department_name }}</td>
+                    <td class="td_position">{{ array.position.position_name }}</td>
+                    <td class="td_lift form-check"><input type="checkbox" class="form-check-input" name="cb"
+                                                          value="{{ array.user_id }}">
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </form>
     </table>
 </div>
 <div class="search_div">
@@ -46,10 +54,10 @@
     <button type="submit" class="btn btn-primary btn-1">
         検索
     </button>
-    <button type="submit" class="btn btn-primary btn-2">
+    <button type="submit" class="btn btn-primary btn-2" form="form">
         決定
     </button>
-    <button type="submit" class="btn btn-primary btn-3">
+    <button type="submit" class="btn btn-primary btn-3" onclick="location.href='{{ request.META.HTTP_REFERER }}'">
         戻る
     </button>
 </div>

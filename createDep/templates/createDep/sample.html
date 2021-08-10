@@ -1,8 +1,9 @@
 {% extends 'createDep/base.html' %}
+{% load static %}
 <html lang="ja">
 
-{% block title%}
-
+{% block title %}
+    サンプルページ
 {% endblock %}
 
 <head>
@@ -18,11 +19,12 @@
 </head>
 
 <body>
-    {% block body %}
-    {% endblock %}
+{% block body %}
+    This is a """ TOP PAGE SAMPLE """
+{% endblock %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../../static/createDep/js/bootstrap.min.js"></script>
-    <script src="../../static/createDep/js/bootstrap.min.js.map"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../static/createDep/js/bootstrap.min.js"></script>
+<script src="../../static/createDep/js/bootstrap.min.js.map"></script>
 </body>
 </html>

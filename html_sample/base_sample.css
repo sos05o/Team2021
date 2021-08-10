@@ -24,6 +24,7 @@ body header {
 body header #header_title {
   font-size: 50px;
   font-weight: bold;
+  margin-left: 40px;
 }
 
 body header #header_title a {
@@ -52,6 +53,10 @@ body header .dropdown .dropdown-toggle {
 body header .dropdown .dropdown-toggle:hover {
   border: solid 1px white;
   background-color: #232F3E;
+}
+
+body header .dropdown .dropdown-menu li {
+  margin: 0;
 }
 
 body header .info_1,

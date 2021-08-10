@@ -24,6 +24,7 @@ body header {
 body header #header_title {
   font-size: 50px;
   font-weight: bold;
+  margin-left: 40px;
 }
 
 body header #header_title a {
@@ -54,6 +55,10 @@ body header .dropdown .dropdown-toggle:hover {
   background-color: #232F3E;
 }
 
+body header .dropdown .dropdown-menu li {
+  margin: 0;
+}
+
 body header .info_1,
 body header .info_2 {
   font-size: 20px;
@@ -68,6 +73,15 @@ body main {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+body main .overflow {
+  min-height: 100%;
+  margin: 50px auto;
+}
+
+body main .overflow .d-grid {
+  margin: 0 auto;
 }
 
 body footer {

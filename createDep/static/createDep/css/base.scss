@@ -17,7 +17,7 @@ body {
         #header_title {
             font-size: 50px;
             font-weight: bold;
-
+            margin-left: 40px;
             a {
                 color: white;
                 text-decoration: none;
@@ -46,6 +46,11 @@ body {
                     background-color: #232F3E;
                 }
             }
+            .dropdown-menu {
+                li {
+                    margin: 0;
+                }
+            }
         }
 
         .info_1,
@@ -61,6 +66,13 @@ body {
 
     main {
         flex: 1;
+        .overflow {
+            min-height: 100%;
+            margin: 50px auto;
+            .d-grid {
+                margin: 0 auto;
+            }
+        }
     }
 
     footer {
