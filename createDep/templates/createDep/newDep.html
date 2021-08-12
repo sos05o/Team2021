@@ -44,5 +44,14 @@
 {#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>#}
 {#<script src="../../static/createDep/js/bootstrap.min.js"></script>#}
 {#<script src="../../static/createDep/js/bootstrap.min.js.map"></script>#}
+{% block addJS %}
+    {% if alert %}
+        <script>
+            $(function () {
+                window.alert("{% if 'no_name' in alert %}{{ '部署名が入力されていません。' }}{% elif 'no_checked' in alert %}{{ '一般社員が一人も選択されていません。' }}{% endif %}")
+            })
+        </script>
+    {% endif %}
+{% endblock %}
 </body>
 </html>

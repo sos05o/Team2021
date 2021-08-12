@@ -23,38 +23,60 @@
 
 <body>
 {% block body %}
-<div class="overflow">
-
-    <div class="d-grid gap-2">
-        <div class="title_name">有原 隆乃介</div>
-        <button class="btn btn-secondary">追加</button>
-        <table class="table table-bordered">
-            <thead>
-                <tr class="th_row">
-                    <th class="th_id th">社員ID</th>
-                    <th class="th_name th">名前</th>
-                    <th class="th_lift th">解除</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="tr_main">
-                    <td class="td_id">00000000</td>
-                    <td class="td_name">有原隆乃介</td>
-                    <td class="td_lift"><i class="fas fa-lock-open icon_disabled"></i><i class="fas fa-lock"></i></td>
-                </tr>
-            </tbody>
-        </table>
-        <button class="btn btn-secondary">決定</button>
+    <div class="overflow">
+        <form action="{% url 'dep:employee-2' boss_id %}" method="POST">{% csrf_token %}
+            <div class="d-grid gap-2">
+                <div class="title_name">有原 隆乃介</div>
+                <button class="btn btn-secondary" name="edit">追加</button>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="th_row">
+                        <th class="th_id th">社員ID</th>
+                        <th class="th_name th">名前</th>
+                        <th class="th_lift th">解除</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for array in user_data %}
+                        <tr class="tr_main">
+                            <td class="td_id">{{ array.user_id }}</td>
+                            <td class="td_name">{{ array.last_name }}{{ array.first_name }}</td>
+                            <td class="td_lift"><i class="fas fa-lock-open icon_disabled"></i><i
+                                    class="fas fa-lock"></i>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <button class="btn btn-secondary" name="decision" id="edit">決定</button>
+            </div>
+        </form>
     </div>
-</div>
-    {% endblock %}
-    
+{% endblock %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="../../static/createDep/js/bootstrap.min.js"></script>
 <script src="../../static/createDep/js/bootstrap.min.js.map"></script>
 <script src="../../static/createDep/js/change4.js"></script>
 {% block addJS %}
     <script src="{% static 'createDep/js/change4.js' %}"></script>
+    {% if alert %}
+        <script>
+            {% if 'no_checked' in alert %}
+                window.alert('一般社員が一人も選択されていません。');
+            {% elif 'duplicate_director' %}
+                window.alert('部長が二人以上選択されています。');
+            {% endif %}
+            $(function () {
+                $("#edit").on('click', function (e) {
+                    let bool = window.confirm('一般社員が選択されていません。\n本当によろしいですか?');
+                    if (!bool) {
+                        e.preventDefault();
+                    }
+                })
+            })
+        </script>
+    {% endif %}
 {% endblock %}
 </body>
 
