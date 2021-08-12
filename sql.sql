@@ -1,247 +1,623 @@
-create database djangoTeam2021;
+create
+database djangoTeam2021;
 
-use djangoTeam2021;
+use
+djangoTeam2021;
 
-create table position (
-    position_id int primary key ,
+create table position
+(
+    position_id   int primary key,
     position_name varchar(32) not null
 );
 
-create table department (
-    department_id int primary key auto_increment ,
+create table department
+(
+    department_id   int primary key auto_increment,
     department_name varchar(32) not null
 );
 
-create table user (
-    user_id int(8) zerofill primary key ,
-    last_name varchar(32) not null ,
-    first_name varchar(32) not null ,
-    birthday date not null ,
-    boss_id int(8) zerofill ,
-    position_id int not null ,
-    department_id int not null ,
-    mail varchar(64) not null unique ,
-    salt varchar(32) not null ,
-    pw varchar(64) not null ,
-    login_flag boolean not null ,
-    foreign key (boss_id) references user (user_id) ,
-    foreign key (position_id) references position (position_id) ,
+create table user
+(
+    user_id       int(8) zerofill primary key,
+    last_name     varchar(32) not null,
+    first_name    varchar(32) not null,
+    birthday      date        not null,
+    boss_id       int(8) zerofill,
+    position_id   int         not null,
+    department_id int         not null,
+    mail          varchar(64) not null unique,
+    salt          varchar(32) not null,
+    pw            varchar(64) not null,
+    login_flag    boolean     not null,
+    foreign key (boss_id) references user (user_id),
+    foreign key (position_id) references position (position_id),
     foreign key (department_id) references department (department_id)
 );
 
-create table approval (
-    approval_id int primary key auto_increment ,
-    title varchar(32) not null ,
-    user_id int(8) zerofill not null ,
-    limited date not null ,
-    goods varchar(32) not null ,
-    trader varchar(32) not null ,
-    quantity int not null ,
-    price int not null ,
-    necessity_reason varchar(512) not null ,
-    trader_reason varchar(512) not null ,
-    purchase boolean default 0 ,
-    p_chief int default 0 ,
-    p_director int default 0 ,
-    p_mdirectop int default 0 ,
-    p_president int default 0 ,
+create table approval
+(
+    approval_id      int primary key auto_increment,
+    title            varchar(32)  not null,
+    user_id          int(8) zerofill not null,
+    limited          date         not null,
+    goods            varchar(32)  not null,
+    trader           varchar(32)  not null,
+    quantity         int          not null,
+    price            int          not null,
+    necessity_reason varchar(512) not null,
+    trader_reason    varchar(512) not null,
+    purchase         boolean default 0,
+    p_chief          int     default 0,
+    p_director       int     default 0,
+    p_mdirectop      int     default 0,
+    p_president      int     default 0,
     foreign key (user_id) references user (user_id)
 );
 
-create table remarks (
-    approval_id int ,
-    user_id int(8) zerofill ,
-    remarks varchar(512) ,
-    foreign key (approval_id) references approval(approval_id) ,
-    foreign key (user_id) references user(user_id) ,
+create table remarks
+(
+    approval_id int,
+    user_id     int(8) zerofill,
+    remarks     varchar(512),
+    foreign key (approval_id) references approval (approval_id),
+    foreign key (user_id) references user (user_id),
     primary key (approval_id, user_id)
 );
 
 
-insert into department(department_name) values("その他"), ("未所属"), ("営業"), ("開発"), ("システム開発"), ("情報システム管理"), ("人事") ;
-insert into position values (1, "管理者"), (2, "社長"), (3, "常務取締役"), (4, "部長"),  (5, "主任"), (6, "一般社員");
-insert into user values(00000001, '管理', '者', '2000-01-01', 00000001, 1, 1, 'r.arihara.sys20',
-                        'Ka8WLaPBTzfwqFnsus91vpqLOpsjXZOW', '776d7d51b1e6d71bb0cb856e1342e937bc37bd0391b9eaec8a2971358e73be44',
-                        false);
+insert into department(department_name)
+values ("その他"),
+       ("未所属"),
+       ("営業"),
+       ("開発"),
+       ("システム開発"),
+       ("情報システム管理"),
+       ("人事");
+insert into position
+values (1, "管理者"),
+       (2, "社長"),
+       (3, "常務取締役"),
+       (4, "部長"),
+       (5, "主任"),
+       (6, "一般社員");
+insert into user
+values (00000001, '管理', '者', '2000-01-01', 00000001, 1, 1, 'r.arihara.sys20',
+        'Ka8WLaPBTzfwqFnsus91vpqLOpsjXZOW', '776d7d51b1e6d71bb0cb856e1342e937bc37bd0391b9eaec8a2971358e73be44',
+        false);
 
-insert into user values (90000001, '社', '長', '1990-01-01', 90000001, 2, 1,  'r.arihara.sys20+sub1',
-                         '5CNM9MYyHud7OO0Y8t4UdBvlFK2khjfi', '624bf532af7dc9ba0fdab54f760ced1fd7432a5fc46c19c4fd07a089f006ba9d',
-                         false);
+insert into user
+values (90000001, '社', '長', '1990-01-01', 90000001, 2, 1, 'r.arihara.sys20+sub1',
+        '5CNM9MYyHud7OO0Y8t4UdBvlFK2khjfi', '624bf532af7dc9ba0fdab54f760ced1fd7432a5fc46c19c4fd07a089f006ba9d',
+        false);
 
-insert into user values(00000002, '常務', '取締役', '1990-01-01', 90000001, 3, 1, 'r.arihara.sys20+sub2',
-                        'fqxSKShzGHkT2bjU04RP5kYEsf9CAzSV', 'e70de723406741b35b7617c9e4b77e3dcb1952fed0aabc737ef414d464f2fbde',
-                        false);
+insert into user
+values (00000002, '常務', '取締役', '1990-01-01', 90000001, 3, 1, 'r.arihara.sys20+sub2',
+        'fqxSKShzGHkT2bjU04RP5kYEsf9CAzSV', 'e70de723406741b35b7617c9e4b77e3dcb1952fed0aabc737ef414d464f2fbde',
+        false);
 
-insert into user values (90000001, '齋藤', '準司', '1992/11/18', 00000002, 4, 3,  'QTg79UUSfsZeZouNHGwKEtgc0S3xNQBU', 'd9AZElxEsYb1dEJmjRpOjVQSuLUMbpsZ', '7e1065dc19fecbaa5f3c577cd454bbf7c69c5aba7e6b1fc6299130d1e6dc1295', false);
-insert into user values (90000002, '高島', 'さやか', '1990/11/27', 00000002, 4, 4,  'g6I2j27hL3xIXryVXBfhgKuzIqh0ebhf', 'SDFAI3uGVkU6bFxKsuRfTWtQgvLQfxWA', 'd5225c594b1f7b0a511f472678ebf76ab9f7b5dfc4f39d8c00a09013604d3eb7', false);
-insert into user values (90000003, '谷川', '勝許', '1993/04/09', 00000002, 4, 5,  '1u5gqbFgBaJxyaKu9BO2o2evuLmweNp7', 'fHNQV0jnRneMakTZ5RxI5LPAPZEC1oYq', '3fa97449d5ec9601528a9c788850cb1db90da167bd3b49b9eff75637b3b0421a', false);
-insert into user values (90000004, '荒井', '友幸', '1977/03/22', 00000002, 4, 6,  'xCyVeRAPEjjnC8FirTts3K5PRomZmyWB', 'V4M5YS94eRv4uqtDEz3bTrOp3JFB45sj', 'dd50f238d2ad49b43440dd6b76455f1504508fedc82771bd976d19d5ff033738', false);
-insert into user values (90000005, '及川', '希和', '1977/01/07', 00000002, 4, 7,  'x0vXVnV3NIyCcD0Uh0Yr3tJw7AOjaDy3', 'KIPQugLiz0tfvzQwLrdoqd1JhV0XGreK', '5f9f93518430fbc3db57e5a1ee4c43545033a4febc7300a75993cdedb57d573f', false);
-insert into user values (90000006, '入江', '幸信', '1978/10/09',90000002 , 5, 3,  'WSuxS2esWp1aMXAMgzjXaco00TyZOBog', 'FOH2LlXWtQAcb3svtX8eS90l8Moyhge2', 'a20fd5527a93f9fc72775345252db8205eb8fdebb80be3ad19cec14c57694136', false);
-insert into user values (90000106, '小川', '準司', '1970/09/23',90000006 , 6, 3,  'mBUlw1GzPfuQ87sHiuq4AAgX4LQNLMWM', 'YGodH8Y6SRA4cXOnqFzqWu1PRLVwAC98', '9fa21ff3830507597240cbbc69884375204dc00d7a757ecb3f4301269c61cafd', false);
-insert into user values (90000107, '菅', '美世', '1970/05/03',90000006 , 6, 3,  'G790qh2QKDpOPqHNwP7RObpZhf6jtRPF', 'Ig4rBzbMaflx1NfORlRy1GuDu3oXv9Ku', 'd95b470193d00f617c0991f4508e5aee68f81537842e4db3dd57eae554f1f956', false);
-insert into user values (90000108, '大木', '幸美', '1978/08/12',90000006 , 6, 3,  'NeN2oeH636UmKfODtmoz7kupzBzYhc1w', 'd7yDV7hfMkNPgCzlmbcENqjpBrt3C8be', '53881d65949116b4cefd2ddc2697642982b1993f62e974897f43cd58dbd6b615', false);
-insert into user values (90000109, '大森', '朗夫', '1972/02/25',90000006 , 6, 3,  'YdwWpTNwVIhVwkRLB0qUtHYV12OS6Kaw', 'mW3K7WevgkzEQNrAmCfbCTQORAJy2xcz', 'c0d534c2e87e450bae070f3d14b3d9e2e66fd97436b31c005b0b598095668d57', false);
-insert into user values (90000110, '藤村', '征二郎', '1985/09/22',90000006 , 6, 3,  'HcXa5C8FGQCgUzth11c8ze2dvXUP0BLK', 'Rcv732Eg0JD0zj8Qa5g4h9NPaNQwAVSB', '2347a70f96d742f2dd4bb11006753d6c360b017c23876e5cc48cf6c1c405613a', false);
-insert into user values (90000111, '中山', '洋和', '1973/03/22',90000006 , 6, 3,  'x5yOJSwZ9GTutlLIIEm9WT1wCHONSnqI', 'I0Dm2icptBUV6skmSr40qAscgvl6DJn0', '03dc35d68ab72ace0d27f80dbb12cfb09fb67d3487af16ad948af52b48246097', false);
-insert into user values (90000112, '大木', '織枝', '1973/03/04',90000006 , 6, 3,  'NjNZ5uyOolBPban05tTHxivqCAXd2Y7D', '0sp5cI6RqH6mfGSFHUD6qHBJBXwBT1Kq', '07aec8e1f752391e0179881ec7afac1de2c8a9dbb66018dc6a540586ab6a81a7', false);
-insert into user values (90000113, '堀', '僧三郎', '1987/06/10',90000006 , 6, 3,  '6wuRi6fGenHhc4QZiKgPbeobK45OI7zs', 'N9fyYR0BrF1nSxMYbF3bC8WmAYjb3wqw', '1641bcba20facba0f64c336c4411dc5a3a25aefc1a9e4f3d363b29d17a17cf7c', false);
-insert into user values (90000114, '長谷川', '稔郎', '1985/01/07',90000006 , 6, 3,  'Q96f3wbOzLrLfzyaR7N5JWNuEw3Q32bD', 'm898CdQasGIHQwF6LFFSFPDO4UrePheL', 'da9dee86727e37054f70adf743a955309aa415f7b352b7de3a781628c762f5fa', false);
-insert into user values (90000115, '高野', '満生', '1978/11/01',90000006 , 6, 3,  'mCAmKUXs6ERikOaQnEqdudhWSLeEufXI', 'pCebCQaNtNwHk3U8DuNm58GAZ7xDLfHj', '52e72421e2909ef590da063a5e78e0ead2b2adcd5f0b08d1a280b27ab2a1dfba', false);
-insert into user values (90000007, '荒木', '一人', '1990/07/29',90000002 , 5, 3,  'jcCmpYnzfQVESbVcEkP8WPb5oXaZ3AZN', 'AHE1aYbNnoDBlzYOhO2iYBuAfkL5DsWx', 'b19fadc5e3a52962cd4fe2bb7af1c2ff73ee09a547d8017e69336014c636e116', false);
-insert into user values (90000117, '竹本', '織枝', '1980/02/16',90000007 , 6, 3,  '0T9D32pDkQuQoDHoJ5Ge3fOLoL6RpCXL', '4XT6UpWkcYGyfDIwJxNe8wYH15EZKDlx', '29a1959378b38a585d855e0f462962ba9643aab8825a09d05663155432b48a3d', false);
-insert into user values (90000118, '古田', 'るり子', '1993/04/09',90000007 , 6, 3,  'zJNwwBorMgCWjWK7Eeim5yUlOig7OTHh', 'OQcad2tYC2s39Pnqg8u7hoV4IS3uvYpS', '8b20748249efa3df300a0a9646402d4785a16151c0efa44d3e50148df56bd0bc', false);
-insert into user values (90000119, '石井', '幸美', '1984/12/30',90000007 , 6, 3,  'SDLKmGYfxILuyVA8ydsgy8jgjSVCYIKM', 'tAO3dqIuAYnakOWt1ZgYdox8Xk39HOTz', '6cc8a908ac4146ffb0c22eaccf3d09a86bdc0cf291d3b04b2c5be26e71f841d9', false);
-insert into user values (90000120, '土井', '僧三郎', '1984/01/28',90000007 , 6, 3,  'L0Bbscuxv0Z7hX9whIgxTMv1JBw3M0Hb', 'cJZ98xaDZo3zcIdJqRvkktHvbGRdAkrD', '13f5b333957f797f1ff359cd4971a94d63d30e597b7d92422291aa7395ac7508', false);
-insert into user values (90000121, '石原', '竹一', '1974/03/13',90000007 , 6, 3,  'hxe3bFYAb0o0lB2yTdHN2vGAUKlsOZnm', '0ta7eye2twxYVPamxGnsUPxbnQ7oTfxZ', 'e815226f072c6e1e504b0dfdbe8c09ef702ecf1d388d4773457897074d26a623', false);
-insert into user values (90000122, '古谷', '智', '1977/01/07',90000007 , 6, 3,  'zbOULSyORQ4Qzpf5C1njv5szmNGQdEq0', 'R4YBb0ZYifllQHYugNJvFZb3uxjSPOC9', '715a15e4a96d09ded07048bc61a4906de599f413ede1d5863d29287751e6373b', false);
-insert into user values (90000123, '岩田', '喜代信', '1978/08/12',90000007 , 6, 3,  'SKUiF5SZGxmZCoiiYrFPvPiFd0NhcHHP', 'RiynS9hLsr1otUUmbMHtXi4EgyG08HMd', 'aaf4e3a40875e1efc18dff80bf141743fbba6da2d0881685b82d8cff49b849eb', false);
-insert into user values (90000124, '滝沢', '三男', '1978/10/09',90000007 , 6, 3,  'ZAtc77lUGSTj3aYxZM0QmHpheKuCqojE', 'BVEXmjx5FAJUU1N36hVzj82iDciAvgyw', '4b399b3ccfba91033ed8945597f1bc0422abff10a750eea3e2772528079dbae0', false);
-insert into user values (90000125, '新谷', '迪子', '1973/07/17',90000007 , 6, 3,  'VrtvKW8yl4ZOMcy3tdpN7RDiLl46GVVP', 'k79vD0oirQjKNriyRB76IxtVf0gixob4', 'f43afa6a2333774e862f4b3db355054c928ad4b875c494cf62576ba66cec87ec', false);
-insert into user values (90000126, '宮本', '久哉', '1989/02/03',90000007 , 6, 3,  'XFuvpqb6gD551X5mo7jw8Tkwm4hf9wkK', 'W1lxbn7PPGRQYv7PxOimOxRQNkiWSOdt', '9f585e6caa8037a1094a70782b37911c0a2a663d92ab53061c2b4b3d5538e079', false);
-insert into user values (90000008, '平田', 'さやか', '1973/03/22',90000002 , 5, 3,  'fhpcHSKU3E0kGzmM8n3owaeeSUCiXUFa', 'H3ibsdH3IAEpMFWlqoltIlbXQA8UvFJG', '32c772efba0648244abf0a503c05b9ef67ff2926e3cb67575dc95a8610d81a77', false);
-insert into user values (90000128, '岩田', '眞八', '1991/07/29',90000008 , 6, 3,  'SiuA19Qc1u1Kjm012SXaL5ThaFnJXldw', 'vn4E3qMJrPoVnQWLPK8JFwYceTgyMZtw', 'd6a60a742d064c36e250e073998bfe9d5a2a4b13c0a78958c085222ebf97be62', false);
-insert into user values (90000129, '浜野', 'ひとみ', '1989/01/19',90000008 , 6, 3,  '1XnTVjCd8XtzPxUn48xp26iYp6Rcbpng', '165JBsjlzD6JR17wTNCoAEdMcP9F2rs9', 'bb0cd6ed7aee485a51ce928f7d40104fbc0e7f0af46b8ef6196371350afad04f', false);
-insert into user values (90000130, '石原', '喜重', '1980/07/14',90000008 , 6, 3,  'DHHGKyfT38IAYhjrCJefMMKZkMrihyAk', 'bmO4BDibHq77RWlmnKNGzopoLHZKNWSR', 'ba7deca19d513f3755a8d34400571b61b345f966ae1b4c7ffa515647d615fa38', false);
-insert into user values (90000131, '大塚', '政治', '1985/03/08',90000008 , 6, 3,  'kbky0RMWmaPfIbgVUXbBOBQeK1GOEnQE', '5bjLgOv7QptMeQhcZndWv1kXOOGp8Beg', 'ad28223a0e1c7011135c749dad617fafaf7d12e9798b1ef301204a168ce1f34c', false);
-insert into user values (90000132, '豊田', '宏季', '1976/12/31',90000008 , 6, 3,  'Ctwdz9OZRWLSGXWv88sgxRvQwOrxhGG1', 'N0lXyI0h9KJi6d4Tap0VOJo5yTv59IWy', 'f1893cd5abe1f6db5f3e1a1affa0447b4f3a5fece3ac8b0be413cca260fb8bb0', false);
-insert into user values (90000133, '大谷', '圭織', '1977/12/20',90000008 , 6, 3,  'dzqu7SWxfDNOUlzaozLdfcq2L70mBB7m', 'JB7R3VTgPuw2v5b8CmB9BdJuy8HO6DCF', 'd408381244ea9da96696fbbe92d10a877fa4e4bb4dd87e6a9dc177032de263de', false);
-insert into user values (90000134, '滝沢', '幸美', '1972/06/14',90000008 , 6, 3,  'K1qm87hgFo1bpp0jQEiBKHbqSfiBrRSB', 'RbuApoFYTO6FTVUgomTZTIgzqZq9Mud3', '2e57aef2cf1d93264af28fe82198422b4e422b43ee4b0d281e4eb0bd5d879693', false);
-insert into user values (90000135, '荒井', '信平', '1976/05/09',90000008 , 6, 3,  'sqWDWjcdOIH5YrEjU39VnwISfwHRQMmU', 'NGhrD48RdbcfLNvSca7lntHtQfXtIOM5', '1eef41cf7b7ac4f6726f1c5feb57297a52131582825855b6ac69df3e0cb34400', false);
-insert into user values (90000136, '松田', '聖誉', '1976/03/11',90000008 , 6, 3,  'jKnrCEZzYOrnBDXm0A2eZXcQP1oSPLpJ', '2OTbUwDdpHSLkp47eI4T8HzGfPdR85mG', 'df4f201d3c0573da73e45dd60516b0923bc10b678c1bf1a5be2ea0d3d24694fe', false);
-insert into user values (90000137, '大谷', '公紀', '1978/04/15',90000008 , 6, 3,  'nhcmwf4LYo3tAsxtn0h7ZxzKxSkjo1jz', 'RW5M5Tmv3z41WlG1QOuEAVk0Dx6o0GR3', 'dcc7eee024f505204380da58aac5490b40304f4251c75e7576efda6b0102a0f1', false);
-insert into user values (90000009, '竹内', '洋和', '1990/07/03',90000003 , 5, 4,  '9agqRQQg3MEJlVLd7wAEl6WQVdZAaEkd', 'rc7x1Uwlqjy69aeZlEZbjLjqrxHUcFda', '8e848686625b0b8ec47bc4a1426cc3e2b2d15ff6d106492c11939a708b23f261', false);
-insert into user values (90000139, '石原', '一人', '1981/04/07',90000009 , 6, 4,  'qu7e2voj3pAIstvAjF9dfXaUxOtM8rgQ', 'DKbs7tmlJXEs1dF9bih3tQkzOS8vnzXS', '293de25864ea37dac8cb243773918929fe3324016883d7cd7c6441bc647b6af4', false);
-insert into user values (90000140, '高野', '一典', '1980/06/15',90000009 , 6, 4,  'EzLT6S3FJqnTBPpcj2PaN8kDyJ5i9MXo', 'nQ1MBVAJFXc4XIFju2qUpcArmaMITf4v', 'f8c56d8ee50b599178c528a1c0ee37cddee73e54f8f4d13ae7be75cf8c128eb4', false);
-insert into user values (90000141, '鈴木', '聖誉', '1986/12/13',90000009 , 6, 4,  'RtD7NjPosnyR7VqY1ITRuluONkzScABV', '9zXxyojQkE5FYtAjpw6bHlekXDz6LPu7', '04009e001af9598bdb6da4aa6e031d27bb1b281ad324047ce45a797a83386b88', false);
-insert into user values (90000142, '畠山', '静市', '1972/02/25',90000009 , 6, 4,  '0ckRwiaxTZOe77ylTwdYaEb21j6BMr9y', '4jgklrRxmVqoZr0l0r2i1gJZnXgJMl2C', '1e5fbcf7012478aeb76b2b1096d4a8e915604d572a45a111a40edf4ffd6f4c5d', false);
-insert into user values (90000143, '中田', '勝英', '1984/07/06',90000009 , 6, 4,  '90JZhwgEm50pHTYRjSdeagO6NN1lsg8y', '9ihMGzMxkl3ENI6aek2XjMaXbQhUCXDK', '86382553182a51cd489c976c3e9de65117d861908d7f6b95beab99b2ab88bdb7', false);
-insert into user values (90000144, '早川', '成美', '1984/12/11',90000009 , 6, 4,  'jwHcgAL3LaBgrAQJbFWgNGih3ZG4CrFD', 'Ssf290sDE94vN6ZBh9L2w4lMufF42w0z', '20457f41ca2c3f491606ef4835b12db2d3f829df131741ed9e1cc5da2e74fb85', false);
-insert into user values (90000145, '早川', '十志夫', '1988/04/09',90000009 , 6, 4,  'Q9qXvKt0fO5UMF80IJXXYh4tLwO4y8uB', 'ZVgYlst4twVSgkABY5L92zoOC5eGlGl3', 'b2cfc693ab3510812cf0be90b5bfe143249c0aef365eb44e35f830912cb07f1f', false);
-insert into user values (90000146, '坂口', '新太郎', '1978/08/28',90000009 , 6, 4,  'E6FF5DK115IH2oAfzvUXetNgubEC3ktU', 'uMSvxux7Yt3F70ngoNSs1GQqDqelDAwS', '6f39aae4c4fec43e48635b759c43e8139cad19b9f35a9758d61e1f562074b5c7', false);
-insert into user values (90000147, '萩原', '喜代信', '1974/03/21',90000009 , 6, 4,  'egV4CDoY01zsk7cEdLjLYhAaRlvos1Uc', '7IqbCDFOrd1pZx9dEKPCjIbSBD4186t4', 'ca4873e031eb0120d815a780d7cc6095cfa09ab41daca31531083344ab084f8d', false);
-insert into user values (90000148, '藤野', '恵治', '1976/12/31',90000009 , 6, 4,  'D3MrHXe0Tz056MAH2Ybs4ndYcgX3cle7', 'JBiTA7nCkvhMdHz52MvzQcNA405lX1Zu', '5892fa16f33ca8aa2e067726536c0211fdf485421d24454ffcbe73e4736677fe', false);
-insert into user values (90000010, '齋藤', '定二', '1986/12/13',90000003 , 5, 4,  'LJ5gPl1MrvyYeSrhv1LprEG6OJSO9w4l', 'UJ44Re660FADmKDccQD0Ct7KrhqUQj3c', '1c992c1ba3ecd1a5cad440ebbaf5176805aa2aa7f779b3370a3511bd6efede2f', false);
-insert into user values (90000150, '早川', '保行', '1972/02/25',90000010 , 6, 4,  'e1yfweAXd5luCnK4KSwLUfxc5KZgozoa', 'ZX7tIT7UlvFWEkcEV9oCve6CbBnVBqIS', '7019e15ddcca86e2a0663a42a96f53fa98e79dcc8f01e37d81ac7a9968d594a1', false);
-insert into user values (90000151, '矢島', '定二', '1974/03/13',90000010 , 6, 4,  'lCKwxuUnLm7ySRjiEjEZEpiHTkrbjLSa', 'sgnk4Uq3S0aF5cpqTwB5k6F9JeeX7Z2Y', 'ba85c5b1b363de130f6113f39f4e9b7f260027c39365ee35b8c3c5ebf6d76087', false);
-insert into user values (90000152, '矢島', '眞美', '1975/07/13',90000010 , 6, 4,  'ZbHM8R3VOOp4r2P8IpCb1dyrNqu20b0M', 'BurHu0BTKvcUzkZHzFlaep6l1jwyeRlH', '28a68aefc2ca1654dd9e8b07b227290b924d721c393dc616011e58adfd4d4e6c', false);
-insert into user values (90000153, '小倉', '定二', '1974/06/02',90000010 , 6, 4,  'fGpNUmt8kocNBU5MOOrTTW9xvoya9EmD', 'S9h6i79rFbybUD5njeKQ5xjkeugZlORa', 'e9617b392fbd7c10425314524d3a7f8d01cb097360b168c9c978affa99a60625', false);
-insert into user values (90000154, '福田', '淳子', '1993/09/24',90000010 , 6, 4,  'aiPzw2nw9HlqTrUEKTIrQ4e3R9ijtQBa', 'lu6ZY6BWbsvBk1WoXag3URvDUzE0z9O1', 'c7215e1443c766f647835f5d44e48f0d87aec2fdcf63c34a93fbf95b1fc22ba2', false);
-insert into user values (90000155, '溝口', 'ナツ子', '1993/12/04',90000010 , 6, 4,  'QFCYFa5HmICrnWCUW4P8XgsvF0t5Ze3y', 'BzpQXHDGeULYLtOuFU8AepLsTFi69dP9', 'c5480a4fbfff119cece88c72364389714388c683c1d1a989fcb132bbe5157e37', false);
-insert into user values (90000156, '足立', '織枝', '1971/09/18',90000010 , 6, 4,  'tMPe5NAst73ZZkDId605pMilvB5zK86Q', '4oRquCXCzzKP1YTOd5NXklavJMNa2d9B', '99c646e06d8c68fc76b88cfec218b3c8ff4f71f21df87ca8de0790821e9085be', false);
-insert into user values (90000157, '町田', '友幸', '1980/07/14',90000010 , 6, 4,  'VYD6vNuLWmA19NUa6eA8w3SV39QQh0TT', '5OR9WQZXx1vkDQWzlC7jcd9eND34kBA6', '7b83c57fd3fb41f67307d5d90a531ae19982eb909548afdd0d331d6672a9c051', false);
-insert into user values (90000158, '古賀', '幸信', '1990/11/27',90000010 , 6, 4,  '8fvRl5MGOl9bVlVJqrwJoUtwsdjQuhhx', 'F59q44dIOTCJgu5ZDBUIwRWGGqaA6xul', '72dcb0cdfaf2c976b679fb9016b6fbec58dc0911a260c68ad7d8b4b005443049', false);
-insert into user values (90000159, '山岡', '健生', '1992/03/11',90000010 , 6, 4,  '1FOeUfMMWNlhT8ZA9Ppr2amx131a8NnB', 'voLikRVnysCiJa8bU8rXZkhexM471rqK', '8f2268b10008c25f460ddd8b4f096ad1bc36c0424d9678ccae9947874bc56902', false);
-insert into user values (90000011, '大森', '久仁夫', '1985/05/11',90000003 , 5, 4,  'kBEAmD4IMX2mgZqEA91ga920GyZGS6Tp', 'kKEdQqtKMJanxXZwh7PD9LMMXqeeZjB7', '1310b47311e1ed02085a4479a4041cf41c6333e3e0695074c174e666a5b7ece7', false);
-insert into user values (90000161, '久保田', '亮子', '1978/10/09',90000011 , 6, 4,  'iynhOPNnACTwuEKqZW9V2wX8VeS7lFug', '2DcShv3hU1G30kXmcSjwWEuqC5kS7BX0', 'ff7bfd98c578ce10a70c1fdf5de2eed2bf03d3f56795f099ff050993368d4f31', false);
-insert into user values (90000162, '高島', '定二', '1971/12/27',90000011 , 6, 4,  'B4yDE1F65ZNIYGKwRGRP6p4cvA8HcJ0C', 'yxs7vSJgvnsrDO60tSJT6kxMCsxteI49', 'd97797233d548efe68713f64880f50bbbb45a7bf7d583c892b136d36d615e0c6', false);
-insert into user values (90000163, '谷川', '友', '1992/07/15',90000011 , 6, 4,  'ZxEB5hO177ZCMFq7laWek52RayaoH4Rj', '87yfZR3N7PmGGen6KaItf4pkdNjwFRaC', '9c5519e02079d67f2ab01ec430e265c7406dc1580610444f8945816045ffc09c', false);
-insert into user values (90000164, '宮本', '玲', '1973/08/09',90000011 , 6, 4,  'o4ZXftluSU4QTQbeWfzLGdrjWqOMbhyG', 'wlEDWXE9bwbidaxZG4lQZ0DvMyKmuBde', 'a76e785136b4d876ad704e6046831b2e26249ec47964db20523e463f7654b2f6', false);
-insert into user values (90000165, '竹内', '喜代信', '1972/08/11',90000011 , 6, 4,  'kghfFuTNnp0jhoy5BMaHEJs7CI1sAxmx', 't41DDyLvwQZhOk0YLswtlYhO8prX5qOJ', 'bdf59a9457563d9433967134c3481eaa9421a221ef539869e993091cf35dcdbe', false);
-insert into user values (90000166, '竹内', '道彦', '1992/03/11',90000011 , 6, 4,  '95gEksQSyZVtYsIjlL4RbeObZk1v7rVv', 'bpOVpT7aIp63HoryiyXuFV8v0y90vUyf', 'b331ead92769bf7942462e37ac272932126cc68a9f4a973122fcbbcd5ceb8221', false);
-insert into user values (90000167, '畠山', '満生', '1977/03/22',90000011 , 6, 4,  'IBrdfwFI7pteRNANbU1NycejQ1Qofv06', 'Z2Uq3gNjv6NsgHALHgWy7DgoT6NMlEdy', '675bb9823cd577da6d5eb5b3b621a229567a1e8b6b0b733dc11eaef2060736b6', false);
-insert into user values (90000168, '浅井', '久仁夫', '1991/07/29',90000011 , 6, 4,  'Qp3Jw8T7n0baeIONn6b39MU9V1RNDLnk', 'EQkiHoryIipureBtuz8tEbeVMZdtadg2', 'c7002092f35ab96c2cc36d7b85b17179bbf766ac2c43119d765ce80d2c17b972', false);
-insert into user values (90000169, '飯島', 'あさ美', '1993/01/03',90000011 , 6, 4,  'yPh7PTyP75AwdO7YlIrwKhQjbEk00CjA', 'lksK50PD4xG8p8wBVRvZgxwxpYgOVL0L', '6e2843dae5c9ef8511489931691a790c4ea3c6b2eae039c8013a9cfdf23b0be2', false);
-insert into user values (90000170, '鈴木', '沢子', '1978/08/28',90000011 , 6, 4,  'oC1BrnsSZKDDXDTkNe6iTgKiWGjWIhqY', 'NHI26I4Bk4t0x4Rdl0mRtbos2tD2S1YC', 'e211658e5e5aabe4959d24683de358ac981abfd9f7d2d2eeda4592eab39ebb68', false);
-insert into user values (90000012, '高島', '義幸', '1977/03/22',90000004 , 5, 5,  '5jSAPihbui5BWHqLvGHBG6xrVHOH16Cz', 'nVRsAdjW4PFz9oQhkvQzQ4ehZMqiU1mS', '6362754da6e7e06b7b536367339bd7d4b48df04aa01b5bdcec4575d84ab5ac6d', false);
-insert into user values (90000172, '宮本', '稔郎', '1985/01/07',90000012 , 6, 5,  'xbl1lJNrdfdqnQ2H9ruKJ7WBiuk9Bk2s', 'hfEXc5vObsUywAuvHAqgpwF4Qb9huDrL', '1203e6e2fcd491c982c3af23280056ef7a8ff8480b98e19705b0f737cd2e0b92', false);
-insert into user values (90000173, '竹本', '心一', '1988/04/09',90000012 , 6, 5,  '3evwAeDgREqSwUYNNix6GtUkklNHTZAa', '438oHcdOBAbLeVaqHVRLxnpRBgqiLEAx', '77be32eba5fba797b9d0f1da6874a559f4d227ff935a942a9e2711bdd9cc6ca9', false);
-insert into user values (90000174, '岩田', 'ナツ子', '1981/05/17',90000012 , 6, 5,  'xnWwNlqL9j5e3RdwroHY1wi0r4EAst2g', 'pZXJzVlAesk5r3OMD0Ag8eGvVdEkEnd2', '0b0bc1f8e55553f83e7df5ddd8e04d3ec8a0ef624edc3b1a029c54f3962881ce', false);
-insert into user values (90000175, '入江', '久哉', '1976/03/11',90000012 , 6, 5,  'KNCu1wOsZJlvKdR3nPNNHQYmtKVJ7fr7', 'sC9AdWVpbx2oMXIqWpzJeztrLkHSuYUr', 'ca8c48f3807263a29e90e277bad600e88151ba8d776584ec72d9c345592209e9', false);
-insert into user values (90000176, '足立', '定二', '1975/01/03',90000012 , 6, 5,  'bm0vyjZPVUGJQ1MU1qXYE5eML0Wp7B96', 'V7RbnjuUK0oQBBzlKWWTaf2ahJeymczh', '42d3b4c203adecf88ea848ea2f13ebb0ff335e8d6ce718a3f85d0d6b5dbd1d0a', false);
-insert into user values (90000177, '長島', '祐美', '1984/01/28',90000012 , 6, 5,  'xDi72pjaVjhCWVRcaIDM5TyZCm1WEolk', 'QNL4vyiLgy0Z3EliKF7plEz8XAyjCo8I', '95a9429510d4c57e090a1d21ba7452a4eab7bb580cc32fcd2fd8d1425d15b14f', false);
-insert into user values (90000178, '竹本', '政治', '1992/03/11',90000012 , 6, 5,  'XxcEaPbragqaElJozLlQ8yY977wmCo61', 'gF0j9k3tZmavIQvmISAGKMwpW6cSjlkH', '8be8f5fdf8ae4881e09c9aa79a2aba8aafa8e6e3896f3ee6d7ec75615155442f', false);
-insert into user values (90000179, '松田', '竹一', '1985/03/08',90000012 , 6, 5,  'd4400gLNrT2MvUstJZdFKYAOoefo2d6B', 'pVflSY3xolud1dWc5alOi4Ejei2YXSrt', '4b1708db4b1ac8044f41a975f029cde2b89b5ff2cf153c6879e050e97e59f5e9', false);
-insert into user values (90000180, '大木', '稔郎', '1993/04/09',90000012 , 6, 5,  'YhjzbukRDvNNeVeUglLSfTUBZufrZIfG', 'aYFnSkt8RfnZsEknBGOeCGkU2NGwxfmf', '0b6ceb68d1b0055e1cb5b542ea3602ff9d7ee9dc2342ec30bd255a56ff868a6a', false);
-insert into user values (90000181, '三宅', '定二', '1987/06/10',90000012 , 6, 5,  'tVvSldp1jXGHL9fiQHJYS5hD3Vsp513a', 'I4Tk1hj5UhDGq2oWap9lEp0x99Qsn0U9', '30b620e2a370ac752190e00d690bafc7ff2289af2de978f8835f93513012475a', false);
-insert into user values (90000013, '本多', '成美', '1981/05/17',90000004 , 5, 5,  'XjAZrOU6XRwdtqWgbC7fIQJEdkcg1jv7', 'HHBdcGLmU7AuHE1mYKI0trggCjQWB0fM', '2c8758068b4e46f428fa183a6b73fee997c47cf2d50717cbbe480152e98b8adb', false);
-insert into user values (90000183, '鈴木', '喜代信', '1981/01/28',90000013 , 6, 5,  'fQmlJhRVJejj1idAfzoZMEmjIfC0Iysw', 'EJhJPB3TEyC4d1IrPGenFItq0ZGIE2Y9', '1ebc738e5db7a632d8cd674ce4f6f217e42fd479a9ba6b9369f2502992b6f7e8', false);
-insert into user values (90000184, '森岡', '直幸', '1991/12/12',90000013 , 6, 5,  'FP8LptK04mOqNLAAAWGSDhXndorVUQ5b', '2RTKhw2mLO4qsW24ZfesfRqApnYXwxsv', 'ff47721086334acd37032fd92fed79c09ee215bef4657cb75b81956ea2b1ecd3', false);
-insert into user values (90000185, '土井', 'あさ美', '1978/10/09',90000013 , 6, 5,  'VaqZ99hbGvnM7YDvv6afdbsButbX94ur', 'iW6G53DwsIvSF3EOx3YWo6CR61g8BaYo', 'c8c07a0c8e4e1efb0ce4c5bdbf0aac58c124f03be13be5c77c2ffddf3e2ed6b2', false);
-insert into user values (90000186, '町田', '喜重', '1973/08/09',90000013 , 6, 5,  'WBxbQlJ4JuUuUHkQds7Zlilo4k03R5Tp', 'TYzyNXIJur3hDp15NMULZ6QfqFn15sdg', 'c3e81606ba22f949f3c4f1157efdf29b09fa962ed536f9e9dee2716af004b21b', false);
-insert into user values (90000187, '小川', '陽子', '1989/01/19',90000013 , 6, 5,  'itaCnpDTdhOkFsV79z4VH8IUHZtjqbup', 'YUsQvXn5cGEVVkihrPVI1Oe3yDPgAWgF', 'c5dbd6cbed42925205e33fdcc337ca5ac9db472eeecacc748170fbd75f1dd07c', false);
-insert into user values (90000188, '武藤', '恵', '1978/10/09',90000013 , 6, 5,  'fjVxqQMl6UvCNdETTTC8eW1CRllZbL6p', 'Vy8D0JXPSxApHpT9gQqvvXgNl2p0fWiB', 'f3756d845e3aa67d4ff498d1dfe0906b2933a57a779ea4134c5c7e0d782c44df', false);
-insert into user values (90000189, '手塚', '友良', '1978/10/09',90000013 , 6, 5,  'muVuwIj8CI9XJPbuTzI5fpzuY5wDMGRL', 'p3UXjd0IqwnZKImVQokxnfBji3HFQy34', '75cdd1c5e6367c373e85f551ab53bee86408ed49b574668280ce212e9c829a1d', false);
-insert into user values (90000190, '畠山', '美則', '1982/09/19',90000013 , 6, 5,  'pUZqSog4sKVZ4UOUWMDzGpD8scor6QF3', 'orvFPYynW9ESHDMBj3IIofijCiXY8FGA', '6c42780fd56fdd92c6a6ce8bfb0f3a0c9ab71b3464b51eb166ec199415e656c9', false);
-insert into user values (90000191, '矢島', '義幸', '1985/03/08',90000013 , 6, 5,  'nxjcn6ftlF3PmXR8T1aRBHKLbAioZ0zl', '9udaiO7XGVkJ9sMfiu2eC5Z6PYybTNS4', 'd152ab9169a2cdf2b560c17ffb3d8ad70faf8bc7d128b054a88df306939d3c8d', false);
-insert into user values (90000192, '石黒', '玲', '1976/03/11',90000013 , 6, 5,  '8izphS6Tbw7NBCjgFQH0nAjcjnyqSQtk', 'm6AIK5ZL354Rb2cXkvQoze4ZqRnnSrBt', '49ecdb3ecc2d24e1195bf7738b9757bbfdd331fde2659c816479b08782e5076a', false);
-insert into user values (90000014, '米田', '新太郎', '1989/06/04',90000004 , 5, 5,  '7oA5FDAEKNzOTgPjAYDT4BHieJM8JnVW', '7Xytodc3FVMHhfCQXrPXzJtNN2vn7e5E', '4c82d2e85f1781745abc831f843baac663f24794d00ac50304324d84836e0f2b', false);
-insert into user values (90000194, '杉山', '聖弘', '1981/04/07',90000014 , 6, 5,  'jQDlBCiAOknBduWWnpSOXjkaa4uvpXl4', 'nu1HwSaMGn8QQ71lHXdArCBGK3XiyOwg', '5d77cc98817778c44182608a84ae6d24248d5a7467de3c0efedf9f5ccf84b7ec', false);
-insert into user values (90000195, '佐野', '準司', '1992/03/11',90000014 , 6, 5,  'wR4E4qUF5YzFayS2qnB06ZYeLshWQsG7', 'Vu5ZfOQXtnQsVv6fZBv3R1uzGCZbYHro', 'a1ddcc01b3d813430f3fc31e6dab521a7bd7acd63d89de4905dc695bee799976', false);
-insert into user values (90000196, '竹本', '浩一郎', '1975/07/15',90000014 , 6, 5,  'EhmfU9zmJNfW6UB5miCEAenBqljRDcci', 'FdPggcJ49qeQbfaaBe6w2B9QoKVV1CIf', '68a7de84e94055057be661bce7ef37ca358459ac5a35344f8bf8ab5fe6adfd47', false);
-insert into user values (90000197, '小倉', '麻紀', '1987/03/16',90000014 , 6, 5,  'khwXlgbjlYps9eJPC9Vl6OwdSZkLNywY', 'rhWq8rsF6nX8wEuWtwpgMwF4Flkp1cvN', 'a048a63b5dced11ae4df422e58e6836451ec849c75cdabfd7464174a879edaaa', false);
-insert into user values (90000198, '町田', '宏季', '1971/12/27',90000014 , 6, 5,  '6BcRHOpbezEYe2gY82k9WPx6oVgmOfv7', 'Gt457dq6FcPLunYN7VfRdXGUIXeJXaru', 'f6c5d0b136cf3939887025cd0e20a9ba8bd3756af33cb9d2fc6d357fc3352e9c', false);
-insert into user values (90000199, '岩田', '公紀', '1991/07/29',90000014 , 6, 5,  'Dp6IDJd5jSX9Njnn92KKdEyHbQPF8sSN', 'FoDirsMbcgjwl14JiXhhmfxEKc7yxZw9', '5252990053e402371fb7f0b3804c81519deabe865027396c94751f5c4f091bf7', false);
-insert into user values (90000200, '新谷', 'あさ美', '1991/07/29',90000014 , 6, 5,  'NLPPenLqVSlImx3RUXLep3lCmcDLsAdB', '9NylFaiKxFpVCYEXBRpdJOXpherNmyvD', '80d1228dc9cf714151581ec95ca843bdd648dfd3ec82d5899c30619d9ff2b8b8', false);
-insert into user values (90000201, '南', '鋼三郎', '1989/06/04',90000014 , 6, 5,  'BJkcXhb3TLu1NOWFlDidWF5D4TpYLH8F', 'AOjGRmCVTVSrrXuvtWDbHAJOuJe9a3Mv', '0d78f4f0cd7ff60831e2897bc8f84f43daa9ad15661e5d7896286181957541c0', false);
-insert into user values (90000202, '菅原', '洋和', '1974/06/24',90000014 , 6, 5,  'u1LHayz8cWEpgvz0QI8pUtwUZhN8hyi0', 'y8Np4T94hGnwsfzOC47n0iQJ9ypmT8B3', '93344bf41f26510497055d4e6a194e947c32f60939933d13ec2a666bb497d822', false);
-insert into user values (90000203, '浜野', '幸信', '1976/07/31',90000014 , 6, 5,  'HDHt1fbAKDnQAzqtPK5ZnS7TAkR4Tge6', 'ut995frCojcaxN0c5BQWplgxEiwipMd0', '75e628b1138c7f2428203f7648236bf66051f58cc761e6c8ae4fffd54af56937', false);
-insert into user values (90000015, '矢島', '恵治', '1974/03/26',90000005 , 5, 6,  'uJkxVpo3MvIVIimuccFNK1x3FYvo661Q', '4Zj3sJNQ1VeTbX1tBQmW9siUKa9TBAct', '732aaa5e754fc2940e305010ee45666ffb2ac89c6c5046feada850ffb2985657', false);
-insert into user values (90000205, '金井', '友', '1988/11/18',90000015 , 6, 6,  'rTo94mcP32RLReSLJY7wDgQBnXnrfR8W', 'xTTekFQ6e8UGDVIx8pV6JK2CTWmQiAXp', 'f57aa302161fedd2778d3b52f5fbeb2e75e32b2c80a721c807661f77fc91b3a6', false);
-insert into user values (90000206, '武藤', '明博', '1984/12/30',90000015 , 6, 6,  'xHi90mGKN38A0FVO7EaD0hhdSbGYJM5Q', 'KwGipYP5VeTy3q4eQ1MvLi7YHJUKTL5e', '8b7c050d9bf31f8bcce0e50daf865f835f6c44abf9f4afb2dd68d6c566e1150f', false);
-insert into user values (90000207, '足立', '幸美', '1993/09/24',90000015 , 6, 6,  'c0cCbwOu0qy0AB3iybBJTI5e1mnXiTUp', '2ApgL7q9EEoNc33O96V7ZhVADlxlJ1md', '5c40f0a479c7acc5e8caed248d3ffe3d2fa01b695c45b4b75c73e712d75929a1', false);
-insert into user values (90000208, '齋藤', 'ひとみ', '1976/12/31',90000015 , 6, 6,  'SunGDsDetSBAoZPveRd3EbOSsZuUcqwz', 'vRk9GSV7Vv2v6YBUn0r3OOKQRp4g3uHY', '34aff88168d2ab76d740442c581d1db8ed51821be951317f2f50c45d97df71e8', false);
-insert into user values (90000209, '浜野', '英博', '1974/09/21',90000015 , 6, 6,  'EBxsU3UKp7qG9SYUCuKmFpm0cdnrR82o', 'Jq544PxsCHyX8J2X3w7DQ7dZihJ3MEB7', '45a7a5f2e04ccac77a3453d357ca97056d2bc3cbf72db97948fe38a4e8190bbb', false);
-insert into user values (90000210, '中山', '昌光', '1974/03/26',90000015 , 6, 6,  '2RHWLrMwisT4baSRPCT8qR3srNfN0BVD', 's6JqvYpzOyGGPnvoTkVcZqr9k24cDKdb', '8889178d06ae301d7031e16acd2fd48f284f932612d636cf785e10589ad8cd51', false);
-insert into user values (90000211, '武藤', '公紀', '1973/08/09',90000015 , 6, 6,  'SPCPxQJHH4iwXuPUvY3ieWqmYjnlIzFO', 'vSqtNyK8Hpd5vqT4rEvGw7V3txvswkdq', 'bfcdc43a4d87971d8cd7aef79685cb595319ceb467997d1dfdec40c80420878a', false);
-insert into user values (90000212, '鈴木', '恵', '1977/01/07',90000015 , 6, 6,  'YZjHtfX4SJlEgepj34Q36CPbf933QiWA', 'NqDK4YVI16jZWsCAfnCfWcCxRacBydgI', '97377950a04b7b6a88faa173cc047aeca66f227080ea77fadc239cc683d3b976', false);
-insert into user values (90000213, '荒木', '勝許', '1993/01/03',90000015 , 6, 6,  'd2AQIvVd1uGaehV55osDMSFQmL6JoZrq', 'KD0lZo6VfER9Ag0Wu2ZyJp1A0CNDfeid', 'edbca02316637011f4cba7cede39d6d1edc1ecdf57b34232aaf266149f93982c', false);
-insert into user values (90000214, '畠山', '久仁夫', '1978/08/28',90000015 , 6, 6,  'TucjXldMKb4WaAMe579E3l850aDOqcQi', '5jfZvrdXC09UK4l3KiiEpDVzTWVYGlPG', '700efdaef70d568df3ada0d987cddd6e882ee267be55e5c579837f9ab960ad66', false);
-insert into user values (90000016, '大木', '美世', '1972/06/14',90000005 , 5, 6,  'Z6nNzVQlDb4SzGLiYztnrjMzJydaPOir', 'VGyMUV5XYh7IuEy4iKwQXlWLeYdC0ALG', 'fd368511f7ed8a616739e630011aae7bd7735f9e27573b43a307a0abbcc61c9b', false);
-insert into user values (90000216, '河村', '邦美', '1988/08/11',90000016 , 6, 6,  'tG4QY4riPfXwmRHwV4UxwEQV87G3ie9V', 'qcJmNAIqFbk2ypyxVKQfZrS2xynZg7k8', 'c683626784bf1ff870dba888f5ef219f1b8de12df351d074ca8094192f8372cd', false);
-insert into user values (90000217, '宮本', '和海', '1986/10/24',90000016 , 6, 6,  'k9XH6uSKaocAXKr0hwFzP3uisK3MouhK', 'LKnDAvfxBOcYpPAqD48BuvKgGjC016nE', '966fe31e30fc8e013c461a642f99e20d2cbedd54d5173c6000067a226f705c86', false);
-insert into user values (90000218, '石黒', '洋和', '1985/01/01',90000016 , 6, 6,  'EP1XHQstcVA7TGzEQ4oiyGRuteUHXyMm', 'HGCYMU2by9Bj3khZcIYLHkZVUWKxs8z6', 'b40e790a449d29367f5356580a3ffd98936f7b7f9733ef09b5547a385da034b6', false);
-insert into user values (90000219, '杉山', '友幸', '1972/08/11',90000016 , 6, 6,  'kEnCTGbJpUU8KxUXhN66NenrshlWyneB', 'mZvMrgw29t7mtmXIhS5XfdEgMTYoQAg4', 'd2bd2c5f2acf0a6d75d0ea7bebce3510a1f5da5102ff0f34350d177c6bf5d0c5', false);
-insert into user values (90000220, '足立', '鋼三郎', '1976/03/11',90000016 , 6, 6,  'e5394eqzZlCQ2Eo4cJ8TqYu6u0p4L5bw', '50C8qt4xf7P2Ih9LBdZa8iODwlAuqsHB', '5859bc1f5ef963fe41b27ea1724180e26850179da3a86371140924352a3a4688', false);
-insert into user values (90000221, '畑中', '心一', '1993/01/03',90000016 , 6, 6,  'tApD48DSnTJbGTdi3kauctT9g2bkMSdE', 'Bxkp4ytkCymlBFiomiRCLoVFvzpwDzIk', '1f0ec78f97022090c9130cf3e198eb0018445f45b46743f9f747a7c9dfe2f1b4', false);
-insert into user values (90000222, '米田', '悠子', '1993/01/03',90000016 , 6, 6,  'DNUTEnON54dOfkMFSdN6xIUVGfdW8VuW', 'AtAkBVfaOD9g4FMeJhFmi9VTIyB0toxe', 'a0efb488e68e0b45dcd27deabd478bcd3dbbca06066eb9bb85a660eaa29f3eb1', false);
-insert into user values (90000223, '石原', '道彦', '1976/03/11',90000016 , 6, 6,  '35TnUj1MMsGiIhPHmIrb8w9uyJQvX2bu', '7xaT7JPOCiSoeNGk9Zr9BsbEwmtdgu8b', '87bdf38f4ec3441dd7d9c15ed734799aba088f3bea131bd0a77446c7128c3285', false);
-insert into user values (90000224, '菅', '祐美', '1993/09/24',90000016 , 6, 6,  'FsFWlBk598DtZbCjFkCY1I4jjfo9lUJy', 'fmt0A2AdBzM1bzEP2E16lVcoNSUi7oJf', 'c3d7072404ce7a5c8a098eb851169946746bab4fce6bead3ac955b042b7a4ad1', false);
-insert into user values (90000225, '藤川', '明博', '1975/07/15',90000016 , 6, 6,  'qXsUQlunb32NMVAaY97VzBj5SzdM82Y4', 'lNSS8DKeKlAcx0Arg7T6twHQhAewryPM', 'a58a5ae99a21dbf40b50675a16c1e16df31bef6d78a43bddcb9ffa538b8b565f', false);
-insert into user values (90000017, '杉山', '芙美', '1974/06/02',90000005 , 5, 6,  'JMDBGszDDTupmwoadBlX29JF4sRGbziB', 'NWehEc2qHrIxuy9bcD3D5VA9btyNT0wO', '9a58f02afde181d7783b1276636753e1185d6f4186853291048c9e6da8afc2c7', false);
-insert into user values (90000227, '大木', '迪子', '1984/09/07',90000017 , 6, 6,  'KTNuIsA8SNGn9EgwPP8t7dTkJ6ogUWXu', 'jK322ea88MWtrAmseS5WQ1w4hPaIqrZK', 'ef561154d60e6274d8e2ec781a8515d48d7657d231894b40d15095f87dfa7be9', false);
-insert into user values (90000228, '阿部', '鋼三郎', '1989/01/19',90000017 , 6, 6,  '4sudT7L5PcmeAOWMoANkhkXWMlslj6Sh', 'uhTXPDtVU8g7Zq2ykYSyzbnNsfo04llQ', '1919591f2205bfcd817f277590fb9abe1f86a51c796f1215e503b57cba2159ef', false);
-insert into user values (90000229, '飯塚', '淳子', '1982/09/19',90000017 , 6, 6,  's3oFg32FHhbahOIaelpFACpO07L3Sr4z', 'iSBxdaOktHdn6PuuH7imL18qt3hlaoE4', '7ff1fd289eb784e4a26ad5ec0661863b5574319acad31a5bc2ad1c383870ade0', false);
-insert into user values (90000230, '笠井', '朋美', '1982/09/19',90000017 , 6, 6,  'csjS3cnjwiRTk7wvUEpL3bdoleeRiwh9', 'K73K9Rzze5MBdUgEqSZ0mDZxL3PZ9czO', '3d55d6ee81a4c6962249069391c1d0bf697439df4ea045b9b1e75b6abdb3e846', false);
-insert into user values (90000231, '林', '金義', '1984/07/06',90000017 , 6, 6,  'N7s77CK81stjXGiE9Zr7050LE2WAzM3h', '7yekDmzcpJHOhfowXkWvpJ09508tZd3S', 'd0915fbe04558d34cdffbc82157ab21af607da5cf2f6ea6efb3ea3ab4cc85e3c', false);
-insert into user values (90000232, '浅井', '静市', '1970/09/03',90000017 , 6, 6,  'AJOzOJdU6obhcF0AfwStULHDQD0koDHc', 'WskEMdNrWoXxWS322yoHHQ67tVzPVjoc', 'db4e1f1052955ed713e022ecb91b35e4e2a78eed42cdb89d3ee816a87e8a0dc2', false);
-insert into user values (90000233, '石原', '眞美', '1978/08/28',90000017 , 6, 6,  'P5d0RD7sFtcfAm9FVHDSXrmW1hT5E29N', 'UiFFdUZyEO0epbkPwVJbknFBVVDxWbsy', 'e684ac3489dbdfe17fdf865e2dc3eea3e083fc55bdc35d85b3e05da6fe2ba716', false);
-insert into user values (90000234, '及川', '信平', '1988/11/18',90000017 , 6, 6,  'NiMfVEL8NIIw8GtxTSkZUa1Wfl3Ox4jW', '88U86MT1vY51bCMQhGTu5srndRpPkgtn', '5589dcbd2713d615305ec568fd4675651599eb6e797042905f8f8e5445a82645', false);
-insert into user values (90000235, '小森', '浩一郎', '1991/05/17',90000017 , 6, 6,  'dFRHsWnFPtlgaT3oqwAczt1xpOdjRQIK', 'NsYNcfCu5Sxfs5wzIItYJYVkAbAhvZaQ', '7c2e8472904d8be32e7a2e96c6d38f9e67c8a03995a3d7ed3869332039d05451', false);
-insert into user values (90000236, '石井', '満生', '1970/05/29',90000017 , 6, 6,  'ssKkVPKiYKHCcDrOoGWMT3kBtNOwpHuM', 'bUB8QrSpGgSXGoEvmpOdOP2SHWAeZWKh', 'dfd8b485c035b997e6a8cee4c4e34dae5d65855f70816b78cc6c92ae33f16b7a', false);
-insert into user values (90000018, '瀬戸', '僧三郎', '1987/06/10',90000006 , 5, 7,  'muCJgOiVyyqtpdMsaugQ5nTQXCWhc4XN', 'FlOUPcrIgnooEE3C6LXFnIPiom3bwLcj', 'e84bcaeb81d9e0e41c0a1a0dec7ff4b53f17043795b6da9ee04ce67b8522a0b9', false);
-insert into user values (90000238, '三宅', '十志夫', '1980/02/16',90000018 , 6, 7,  'Kc74Jju7NvryKZgUEjkGzpY6sFPUWR6V', '0xHdEC8dFUgrrQIx4K17ywMszciMOelr', 'cf28ea6b2f26d2031516ea34e8a0d76a8ef291fd1ff65f3aefd0cf55015e9de2', false);
-insert into user values (90000239, '古賀', '昌光', '1971/09/18',90000018 , 6, 7,  'qyMDC6SATBxsSF2SmhPZZJxZcAvdt7En', '5bDWZ4vveibD3I5dlOFsO52LPMmuyQDO', '6932ae7d2aaeeab463e5728bce93294e5e0c0ab390cbf86a471a27454fee80e4', false);
-insert into user values (90000240, '宮本', '昭良', '1985/02/24',90000018 , 6, 7,  'AATQlJvirD7wzuCO0vAAXDvCLYOE53Oa', 'hVr6893oXmzKRzLez2dFHhyUGGtNa94m', '16dd7d2ec5f228d980a34b81159310de07ecf7a8bac322425e172a43eacf460e', false);
-insert into user values (90000241, '岩田', '圭織', '1973/07/17',90000018 , 6, 7,  '2x1ASe6x7tZt8SsFd9dbhLz9exz44guf', '6kWVpIYjfgSfL6AhMkF5rNjUkWsfVtir', 'f138b64de131f887cbe0cf4408b90649ee970c62c19962bb6663c161bada977e', false);
-insert into user values (90000242, '鎌田', '育雄', '1970/09/03',90000018 , 6, 7,  'Z7pDSvmFrMD0yvD4OP1uTL1VWsD6AF7l', 'AmN3ph4wwWBtIR0gPZyHAwc8gAggpW5h', 'c02919a12220ecc58fdcf0012a69cb04deaadc7ff879c85c3265b970bf82d5f8', false);
-insert into user values (90000243, '町田', '一人', '1987/06/10',90000018 , 6, 7,  'Dvu0EU7Q1hygnlDI07Xn7HLkbF97XYLj', 'p9y2x6TuXLcTKFQcX08OFr7bCgQqB6vk', '7cb8b0fdfe3d1c024834d3618bd13379d8d432d3b40f7e0da9a252bc55b69510', false);
-insert into user values (90000244, '菅', '直幸', '1992/03/11',90000018 , 6, 7,  'BjXjBy8erLTEbwEWFAM4lBiT7tA9KYBc', 'E8GRvEVhMaKYcmw9uJLqPWSlQcgnkBeu', 'ad177ec5cbfe898017acc6e5ba3b9b6122d948ac84fa9614dfed5ac71d340d40', false);
-insert into user values (90000245, '長島', '勝許', '1971/07/20',90000018 , 6, 7,  '9LJDNkSmq0blv1Cgv0UHREXXIaOowwjF', 'PbCglGv9g7AdfqRpSlg5qmnhf88JPBJI', '4a492db72a270410e3380b1046da53c37411eb2b68f47242b67e95bb25539414', false);
-insert into user values (90000246, '佐野', '悠子', '1977/03/22',90000018 , 6, 7,  'NmteFeMkuSpeZJ0Qh9E9AwAcka8FmpPj', 'ZrkhMKv4APugwh2RrH3FFFU7XAf1Ck34', 'e9e1f009edb73bff5a302629518e37e2d0425225a94b8815ae62a572dab5ea5b', false);
-insert into user values (90000247, '岩田', '鋼三郎', '1971/07/20',90000018 , 6, 7,  'NzocQ0QxtwB54Y2C4kGIeO92dt8wT4WX', 'aTIVvWTTXQuEuPdcbsXL9RXLQngOglTy', 'eb9ddde8dec0117ee33d6b1fdc4d48340d2e158ece125cc3a028c47b9639a50b', false);
-insert into user values (90000019, '片桐', '喜重', '1993/01/03',90000006 , 5, 7,  'bmWMsRlN5B6awwCrnGKh7xvB0NCnzx8s', '0RiXu34NJbpX3aFWZKwrTKn4CfstnBKU', 'ec1a040961805d1090d59c5664561da51e1f17d88486a5a00de357be8627c7d9', false);
-insert into user values (90000249, '中田', '直幸', '1980/07/14',90000019 , 6, 7,  'MUkF99ADAqZV3qQDsxuqiMGoxBBLnjcd', 'a4CcecBlnhCj7gtr7lGxVGIrnBHZsX2y', '317558c68d9f7388aa6c014c15b1b37432a3421c1e3dd3b6739eea5adcbe7c59', false);
-insert into user values (90000250, '小森', '一典', '1985/07/03',90000019 , 6, 7,  'x3NaGG4ngOuw0I0YdopG0l9LY9DX5x3G', '9rumJ2S1DuSdrwEEwsqeEoV6Hea5eatQ', 'f501ec2c1edf9ff51f00784395312677cbffe9247ecf1800a1875b7428f28bcc', false);
-insert into user values (90000251, '藤村', '義幸', '1988/11/18',90000019 , 6, 7,  'boPtRGFtsKeccPXoKIHnuRnNOZ7a5rEo', '5DazoBSZ90IOAuakPFAVRjgVjue898oK', '3a3518aaac0700051d4910419a35135bc9768d75afb9fe0bdf00495aec0ae763', false);
-insert into user values (90000252, '大木', '昌光', '1990/11/27',90000019 , 6, 7,  'Ptf2t07NiNCXwc3YtUfd3JNicnS0JINd', 'ZSSMeRZhzdNuVztcPnjm801AhyHi4BQH', '3d85a525f205d667cb41d37a315e9fc1a8efe22a250986007d03f2984eb320f9', false);
-insert into user values (90000253, '荒井', '茂義', '1988/11/18',90000019 , 6, 7,  't6Af0nvMq7GBYEiH9wxqcJ1X0iAvYI19', 'YSgokq7JQXX8bC3TCJ4CrUtFJUHLbHyR', '0d26c4348107b2dcbf62b73a77d769597348ae88592dbb9e01e287a1b2e51c67', false);
-insert into user values (90000254, '入江', '芙美', '1988/04/09',90000019 , 6, 7,  'Gl7LHYLWPIvhDQ3qp3VVzVOmIc3UNyKB', '4YLrxberMkSDNuDWD09EnVoW7x7LDDGa', '5f9ccaa07a226f42368db5c5a63c4309baec7d0c9141cee602851edc4bb27ca9', false);
-insert into user values (90000255, '大塚', '迪子', '1985/09/22',90000019 , 6, 7,  'lPUgeHMMgv7dw7bHtC67Zr7vF7L73mE9', 'ARucOZjbyFNRtZTTA6hfE4a5UVtLWrYR', '29fc983c4a88359770609b19d65476f7e79159b9d6a15ab7286e0c93ef940715', false);
-insert into user values (90000256, '宮本', '恵', '1990/07/03',90000019 , 6, 7,  'O15yrU8c72wH2KSq7XsdwXmSUxFL8q2o', 'qx2IXck4zu15AkwsSQd565afCSa8AzwX', '672dd7fe89ff9e70a127b3f41c2f68bbc9c8cfb76665dc58b3021bee50aea527', false);
-insert into user values (90000257, '矢島', '幸美', '1973/08/06',90000019 , 6, 7,  'JwkIX6Pck4MLgt87VVGOpWZ17wgJEiyI', 'hOkCBbCHfTJWT2IID8pQVL4eNZ6OxzJD', '39e5958f763f7e2209311d6321f9e9dac3d4b9209902f707c644fb679d1ce16c', false);
-insert into user values (90000258, '大森', '麻紀', '1982/09/19',90000019 , 6, 7,  'cMWSCfvtYDb4jMJ2rPVUq4Aklr38FjgH', 'PmcnR1sJL5O4jkrxuIIEGKzy870vdWpw', '620fb4cd518368d0d5cc36aa164744c555c71d4f1ead56965dc8ae0998210cf0', false);
-insert into user values (90000020, '武藤', '美則', '1993/04/09',90000006 , 5, 7,  '2hjjM8sjYJrTEnumGzwkUbDlXcqWBuVt', 'MmRJWWEB3m5aVHRzuDIxAjLj2ZyxFsCq', '2225252022db0c272dde2ac4bdf29dcf9db5b860eb116e2ffdc8f5138ba5adad', false);
-insert into user values (90000260, '滝沢', '数也', '1975/07/15',90000020 , 6, 7,  'y4DLMnFdI79auxVqUKwlow8uUnIhL347', 'rStATbmHTR73DtIwiDoNthQBgUyb0MIk', '3e99b1412565862f5571c0dcd9112de48296dc8fcacf17f797e7c26a05e4e7a9', false);
-insert into user values (90000261, '岩田', '恵治', '1973/07/25',90000020 , 6, 7,  '9hkL285stLyaZmQQk4DdHg8A6KLTKve5', 'MxowJrtPI4VW9xJ70a0refi95KRhJ9RZ', '46f5fad8a8fa8959e24112e3db031e5ed88769615d3036a1a2274c90bad12e57', false);
-insert into user values (90000262, '荒井', '和海', '1974/09/21',90000020 , 6, 7,  'xVfdWtrhoIxVxx1iC1AfhGtSZqVkC2nE', 'RbCZ7Ok7egLu08o3pCn8lK7c8GRG0D4e', '9b2865856dd05ea1649f5db350b1dad3afaef0daa4e2290838aa484853a6272e', false);
-insert into user values (90000263, '齋藤', 'ひとみ', '1982/09/19',90000020 , 6, 7,  '7N5H2M9mt2H1oZRFGA9BYPJbULoqzCYw', 'RMzBXyhGZ3MZSr7MJXooRb6aK2ROKzTB', 'ffa3d64c1202832257d176137ae43b4a11862bf453993b13896056ac3834309f', false);
-insert into user values (90000264, '新谷', '菊江', '1981/01/28',90000020 , 6, 7,  'rDalrX12HTnKdxFDeg4XXNPYt9Rxq6oh', 'Bf0PH5ZgB16Cmr16gRVMlDEvaY2gZj4n', '6e9ad69f21b3bab77fd3634e2d9aa3f3bdae8d37e5fbfbeea7725a9ef5bfb0b5', false);
-insert into user values (90000265, '三宅', '眞八', '1979/09/14',90000020 , 6, 7,  'OunhwSj6DFqeF3mK9PuHX0F1QZAy98Uu', 'WgZE3e9xEyjaQh5tafvEVgvxxUuuV7bZ', 'e0874d0add47d9e69a26bd2fcdbe539fd5fc7bbb1d8bf6fb892e66c9c57dbcdf', false);
-insert into user values (90000266, '高島', '友良', '1993/04/09',90000020 , 6, 7,  '33RpAHp4Fqrt6uYY5B62wyipUeNUKlZS', 'XtmgcbPx4qdIFd137SZYNhJ5bhe4h1wT', '9e825e145e7cae86bc4bbb97e9f3bb2c6f7f39b108f849996bb14a227517c4e5', false);
-insert into user values (90000267, '溝口', '一人', '1980/02/16',90000020 , 6, 7,  'KYdFFJ1ppDXlfiLCmQC9bqpz7nO1ZBsG', 'EqISE7PzrSA3L8Pa7Evv5WTL8ffcEInH', '2e6a64d9489a439d54804b888e667d335f8263962ccf0f270c2dfc2146a832ec', false);
-insert into user values (90000268, '堀', '喜重', '1986/10/24',90000020 , 6, 7,  'O0VKjfJAQA6CHocQpaZmlItU3CaJz03P', 'NRRJ0DBc1MjqQWatgybTOowbTMG9LELB', '475b5e45786d4f31fbebff63d5365642259afcdefb8c0b3406f6f2194929bef1', false);
-insert into user values (90000269, '武藤', '亮子', '1980/02/16',90000020 , 6, 7,  'SXslhG8jCs6aOacQzGF3ZYsFGK6DTkYR', 'YkWmeqsJbdgQkS2tROOn47s78WGJX0Y2', '8c8aeabd206ee1242a67cf572d5158b18d82532067fdad7e4af73b9a73f995f7', false);
+insert into user
+values (90000002, '藤野', '昌光', '1976/07/31', 00000002, 4, 2, 'wHiFd13BRKZBJHJGqgVWGw6jQLBif7Gf',
+        '0iX2FB033oZZ8ufBKn34hBUsugST2GCv', 'd3e531eb32aadd77fe35a06fb74713f854a99554b7ce754ef8e730abd0885a70', false);
+insert into user
+values (90000003, '石井', '陽子', '1981/01/28', 00000002, 4, 3, 'Iu3jU0t3lHs0xJoWLuS0Y3zGHN1f91Sy',
+        'm043n5v743MJJr1Mv24er90tb5t3TrhD', 'ae447df4e64fb60cf9a0100054925f8d3524b2cf33cf6e9416eaee818655184e', false);
+insert into user
+values (90000004, '本多', '富良', '1991/12/12', 00000002, 4, 4, '6SUMaqlIXt0sLUQA8jox3wpr4xCZcZYk',
+        '0GLrC19yL1YzIn8sBydP29LvB1y48sEa', '69ed7fc8a156dcda11d821fe7b22f466dd0aa096a1905ae4e1bde14955093122', false);
+insert into user
+values (90000005, '長谷川', '成美', '1985/05/11', 00000002, 4, 5, 'C8PbPQfit4jCEEAxobAUzEWf19s2SJ4H',
+        'Y3dQoByAT08IjSu9ZkMh416yhN6D0E5K', 'd884e8ecc70fdc429bda99460c11bff98bb44f49a0dd28c54befa45e0ba7729b', false);
+insert into user
+values (90000006, '鈴木', '絵里', '1984/07/06', 00000002, 4, 6, 'dtcS6FaBPB0Vj2HCbAWDNDuE146Vin8P',
+        '1pIwNjvayyuA5Nt2iR5y33VoI31S7jj0', '4e6b9d8b17ef0ad161c77c22bd003e0d2e97efdf4f2afbea56e846cc0f2e46d4', false);
+insert into user
+values (90000007, '塚本', '鋼三郎', '1970/05/29', 00000002, 4, 7, 'iimhH08kcU6hu2PcmKTGB3TesDeCITOh',
+        'BBi5iwNcFpy3FQbEozDhajWCHRNgErny', 'd21a5f755a812a56a009889af5edc98d9f3baa50a0cf8c98788da8335ef8c4b6', false);
+insert into user
+values (90000008, '小森', '迪子', '1975/01/03', 90000002, 5, 3, 'C40XgNVdTH0mjedwYhWm8EODQSpu1ef4',
+        'VRzTDKcimlsCW1TrXqxcYfT3MIPjdBDP', 'dd681dc002c1ee530a62cab3a668bf27e60d375c85d6d7165a2d3b7deaddceb5', false);
+insert into user
+values (90000108, '新谷', '喜重', '1974/03/21', 90000008, 6, 3, 'QuyhSeHghTTkkpJPH4m7Jq9hN0YYVsjk',
+        'DBl1KHc3fWXuT9cB95U3b6976iq0C5mS', '362634ef07c062fec6b1bb199a71d07b556f9ffb05bcdb0c69a9d70109d4f809', false);
+insert into user
+values (90000109, '石原', '恵治', '1984/10/04', 90000008, 6, 3, 'Ffb5EfDLLTx24P4pYlJSZJmQApj5o4xg',
+        'qmG3XjGuwHnLU5xeQFHCdZKKsQc1plUn', 'a2f41f9f0ef8a546891d72b9dd33254dadbdb0a5eba491678c34228201147a02', false);
+insert into user
+values (90000110, '丹羽', '一人', '1984/01/28', 90000008, 6, 3, 'GIiFOhZRnDEkIRS1HieQamlQmRiGWTAY',
+        'R7rHrIIuw8PcaD9mtrANPwGFxx63pHyW', 'dbcb4d986cca5bd2a62d7965db45f3aada7e20eebb4499247b9c50dd71e08ff7', false);
+insert into user
+values (90000111, '長谷川', '義幸', '1984/07/06', 90000008, 6, 3, 'ySl2lo3fjGE58fNfjF7sAdIO99KXWrmb',
+        'HXe9p3Q6ByPW1aMTBFnMc2uusfupqjkC', '7ffafca51b1665fa883811a8877a6a4a7a1152a4ec7ed76c6924001f8527407c', false);
+insert into user
+values (90000112, '松井', '育雄', '1979/09/14', 90000008, 6, 3, 'bgzm8ih5xP8ZkZnuApAweAhCDaLZAzlG',
+        '8KckuC6I9n57dvdNdEIX9E89ooOBFaF2', 'f2bead3f477d0024177f371545b4fecfe4bf509859a103aabb22da3187f5bc2e', false);
+insert into user
+values (90000113, '西原', '茂義', '1974/03/21', 90000008, 6, 3, 'N8OK37BqfJDPLdt5VTxJGOc8Vs9pPBqT',
+        'r4B6aDbAtT2MBr94S4AbBm0SFBBnRvnw', '6a0e768ac5090536fbc8a4403e6899a9cc210c35b1c300b385e70a9d1acf5d03', false);
+insert into user
+values (90000114, '藤村', '眞八', '1978/07/11', 90000008, 6, 3, 'cF8rLmB7aAGVHFXZX6bkB77DStZIkCp4',
+        'wDK09U8RhrREafg0qnS8OznnxLkLENtE', '195c85a6cc63ce20d0ebd5502b2d401e9ce1781ffbcc1858d500826ea370aa13', false);
+insert into user
+values (90000115, '小森', 'あさ美', '1974/03/26', 90000008, 6, 3, 'hawY1HFwADPbMFzPel2YDPDy0iP4L3f8',
+        '8t8ddbLFTX5WLrAGd5HmBsUYE8cNz8nJ', '966da59d3131bfbc4f64ae8d6b8916f152d41a39dd52715af86841811dc0a8b5', false);
+insert into user
+values (90000116, '武藤', '朗夫', '1974/06/24', 90000008, 6, 3, 'rOwPblXjsErZAcLepA3EK3ujvMF4ggI1',
+        'cdc8zfLNCEsnioi9jBAC9xtx43n7jbYF', '7495bb0b15b2b490875119b3630f87459103c5824c67f863c1307cfe34db7798', false);
+insert into user
+values (90000117, '宮本', '陽子', '1980/02/16', 90000008, 6, 3, '8qYzNCzSxmdfrJyPL3roZtvr7JIuVExg',
+        'RieCpe3vA9llL1apQN3wflUE7UixJfXF', '07894886f091cf44550c72cd295356b3e4421f33d637d12a299eaf7e112c2a36', false);
+insert into user
+values (90000009, '宮本', '育雄', '1988/08/11', 90000002, 5, 3, 'SQ4GBEzybVYpkHBX14RHevZ07aAwx6hG',
+        'Urp36pgS54MTftlPyzh4K7t6GOebvKbm', '8f5be045c0e5c00e3e58081a2d70bd6af1a0e91801228a044227aa0bbf0e2bdf', false);
+insert into user
+values (90000119, '上田', '智', '1979/09/14', 90000009, 6, 3, 'ClcfC1ea9UeW0P5Dmq1vP0zUoChcQcyc',
+        'mrpexEht63BU7s4XAVWuuTjNXRUqFe0g', '3f8913392b6ff6f931f3e2c582f5d7c7b24b1c54e072b88f3a18d1c3bb0bc89c', false);
+insert into user
+values (90000120, '飯塚', '一人', '1974/06/02', 90000009, 6, 3, 'yejioRlKllcGGvl22YJWR5ZK3Kxj05IL',
+        'U9IMm7rkoSaHIa6oQjj65URLtLZPu5hY', '2874f9faf8a2ef8db75fcecf883a929ed3f582a0af0c72571b0bb7cdad7c4448', false);
+insert into user
+values (90000121, '藤野', '芙美', '1976/05/09', 90000009, 6, 3, 'dgWRdpwORTsZnIdVQRngHojV3egAP8iU',
+        'nU66k5OHQsHN55rk3aigRlcdOgdDKlGR', 'b5fd3e28ca2821d5661362fda3e1dc0628c64d0cedf202ce595d3639ee8331ef', false);
+insert into user
+values (90000122, '西', '直幸', '1985/07/03', 90000009, 6, 3, 'VvYZB1n7bC59HoUs1N2oq9EETsA6LbSN',
+        'tG8RXHJcvLIUoblXVS145cYAaDBmSvtT', 'b7e437ffb3262db9518efe0fd20ac5d4ecb36e056b2062a44ea92f480126fbc6', false);
+insert into user
+values (90000123, '岩田', '昭良', '1991/07/29', 90000009, 6, 3, 'u0sIoD2J4IhvXJ1CJ39ZMZuzFdPskQ9B',
+        'D8EdsrgBk5frDLWiqVCuudO5x1xPJX16', '73f18accc80ed64caf8cc9c3bf58ba28a0a6e7a9bb229d234cf599c7bce7a6ab', false);
+insert into user
+values (90000124, '瀬戸', '昌光', '1980/06/15', 90000009, 6, 3, 'tIZgNJXAVzqpE5Fom7Uo6lpf6ClEZyNL',
+        'F8uKMYWr8KEG7iMWcwECEi7hHdTpT9me', 'd425d931f2b5faf9178b83e4c5840bdc9ca7a7c26e10467ee1e297a3c0cc6c1f', false);
+insert into user
+values (90000125, '町田', '友良', '1987/03/16', 90000009, 6, 3, 'ngHO6wxlzaEegZuLdarwOWNcoQ5gmEtX',
+        '33EbhD9olVId3jRZG8Wi5MLNj3bl9koH', '8cf3c7c08b4cd9275e80d6b60f28e3b59e8828a20a96e0c17d9d2a02705bb7e8', false);
+insert into user
+values (90000126, '古賀', '茂義', '1978/11/01', 90000009, 6, 3, 'Doh79IK0WG1HdqNrMkv2CoUI2MPna1o0',
+        'Ms6pGUi9BEc3W3qOiLGePbuwekDeOSPv', '4dcc064cab413c81640d79145f06323b1a1d69b238f6679b4f23473d74334b00', false);
+insert into user
+values (90000127, '早川', '麻紀', '1992/07/15', 90000009, 6, 3, 'hQx3pVahidlSB0vfJuGEHw8TtSg9zRlE',
+        'mL5eDJ1d2hLbKFYebnix7HKDoUwMLHI2', '0bfde70e360ddfe01f56def3f472328ee0374267792bb42aac15326d669a3fa5', false);
+insert into user
+values (90000128, '大谷', '淳子', '1990/11/27', 90000009, 6, 3, 'Kp45dPIH8V1IrwvTroywhyzWWlX7pm1z',
+        'jthpNlqdCtQoA6Yl54QMQam4ZVGNKOhp', '1cde037b94b8ea710faf70a8e0d2156ce6062b494b57fc88544955268810b4ac', false);
+insert into user
+values (90000010, '金井', '美智', '1977/01/07', 90000002, 5, 3, 'BYNQ7HDLOTsteGk6wHU2zY37hn3Q6f5t',
+        'B3DR5Z4YtMfBFX2jXP8q1nReNMNOX4aK', '0fc8e45e3d2a8f0ebea1b6b73ffcc3411d492e9046d23f54c0dae8f694b8d45f', false);
+insert into user
+values (90000130, '大木', '恵', '1986/10/24', 90000010, 6, 3, 'TjyFytCgklyXnNzQ2qOQDRIvn6XO1NXW',
+        'FOGVHGmIi6v8NrF7WmQjMjhqrTboeknN', 'bc94d888958d852453af727df7ee2fa4cb9f3c26fd84ef8c01b886f6e3f46fa7', false);
+insert into user
+values (90000131, '杉山', '悠子', '1985/02/24', 90000010, 6, 3, 'Z3V8IRfnW0NYyiEkUATOXU3vQ3ET6sUQ',
+        'KbhslEpOeIaVvr73KA0COpDGvLYxlwJr', '50506d9ffc200107ef6e529e73b0288912c61a05b83737121fb8fd6978f861dd', false);
+insert into user
+values (90000132, '早川', '玲', '1988/07/26', 90000010, 6, 3, 'LB0bCOp73vKvP5xW0svZD1pP4Hq7iRn3',
+        'pTN7MZnZ4EaWzTEzr5zIREn80nl5Gk4C', '281206b24e4c685edc57d9e3965e875c9f36bebdf420a7248512ce93892d008c', false);
+insert into user
+values (90000133, '荒井', '裕恵', '1991/12/12', 90000010, 6, 3, 'cIEQig7gldxA3ORpKJsznfjyCDZr39zt',
+        '1dE78QPo741WVmyjwgDDxXJEfwEJyRjr', '37df52d73aa87b4a688f5345cb41de66ff77a9b040b6f69040536dea778ae250', false);
+insert into user
+values (90000134, '飯塚', '健生', '1970/05/03', 90000010, 6, 3, 'p5oeT75OiG20MZW5icatB102kmGqKn5y',
+        '89qkfnep4DKRNmW42kyPHRSg5cpAqm7a', 'dc79e5caec54cb423a6b7a25d3cd0532eda79fa96475656c5110ab052d341e83', false);
+insert into user
+values (90000135, '長谷川', '絵梨', '1993/04/09', 90000010, 6, 3, 'PRBufSKGympj1MQghYEzdOQ4TxWQyZ94',
+        '4RKauvbt58ctEGTbTRAzBNbT7woTJDfY', '313292016272069f7d5cc259b23eeb8a49394fecc0de40c6041c5335c271a1b8', false);
+insert into user
+values (90000136, '坂口', '富良', '1974/09/21', 90000010, 6, 3, 'eOJYhLiqOJwBZx4JX937h8bYEeY59qO8',
+        '57IbL1oAadv196FjTsEzzqu3xoENzQcA', 'f2c24014beb85c69177b04fac2fcb65597ef649d4a7b8baee7b525a7279f24d3', false);
+insert into user
+values (90000137, '久保田', '金義', '1991/09/10', 90000010, 6, 3, 'K56JYaiBeBCM8oIKZM4aB1FxBFusXBYL',
+        't5u3MGbOEkvnTA5kBULCPUWgYJ0sUN7l', '2e39fcf589cc8e0c2b38935c03d511099c62fb7d1d2d5bd1c564e0152b03d30f', false);
+insert into user
+values (90000138, '荒井', '眞八', '1976/05/09', 90000010, 6, 3, 'lpHScdYPL1YjhFAPpWVIutUJ0Ld4oh39',
+        'gM5B9zQZsHrnTUB9Sy1oWiM3NCQg330j', '14c466b0902e5f4086ab09fb0728870e788e9d63b6ce72a831bb3e88398cff85', false);
+insert into user
+values (90000139, '菅原', '鋼三郎', '1981/05/17', 90000010, 6, 3, 'FqQ2V38Nht2Nl0UvvZ4yzCIryfwJLmzZ',
+        'KK4xUv9qSV4gf3h4yDw2gpPoDjezgTqm', '5872a8f2604457d1f1fa37adcd04af6dc2eb8f04d470748e73160a652ea77673', false);
+insert into user
+values (90000011, '長谷川', '健生', '1991/07/29', 90000003, 5, 4, 'Ldyvem2I42JRmkQ50OHlIchgE9rRrJC1',
+        '3WgDfCXSqyi32ukpI3mgybduma0J4kvr', '652a03f07ef0ceab2d202c298bf802d51573b005225fe09a97d415ff5169c8e4', false);
+insert into user
+values (90000141, '新谷', '一人', '1978/07/11', 90000011, 6, 4, '3boIOXWU6ANHDFYFog2RjDGN2q9444Yz',
+        'bHtbQQbdCUPstPIEJV01v8hirgMJNwaK', '78cb39da334262881dec938c0a153509deeb44bce08cd1607c1d8e7252e9c701', false);
+insert into user
+values (90000142, '土井', '定二', '1985/07/03', 90000011, 6, 4, 'aRPxToms6OuxMSD9wRByYjMwl9CYfYMW',
+        '5dqm8JXAbDV3Rz2zgCKwui2sYp0tz1WL', '9ae81529bdf2c6f3cbc52fa7c553b832c53c57bed1627dfac2b11c0b46503627', false);
+insert into user
+values (90000143, '高野', '昭良', '1970/05/29', 90000011, 6, 4, '90ADGWI38ew1AHJ21sn2iut1qjsVey0r',
+        '34TYdynWnZ6szO85aFQGsthpKKdz3JDw', '3eabb7085958e4247b68b264a8bfcf471f66e4870eac1a462499718415266eee', false);
+insert into user
+values (90000144, '飯塚', '明博', '1971/07/20', 90000011, 6, 4, 'OLWNvgvSTejciXDQNclcuqmtA29VIeuv',
+        'MsKpsgPyoB1eY8yAHWlMeBBzBmRnXl06', '2958027da1af9530e075af8c41ae5325574648250dc65d907489ffe9d6df5211', false);
+insert into user
+values (90000145, '及川', '喜重', '1985/01/07', 90000011, 6, 4, 'tMconsAb6BMTgCmUa0BXHKgYn6pwlML8',
+        'TwDogncwKxjPraX20jzo4UssDN7sCxYR', '813a70e46c4eb1aea9805ee5057062c43da39eb8839f1c8952752cec339a9edc', false);
+insert into user
+values (90000146, '大谷', '勝英', '1990/07/03', 90000011, 6, 4, 'KG23qNPHgQ3F21Cc5syQrK1jh0k6sgYP',
+        'MkG5jP3pcYlgkeN8vB7UyYhmuMgq2CdU', '9de7131733b69c94662d06ecf81d89c2868ed9a64242918fef3a6c23ae34d21f', false);
+insert into user
+values (90000147, '大塚', 'ナツ子', '1976/03/11', 90000011, 6, 4, 'a5oTVlYnNGi3b6CFgtjjaESIQ9KgAqzV',
+        '26PMFkKy2QNTBx0BSA69pyEz1HcsfF3y', 'a3cd3a657166d75fa8a31d749c1ed57b0650e8f85b51f37362973c7f43afc96a', false);
+insert into user
+values (90000148, '松井', '希和', '1976/05/09', 90000011, 6, 4, 'mCVVuZ5PUlVm4t2JXFBIWCvaX5OVGUND',
+        'KwEI0VsPg3aYQQ3yScX1VUKDxeQKS2c3', '20d0913ae44f30c9c09b788ded06c2b15a8b079293558d929f4e9f851dbeb5d6', false);
+insert into user
+values (90000149, '堀', '麻紀', '1973/03/04', 90000011, 6, 4, 'MCX4XBUJ73WcRk9pJx8EcWzmcg45CQuX',
+        'UBedlNQ8Acg0IIpBwZomtM8B4Tl80Ewc', 'c166a67da34cd221c0c1013cbdc8340b2dd236da4c53042526d9339736a2daa0', false);
+insert into user
+values (90000150, '飯塚', '友隆', '1980/06/15', 90000011, 6, 4, 'RhN1I0x5Cvh2JYmHRY4C5FAwYRRZF78M',
+        'rIwaiAKBdNqgU6bwKD5l0z9jp1DGdJiF', 'ee319877e1dbadba15a452a1fb0e58afa7cf349ee02698ad6f9559c37b2dd874', false);
+insert into user
+values (90000012, '塚本', '眞八', '1978/08/28', 90000003, 5, 4, 'S30AHlK7ggz5yXN9yuzaejDr8Ot8bpQH',
+        'csvTxi10RYoJIaOoUJpf6Yr5t3CGjoWd', '0079aee91ec7d47b89e1e97202adc1ea68ebb876cfff4ffe2fef6f3f4940cfb4', false);
+insert into user
+values (90000152, '塚本', '竹一', '1979/09/14', 90000012, 6, 4, '88p4Q9hOhB4blpzvc13QMp71n4NbOFcV',
+        '0tisbOUHlc544WSxAfo63d8R7JooZsqU', '1e3776c4792d7f29b9a744894e2086feaa053506217324538a6e10dfe84721f0', false);
+insert into user
+values (90000153, '水野', '亮子', '1993/04/09', 90000012, 6, 4, 'ic4mfw98He8rfPCVBVagfTgPDu92u0kY',
+        'usOdKNMi5PX2tdP29bBZpH6QeSgeWRj5', '352b81dd25649739ebdc275043beae78fe1fe320f07c02939333f9676f63e233', false);
+insert into user
+values (90000154, '荒井', '道彦', '1993/04/09', 90000012, 6, 4, 'RZzXG0biIE3B2x2sn1uo1gS0j5hVwRs3',
+        '4tJ2O80XNOxHCIClHQTmPrw72bWPqALm', '7dda9940c25f2eaf3510d2bc850cfabcd95f42d0aa40e69460949a3f8e256130', false);
+insert into user
+values (90000155, '瀬戸', '新太郎', '1988/08/11', 90000012, 6, 4, 'hBpxlSDZkXa2IRgG1JZS79iKkwzZYQN8',
+        '7uxVODOykfmzSkBLQ3JVySdL2VUNjcac', '5fefbfca17d89db8906b00cdec14d8beb915d03a4e6c643c69f38f2379ce45c7', false);
+insert into user
+values (90000156, '三宅', '僧三郎', '1970/08/11', 90000012, 6, 4, 'FukIPqcp911cvKjKIO0FnOto4N6R2zVt',
+        'rsfkkYFgvoYTAr0jpCbE9PXZNaKyhQKO', '19e62fc43c95b05674ec7ccbc3df2040ca9c8b1b66171595b8f7417dbbd87e83', false);
+insert into user
+values (90000157, '鎌田', '一人', '1984/12/11', 90000012, 6, 4, 'enBOcSJd0HPK7tg7cDrhoz1gdnxpz9hO',
+        'KbOkdDL14g22vZ0B5qJWSdtnDCiuXpOH', '290fa836cc3d279d9b85ebf6aeac234cd41e551668ee1430f11599649820f4d0', false);
+insert into user
+values (90000158, '入江', '眞八', '1990/11/27', 90000012, 6, 4, 'O9cOz0Z4ZBr6C0Hsf6njN2XswutqaE5b',
+        'iB0ZP5PsgffV5HO1UBUay0kKp28esoOX', '5f1b2da83bc2b260fa3ede42722721f82dd607c25f1cc9f2864ce805536a5b9c', false);
+insert into user
+values (90000159, '飯塚', '政治', '1989/06/04', 90000012, 6, 4, 'pgWX0PlsJnV4gnkgBAZTG6EuET1F2DHe',
+        'ASHeMCLxPrZX8VSowHqYVxdHbEoCnr8T', 'f4036c5c1a2648cb6a335fe13d21b1b6622c2756fcb69c4a778843f1832de3d5', false);
+insert into user
+values (90000160, '福田', '富良', '1988/11/18', 90000012, 6, 4, 'pJQeYae4irhgmT3ofvRjYpsMiDPWOARL',
+        'UBnlCovdXUhOYF9b7zjwHji4gRlzaOjD', 'c98984fedcec3f4c5dccb2343f4c1cb2ef1aa0bbbf3dd8bf197a193452414b71', false);
+insert into user
+values (90000161, '谷川', '静市', '1987/06/10', 90000012, 6, 4, 'y07w28lkpTA3WR0LQesjwcBq83ukYFsL',
+        'b0oRwznyB54wqKupcTS6wTA9ZdctM0mC', 'ebd1fbbca15005ec62509906e272642274a00850d0b0876742c6e85e008aa6e0', false);
+insert into user
+values (90000013, '大内', '長一郎', '1975/07/15', 90000003, 5, 4, 'v8Ibs5NRzfj4vqtWOiXxDDqyYWKIy5n0',
+        'bJt1GBkOh9HLDOUpovJxbGFVcYLALVoA', '2cd6ffa6f27e5dff050670997b948bcf32c466d742f7f6abda29609875c2b389', false);
+insert into user
+values (90000163, '竹内', '稔郎', '1991/12/12', 90000013, 6, 4, '8YQ3CUt0nFEjHUMteD2AUdYiKJxhfQER',
+        '3SC0lJ2PP5moduXrZL25knbcuXfowvGf', 'b4b2bfa0c4bafbc1500981bf66ef90b77f007bd6620bb994266f2ef845af4ba4', false);
+insert into user
+values (90000164, '大塚', '芙美', '1977/05/14', 90000013, 6, 4, 'dmGQbbVz8RdJkrxGJ290jyXUmdsTzW1p',
+        'DJNCniYW3WUzCQTKfM07ajfgqZvCaW3x', '4e951850e4a8f3e708895f3b7568e59472dc6884b58a237da5d9061af120a14e', false);
+insert into user
+values (90000165, '矢島', '圭織', '1984/12/30', 90000013, 6, 4, '91ecLeJr1mhs4QgvUUpdyudpMUY5RPXE',
+        '512Hol2GkAIogG7kVW4fs14H7BylJYfO', '26b148be6cab68471f90b3eb5ceb91e3c34db92be53cb098c9c8186dd2320ac4', false);
+insert into user
+values (90000166, '岩田', '心一', '1988/07/26', 90000013, 6, 4, 'usasBbFejzLNlyynBxUlmSMW2u8djtan',
+        '1gpdPjv94g1QJUcGWKx1smtIPauq6Ur4', '5772adb04306f99a950524a67d77afcd21148743ba5b6c84a0dc8d260a6c7abc', false);
+insert into user
+values (90000167, '齋藤', '三男', '1974/06/24', 90000013, 6, 4, '1Lk9ZDstLIb5jpGdm21Q5T1DtBLSYs8x',
+        'y6sK7K86ZxdloeUJoPEXEpMSgNT6PE2g', '46d93b37daab5418eb84f211c77b761dad2b5282e1f695175ab86ad8b1c7baae', false);
+insert into user
+values (90000168, '藤川', '絵梨', '1974/03/26', 90000013, 6, 4, 'CRehxOQv5tyHy0Z73RreTnh2sYqenrG1',
+        'usVA23dcG0K3iPiwLhp7MbqQyU5WLf4r', 'feeea0b813ab50a5d2da8cec0be26ee3c22a3d24db914662f04429f310bc1882', false);
+insert into user
+values (90000169, '浜野', '保行', '1970/05/03', 90000013, 6, 4, 'OCuWecpDMGMaItdrCdroLOTW5dUjkpye',
+        'UBs1LQwmRPvcGCZ9r221oE9kO05sCk4h', '7dfe75649c03624e51b1285cd2a1881882d304f51ffec07adaae9c0084e1b393', false);
+insert into user
+values (90000170, '大内', '洋和', '1978/07/11', 90000013, 6, 4, 'uvvNu1g5inrF1bu6ZYo7S5EOGrUkBguU',
+        'A75SQb8IJtPotanph2jMNmaM0ucFSooW', '770360207fd9009c3425200752e6ed683123fbe44714625e486ae850a814417b', false);
+insert into user
+values (90000171, '矢島', '千恵', '1978/08/28', 90000013, 6, 4, 'V9huI1ZmxTPvsWOwzihji7uSgLT0vWhP',
+        'fap2Qd9sjtZAUKUMNLuY0ZSHUkPSvYIi', 'e4067fc0c873cc48da433886f93f1510a38835264c5fe7228e1af7d4c9e456bf', false);
+insert into user
+values (90000172, '古田', '征二郎', '1987/06/10', 90000013, 6, 4, '1aDJncVDOz6vSNc6cbcdeqAbuTr28JGE',
+        'Gf60InAwyEIWojWqRzsOpCe8HUZuL4ld', 'aa3db1f62026ea7f3afdfcf3b54cbd0ae70cf53d7c7952f1a5ca2db7872e95e7', false);
+insert into user
+values (90000014, '新谷', '知生', '1973/03/22', 90000004, 5, 5, 'IKpYdU30z33ne06oQeLSuWD96vZR7KHY',
+        'nfrp9oGUE8oO23aDHSzXhuxn1gGITs6g', 'e66be7a9b9caea28001d762aca379f05da75b88a11aac1d8d0343c01f78ecabd', false);
+insert into user
+values (90000174, '足立', '数也', '1989/06/04', 90000014, 6, 5, 'xSqP2cCh6zKPDu49BMS7uc0IL8yEYe9X',
+        'gA25sS75sDFab5wH9oCpHaNlBpHBXL2R', 'e993e132f0e9260f3a11cbfef27357c175362183d158661dccb06222b30cad89', false);
+insert into user
+values (90000175, '長谷川', '政治', '1970/09/23', 90000014, 6, 5, 'ciibODKo6XguCYjZ6uxP3OBzttWsLs34',
+        '10VZ4XyksevH6mZJZWL6DNPpLXgkrb21', '75ea3f3fb039ed72d885559378ad8a7d90ceb86ec2e2ffb9b95b1a363b9fed11', false);
+insert into user
+values (90000176, '土井', '織枝', '1974/06/24', 90000014, 6, 5, 'qF6Uni85WCbDodUQmTxSG6GKdUsPlSHS',
+        'lSaHuRryOzkGzuf5kiBJmKSM32lCgv8k', 'd52c10ba2a0e3f7cec901eb9f32f8db2473ca278e2f9ea3a94c6d9962ee3a77c', false);
+insert into user
+values (90000177, '河村', '智', '1973/07/17', 90000014, 6, 5, 'qXOQM1Twg4uELmkCQTRupLSmnbc4cdu4',
+        'ZaCKbxMjuFIAX8tzHosHhk9FKOTvqqVC', 'cd27446f10e3011f42b36db21bd518fef3c8761d0dbc014a895d478b4c39a785', false);
+insert into user
+values (90000178, '古賀', '友隆', '1981/01/28', 90000014, 6, 5, 'zoA9vw6HyzItTMS3cUVH0AJzj4flrAYj',
+        'oBK4uugXvThGCb1Q7uyLZUCb9Ovmkebe', '4f2aa06909d6fe110589bbc9cc2dcb5105cfe896763edae1ffbea24e5c6e862c', false);
+insert into user
+values (90000179, '浅井', '保行', '1978/07/11', 90000014, 6, 5, 'FjMC3WaROBM9BDQHQUmeFYYUbFlEMIB5',
+        'TPwZOIEyRK13EHaIJK11MOOmzCo0cJzu', '859e9756e08e41a1265fb13d98fa7609e694271edf68f3715da6853541b840bd', false);
+insert into user
+values (90000180, '及川', '保行', '1992/05/11', 90000014, 6, 5, 'V9vVtKfa7AuTkDtKibAdgf6WeZcVU2MS',
+        'jzX8q0s96bVHsjKhIR2bOWaONm9Cn1ux', '92bba03fd6ca68b8453085ebca002f115f34eb49ee97c27290589115a409da5c', false);
+insert into user
+values (90000181, '萩原', '征二郎', '1988/11/18', 90000014, 6, 5, 'tTXBhsSJwgJWeou19oFXeNtQeq33eMOT',
+        '0sLAUdbpunfGpADqjedrT66bKAymsrCH', '99e29e7faf48b6f9671f26a7b53b573354c06d3e3453cadd614d21e8cacca1cf', false);
+insert into user
+values (90000182, '杉山', '洋和', '1988/08/11', 90000014, 6, 5, 'p0PVuwtELll9Q9SbFBlj042UDTHbaxQj',
+        'htwdyoNMW2YBG163Iw2QzHM4ckJUMOr2', '8bc36e740b12c9377d8e46ae20a3fa02796a3f6ee06adef3d7fb5103051f2c11', false);
+insert into user
+values (90000183, '宮本', 'るり子', '1980/07/14', 90000014, 6, 5, '6allfbK2dtTzn6FQT5loVZ3DYc7WECfA',
+        'cy6BziE46BRYKRBGZAYQJz6yK3pd2Vcu', 'e74a2849e694232d01ed3237c1548a34498f164d49669fb158039565e6c552ce', false);
+insert into user
+values (90000015, '浅田', '満生', '1988/08/11', 90000004, 5, 5, 'sny2tvetCUSN31u7ua6U67cPreL6jOV6',
+        'DsJ7kNHjOeCmcAl40iYeonOhd18clLsE', '65deb568fa5ee187715bb6268c99e6feec6baf6bbe71de01878c6d9b221059a0', false);
+insert into user
+values (90000185, '堀', '成美', '1991/12/12', 90000015, 6, 5, '7PxhR3W06G528mFh6GVG7FH47QozGTgx',
+        'y6453DlGW7DJAw9mZyARw93HL3mIzhUu', 'b1bd119df3021ecf6da4d37d2f818bf0ecf2d525ae20614138276c5933ea2c28', false);
+insert into user
+values (90000186, '宮本', '浩一郎', '1982/09/19', 90000015, 6, 5, 'zXD2E5zmjWtzu8dAPJUQywVPIhfLYH0I',
+        'aKXLAvtYGhUgXDOVQ6s5ioXPBkw0fbSq', 'edf5e28a5715bb61feb03fd5442d0bfccff5802aaa6e63e0cc2349790a6dd18d', false);
+insert into user
+values (90000187, '藤野', 'あさ美', '1991/12/12', 90000015, 6, 5, '29C7w0GYsx8tsYY0n9uFYOU6Zv5BToR9',
+        'iYAHjzXOger9GaG2KqPdNmThcujQh4Iv', 'e31b257add5b67bb8a181ec59443437759f4d558b35aac5d4e298083a3dcd0a4', false);
+insert into user
+values (90000188, '滝沢', '和海', '1975/01/03', 90000015, 6, 5, '1caMzEQ5tXqI4Mgln3KjTGnYjMmIDsx4',
+        'Sl2tOHh9GNbGvcGsbr6JXFrb4lE88Nmd', '715f474bcc076ecd6a89192a5102447c470034305cd584a667d5ca00876d83b7', false);
+insert into user
+values (90000189, '菅', '織枝', '1994/02/11', 90000015, 6, 5, 'I1FHm88hjrM1TRNA00VJzeS4jS2fSQBD',
+        'lqQkyntk13BPu7JznvwA1XT2vxjsdZ3P', '486e3d84d9516ec84ead5a82c2e822111a6968317eb8da8820ee055b0f885da3', false);
+insert into user
+values (90000190, '小森', '勝英', '1992/11/18', 90000015, 6, 5, 'XLhuW6v5bT6dqTIq7EK1UWcaGF8n60I7',
+        'o1QPjZiCxG1905NKQupFseANKrKr2obm', 'b72e6821bdc0680c5d4f74f451421c5c8d95744eb612dc66c0b12d281aa4614a', false);
+insert into user
+values (90000191, '浅井', '定二', '1985/01/07', 90000015, 6, 5, '1OhhTPGo4QLVoeOg74S4lwpIjEQeFbdz',
+        'lTc2p7q5fxZ0f7V8dZx63vt2Gib7sJeR', '715d602c5e440c3969798d55ac5c7a14b006c098248c6e7a8f6f7c1aa52facef', false);
+insert into user
+values (90000192, '杉山', '幸信', '1974/03/26', 90000015, 6, 5, 'W1noCiEmniLIMrpulyWyq68VKrnJmOCF',
+        'TPGQIIet8y9GBsVfrI1j9PDP6EfjgK3O', '93215d73747fd99a6f94a55d8a37441a95493a046ab5388927bba4bfd1637f9e', false);
+insert into user
+values (90000193, '松永', '征二郎', '1980/07/14', 90000015, 6, 5, 'MJXSoB1aoarUwmhXRszH4Fcpw1zRqjVA',
+        '35XA7VrxQTVIVJlme2bM9kHCIAPfKH4O', '5f49721947e0292bf69251bda8ea076e5e11e73b9a2d509116b4f520769805f6', false);
+insert into user
+values (90000194, '片桐', '沢子', '1973/10/15', 90000015, 6, 5, 'klnb66fatzF6YtXAJVqCku5znyEQEsHT',
+        'EgMQopWRAGt3dhRzaxojudQRFPGQ6a6d', '7be6fdc48c532e751720662242092e26636de7f822f6364e73ed9226afe7cc05', false);
+insert into user
+values (90000016, '黒沢', '一馬', '1971/07/20', 90000004, 5, 5, 'GBVd2Umw9MddszGHD3AC4j9YhyYPSWHv',
+        'pKM2ij3WrZxNntaQKcr4WI5cYDEbjGsh', '2bd1866bd0ad4c19582087fe55f1133a4e039f3eeace043dee68e0a98199b202', false);
+insert into user
+values (90000196, '松田', '保行', '1987/03/16', 90000016, 6, 5, 'ySzXo1GbWQ2miTUVuv7eSVBERGsDSkQl',
+        'i5ITd9xewOn3JDSkCc0mxeqVTSaRaiuB', '788f07d0958ab4659e9ce93b360ca04bb59a180b776963a2b5679a2e223cd0bd', false);
+insert into user
+values (90000197, '長島', '富良', '1991/09/10', 90000016, 6, 5, 'bz78CEIlmWYoq9iL0MNgsAFICq37AclE',
+        'Luo6Ck8PgTB33bq1Swtk7j7GR4ucJ8XK', '0eab03362eb4ab5a469ebdd3d23e523084a28feed87204426bb07a1d41c2c653', false);
+insert into user
+values (90000198, '松井', 'ナツ子', '1974/04/23', 90000016, 6, 5, 'x6tB74Qli3voRrbg9fIsKwVk8In1cdNu',
+        'OFEDZAiFgJEytQsU4Gpuc9EvzJ7Dt4Gy', '0b15d3fe0763c5858c7ca327959dc6904592854ddd7019feb6e5b7c0db430a2c', false);
+insert into user
+values (90000199, '大塚', '政治', '1985/02/24', 90000016, 6, 5, 'NPzjfoitSUCL1aPjQkbWuXufiu7zEuJC',
+        'sbuo6sNsqD9kheXgaxeXFVGlFZwSGfSV', 'eadedf9b97e030111fc45c7a1b844b35c6c863572d90ccfedcf94955631d9d78', false);
+insert into user
+values (90000200, '荒井', '心一', '1977/05/14', 90000016, 6, 5, 'BGkfiZFrAHPWnklUztC3S1rrmqLImKMj',
+        'F7HZ3jSIDs4IqDgJmlcWo7Z0ySe65Z8h', '983e8f02cb0fddb8a1f51b4f1eeca66c980718d3c39b8e1dd08169254ebd32ab', false);
+insert into user
+values (90000201, '阿部', '聖誉', '1974/11/21', 90000016, 6, 5, '56UA359GcQikggnp4ZaqwGosZVr7uXjC',
+        '6GMJ4QMUMX2mIDyQfRpxyMlIuyc9eVZb', '6c0cfbafe1d6c4032c42c7fc325e9170ec40ecd4ce8ccc8e01850209e1a3edc6', false);
+insert into user
+values (90000202, '米田', '友隆', '1977/03/22', 90000016, 6, 5, 'LvvIvPz0FP4JvBNAajDNZZeR4s5kUNsq',
+        'inKZPc7pjOJMtIJYYSRqAkHWPGsqEK2z', '9e9384a9f1d7961cd2d42ab69b9c3c95789df9cb39b958b4092e5fb7657cadca', false);
+insert into user
+values (90000203, '矢島', '芙美', '1989/01/19', 90000016, 6, 5, 'Mtosvo8xW3hkxltGHPCrGQDkgPiV9SrB',
+        'gYGvB5poprs3gR6YUoT63fEXNpOf8itf', '0643b4d19d857db7a1d682c77f37a5f68526fd999240d200f8c0613cd5dc5eb3', false);
+insert into user
+values (90000204, '大谷', '和海', '1975/07/13', 90000016, 6, 5, 'WigTydEPv2r8FDtJHNzXO3HJPeH2tLq7',
+        'y1LuXcd0k49QAZFhhZRLdoOrA8GYBCsj', '9159a26819e79fe65f8fd07b8f126227086c38aa7a96d3ffe14530f2fa734956', false);
+insert into user
+values (90000205, '黒沢', '眞美', '1989/06/04', 90000016, 6, 5, 'FvJIuNWtyA6TckUp1oQad5tJDo1TYjcB',
+        'bNgz908tgXYNMxvc71B79ElTSzgc8VQt', '968aacfbff77601809ba7d7bc100c62fc0b3fc6ea3ceba2cdedd0817b3117c53', false);
+insert into user
+values (90000017, '笠井', '知生', '1977/03/22', 90000005, 5, 6, 'Wj5DBmYFAJhNpV63eP0AaxhoUmR4Vb0N',
+        'aNyXVTfXXntrFuTiYL28CLUkL1cx8faF', '9561de5ec0029c4e49c4b7f8ebb96cf0359257a211167b83d4de3af5729f82a3', false);
+insert into user
+values (90000207, '藤村', '定二', '1989/06/04', 90000017, 6, 6, 'hvG7Um8uHXEciprSZV31EXY03pcSwaWO',
+        '1C2yNYeL1mL2DGPXG8QnM95ugBWdsFmM', 'aa52eba81c3bf758ad015e75ba98960e252add4270519abea9c651dbc1af0328', false);
+insert into user
+values (90000208, '比嘉', '一人', '1994/02/11', 90000017, 6, 6, 'aupZdqJZzj3jvcYci5Sgh8SyeBpu82Zk',
+        'q53HOnMXbDVXfSAOtGSHgqBBAVjJQqGO', 'b0c3d9ffa481d7f11c3166e3b84575da75bef32fc147c0ce3b0ffd648d83eec1', false);
+insert into user
+values (90000209, '長島', '浩一郎', '1984/10/04', 90000017, 6, 6, 'e64oDUUn8SqJJEov9wAANaT0OVSC7lKQ',
+        'SMEEu5KM8txdaQTTjWiRlgKL4DC2JzpJ', 'fbafd67bf044b20de6196217f32981c727a5c7254c7f7d8efc27605c8f0e1e70', false);
+insert into user
+values (90000210, '浜野', '一人', '1970/09/03', 90000017, 6, 6, 'eWuo6AqXG8TkxKpsK40f1nq12goTQ4ZG',
+        'AwkKfOZTDoVf3SKQkON21OFLoH3lC5yN', 'c9d2e72d0c9aac0fc1ee7032dbc8db755966a313b49a1f15f7746ea0fe1739a0', false);
+insert into user
+values (90000211, '宮本', '準司', '1974/03/26', 90000017, 6, 6, '1wFiXYfKizufFvwYsWcJ6S5IOAUeRohI',
+        '0WJo3xqdb5mkAxxcdAm0Home3k0SPKvH', '3d3bba32c9cc3fc32734cf66a22dc79ccb8d685584b6efb183aacaa2e844cf46', false);
+insert into user
+values (90000212, '長谷川', '心一', '1988/04/09', 90000017, 6, 6, '2Dwc6Uof6778vmepCP3UO1Qt7nnw3wpk',
+        'kdqVi5FHdzI35miCrlzyPzICTmYn9a7z', 'a34f2c3df4bc9c7208dff1d7b0a72a3fa656c73e6ee75fab39144847128ef052', false);
+insert into user
+values (90000213, '佐野', '恵', '1972/08/11', 90000017, 6, 6, 'K7tfYhkgyhGYnuDoTrwJhTEGy8tje4DS',
+        'OGMxkcpFuD7UCynpW3rsKI16T6oB3vEd', 'b2b3763f3d103be2064c886acf27337597c4ac1898ef053bcb7553d50b1b5d63', false);
+insert into user
+values (90000214, '畠山', '一人', '1990/07/29', 90000017, 6, 6, 'ZOqVX13OLOpV90ZTkYTpKjn806jkUoO1',
+        'mYBy7AZ4RGVnp88cHZemkytSN8u69U1X', '82e1a37c864cf44e613330514f623b868aa9c5c257e123adfd2df09f36a21c5f', false);
+insert into user
+values (90000215, '小倉', '喜重', '1976/12/31', 90000017, 6, 6, '6jQr5Lf47djXljH2zI0Oeon2zhySalgp',
+        'EWJ0TKqF1vDu8aw90jyRhP2XvNzq4LJz', 'a785adee89daf0b602a93b5321d1f0d19211a88010b185f301790a3ba71bda59', false);
+insert into user
+values (90000216, '滝沢', '一馬', '1974/06/02', 90000017, 6, 6, 'WGIoXGgoGKynUSNOn5TAeJHu3bPV9wJg',
+        'y50sjqI2sfwEFijPBd2jasHJEoVuyTFH', 'a37964d4bc9a720469b7e47f06ca21a742a1a71ce8104411668b25055df78816', false);
+insert into user
+values (90000018, '豊田', '恵治', '1985/03/08', 90000005, 5, 6, 'RsWe3dOO2K03jGAEzvaPCCDwtvq40Utp',
+        'Fl7xriwxM1sOu42SoJpzLuDAKIB46Plc', '63cf4fa4ad765825af3577625699df40e9ad7f8eb037a09f3830e1f73a4ebeb0', false);
+insert into user
+values (90000218, '大塚', '治次', '1973/07/17', 90000018, 6, 6, 'qSxcC6akrqZ5YGw984JCWNZq5gBe6cfc',
+        'M7I3PuacoTtiYir1joFHwZtiWeU3ofcJ', 'f0355668f9bd34cd4dedfe0b035a02b8c211ab0538ebcb543a9f5d66b1b93b24', false);
+insert into user
+values (90000219, '荒木', '和海', '1982/09/19', 90000018, 6, 6, 's2G5geb09SzOv9jn90WI4HJEwv8BHy2i',
+        'bcmonGqDoyb0zFNcKpH06D9ccTqY4KaK', 'ac4a05c06be298b918fa94da83a8b7a6ee28be51bd258d1c61ca98dd3b961fe1', false);
+insert into user
+values (90000220, '上田', '朗夫', '1991/12/12', 90000018, 6, 6, 'N5WQjYN9Z12obv8trFaWGC14eLXBlTNg',
+        'hw0B5bIc68SJcLGslG1MDugHgVcmuyKb', '5ad17ccd40d02a0547be39ffe0b19f822eb9013c7202a0f9949c92b7267aecf8', false);
+insert into user
+values (90000221, '笠井', '千恵', '1989/02/03', 90000018, 6, 6, 'HE9vBJH9nJvbxAqcpvwf2VU1GQd7bAKA',
+        'OywcooSU3iiCByHKw13IqFjtnnhNo399', 'd876d0e813b766f718f40475a62adc0341e7ab6cdbcb00a06d794b3f0be81820', false);
+insert into user
+values (90000222, '手塚', '淳子', '1993/12/04', 90000018, 6, 6, '7hustUufW2YMxX5FPKd3o4MYDm8AR5xQ',
+        'SqNFc7phbb4eQyzFmVvIgN1465T8vA2W', 'e3c17678ff25e4961e8849c271975dfacdd783065372eecb381c742d5e4d49d6', false);
+insert into user
+values (90000223, '藤村', '洋和', '1985/07/03', 90000018, 6, 6, 'UetzYJWot663sdSiFN8TtExXAFEeJQU6',
+        'H1a0i4nwHZgDj1z1kgBhtWHrt6TTjjyI', 'b021d87bed24e6bab881d4186e234ab2c3367e899db87c2f213d09914bde320f', false);
+insert into user
+values (90000224, '石原', '芙美', '1972/02/25', 90000018, 6, 6, 'tVA3DGOgRH4EikQyRqLhPKveialVRXA3',
+        '808ggOxD6u57NEjtz5jBBAuSRTjS6wg3', '384a274c78b2f1740a329f7a82344a879dac19b50d87bcd61f062e0f33dfb4be', false);
+insert into user
+values (90000225, '河村', '一馬', '1978/10/09', 90000018, 6, 6, 'cjK9caPm3em4nQcf3Y68xMPJYU2XDZ3a',
+        'Zt39jfGwHw307tc6pHMifB9ldV8efN3Q', 'dc5a66910949931401e2c56a47a82f8ebcb31fe4ce734ed95f7f700a91fdc5e8', false);
+insert into user
+values (90000226, '齋藤', '恵', '1972/08/11', 90000018, 6, 6, 'XTm1ITiRA1p1omZ0pKVjyyELwyF2S1Ow',
+        '2wOFzgrWZ3e6rLejU9rzyOEFcwwBaVQY', 'c5647156fa1e8cd270bb85069f7a309c5d5fb0de49e32e85602d0c38d146aa54', false);
+insert into user
+values (90000227, '片桐', '喜重', '1973/07/17', 90000018, 6, 6, '1mwTiwIUjn3kTrcwVORrVSB0C4b3PzbH',
+        'aWpFax2kPh10XdjCf45EgctSs0INw82V', '9b57752d6218b3e4775f23fc82341821f198d96b6acfc1682bf96a3889679f0e', false);
+insert into user
+values (90000019, '及川', '聖誉', '1985/07/03', 90000005, 5, 6, 'mmMfY9VKqJI8CuluzMLRGDbyG1GhzMZf',
+        'Z38BbDYE7okfgnuhrZ0rIVjm3erILtJ7', 'c29a8399bc5fc6484405f3cd75a59d443eae2b280370c47a641541d155815e0c', false);
+insert into user
+values (90000229, '藤川', '鋼三郎', '1980/07/14', 90000019, 6, 6, 'MmzvvOiNw2EtEMHCEfvDGnClkpRdoF96',
+        '7BVO1Y1tJ7w8LtRsDuCISyq4vbiF7RDy', 'a30d9607867a0b8f78352c01665ab8a05a2ee1b716b24ecf3d5fb40a0a890bba', false);
+insert into user
+values (90000230, '及川', '昌光', '1973/08/06', 90000019, 6, 6, 'cEKTbfUFLvRO9zwB7rx5g7nNbbyrOlVp',
+        'UD9qrPuFgeyRZdKlJVihBkqtC77SaD8p', '72be814c598e82fb723cfccb5da460bc79d77ac448d53a11ab6c2c5ecc4d77c0', false);
+insert into user
+values (90000231, '滝沢', '浩一郎', '1994/02/11', 90000019, 6, 6, 'mGwmg5ZZD6ipof3tFaw1gRnLSjy95WpW',
+        'hCrRkPmVVgiEE0d9mgCgaiRiT1Mulxyf', 'b31cfc35abefb34c7758371813d520a322d4e80079c5f54fb20b82bc9a472c3d', false);
+insert into user
+values (90000232, '豊田', '茂義', '1992/04/11', 90000019, 6, 6, 'DG4V03DxvFhX6xCdeloQpMDh6vDlgSYQ',
+        'TEPo0wbHnMQZjQzV2U7QrQJqmRyjaDEQ', '061ca294a57b1f3e6851142f39ef98156c7429c0bac6b9f76185ad0fbc5d3ea8', false);
+insert into user
+values (90000233, '南', '宏季', '1978/08/28', 90000019, 6, 6, '4uOp930oVK0HRYRcrdK8W3PXyU6DMqUC',
+        'jMbhlfbiYHdzpMXliQBL5mXZoB4BdXFf', '616adad27d636ab13b4fa87a0c92135ca697dc5482785d1bcabfd9a6f5ead03e', false);
+insert into user
+values (90000234, '萩原', '菊江', '1972/02/25', 90000019, 6, 6, 'vPNs7R6Eq6T1CxqRdJGvXKW6TKF7Bral',
+        'uZAk1vOuKNAL0Lqfj2aXw76laFyxcUDw', 'b9ae7a5e67f9c85e1cd10eed576f118dc8dc4dfd36235442458f6c262b37421d', false);
+insert into user
+values (90000235, '大塚', '直幸', '1980/07/14', 90000019, 6, 6, 'FgnxjiLQNiSbA5em7mIzs2Nk0wjmH957',
+        'xH792Jqam6Y7CI7znXHJ4r4Xg1K6Do3T', '9c913a89a63790d974799595474387cccb1f75839727509a9e91a8e0954a37b2', false);
+insert into user
+values (90000236, '南', '玲', '1973/03/22', 90000019, 6, 6, 'aOhRZfRISy3PFTYfJ4RKP8N9LjQueNRy',
+        'TOD9FcJv8sOlQe8b3XyWWzJTzO07n62S', '969448c2f3fbb4f63a468da07b4e707ea85eb806c610adfc8b301054ee232787', false);
+insert into user
+values (90000237, '入江', '弘義', '1973/03/22', 90000019, 6, 6, 'Ps8o21ufJAX9RYSRQJHKv9jbhBhTySQW',
+        'MAURgOrS2Eg8sQu5MBZ6jn4ZddgQvr64', 'c206db4ecc423d470b7edf41faca39178a85b17afdb197777c171056de59faf4', false);
+insert into user
+values (90000238, '岡田', '玲', '1973/08/06', 90000019, 6, 6, 'jPMqmc8e7KuxvKzKpDQOS9oooJKQNQG3',
+        'Ap4QQDJeU8xpz0fk2EOjn1FnQkMUy9RP', 'd3b58f678cf2a74629bdbf6c5b42ce9c59ab634ed5bfbc4d585ed110205a7817', false);
+insert into user
+values (90000020, '土井', '一人', '1985/05/11', 90000006, 5, 7, 'ZVMloIiPCmZC3kpyfz4obbemN5tWqvrx',
+        'Kvx5JXqn9TXY60vc3bpIdoq5BqCdg7Ai', 'f50235208ee1aa3c63b3e9148bf2ae14af4045095a3a5f4f5095f82e09fb1dce', false);
+insert into user
+values (90000240, '黒沢', '明博', '1992/07/15', 90000020, 6, 7, 'rv6swKK7PbSBVS0b1tyxHe74viGLPUTZ',
+        'c7Q2z6Yec8SdBqnJfeyAmTNCBQLBdSun', '58d7f46f8c71f5f3b517e85e1308506a55b21b8ec213888ff2487b2e041494c3', false);
+insert into user
+values (90000241, '豊田', '僧三郎', '1986/12/13', 90000020, 6, 7, 'WCFvs8yO6NDeBrUedB7IWHZYy3n8HF77',
+        'lpIoCFan6uY02ezMk0XNTXtEpCfzma2c', '26f4b8a30c79c98b19dfa6f1b7ab728b5b531e93d4566d14f6d7bbd67b1c70ef', false);
+insert into user
+values (90000242, '林', '美世', '1984/12/30', 90000020, 6, 7, 'xFFDA2qftRY3fSihDVmxlph2pd2MHmfL',
+        'WYHXyUmhtV0j4ee7FaOhAehSCkpTiMYP', '13cf2c2f0c8af71a05c37d970eb851beee2fbfd768ea6047b2e7db23e858b286', false);
+insert into user
+values (90000243, '石崎', '明博', '1974/03/21', 90000020, 6, 7, 'l1JTGMTwrXUxkvXJsmLCCGwAQJbN6WxF',
+        'Xn1BF49ydjCWFzZb8IGUmjNjpbdOkLQr', 'a2f536eead7d0a66d796284ec61e4dbac7dd111dae65d9b89c2db7941a45af69', false);
+insert into user
+values (90000244, '藤村', '三男', '1990/11/27', 90000020, 6, 7, 'kJMHlEsHDJ45rnxshw5lfLAl6Lch5s6o',
+        '7i6qwHXZfpXt98JipEBf16KLuXgYUtVD', '77e67e6964d209ac679f60e5238ca9908651ec5e6bbd24a01bea2dc1d7a288d0', false);
+insert into user
+values (90000245, '小森', '一人', '1989/02/03', 90000020, 6, 7, 'BgvdEzieGzEzhOjzZHq0wa00q3eRHhVn',
+        '4QI4YdrZhGoTMS1VxDTblDytuSnumqNY', 'd4f36f5f7777bd23706932dd0e8fd8b541cb8221953a3b8c869ba8f854148256', false);
+insert into user
+values (90000246, '佐野', '幸信', '1992/05/11', 90000020, 6, 7, 'RZOnfMYIAJFhpHUatU5Y4ObC5S8VF9pi',
+        'w0UAV9DIwZ6U7vrWfFWWPKSiOVVoB0M7', '4554f76d97c515d2b1cfd960b73029a6dc26034da7e39191afcaddce67116a53', false);
+insert into user
+values (90000247, '大谷', '明博', '1993/09/24', 90000020, 6, 7, 'PJjXCoT6pJC6wTZyKYEd1to8XWr8zCPL',
+        'CnBjAF2QnOC17KqXaUzYOhqn8TllHh6D', 'e85f300ff9563fe411b7aa2afd42304d7e8d704929c794dc54f1ec2668fa3ec8', false);
+insert into user
+values (90000248, '大塚', '朋美', '1978/07/11', 90000020, 6, 7, 'nDD6bUs0WDjK0zKiKN6EGsvDjj3MEmww',
+        'tB6cEOrxreHOmGidS3AmzF19c7MpKHuV', 'b16404289c474856d39d749f5a1e23a247add9971cfe7e97fe6b2cad025a66dc', false);
+insert into user
+values (90000249, '竹内', '喜重', '1973/07/25', 90000020, 6, 7, 'k6ZeeZr0smwKIMZljvdsqxTlnq4acqkp',
+        'OYOSClkdcN5FjlAZ5kksVErRKo4ih4V9', 'db23036e01e7eb4d5d9bab4897e6646f806c71a9b9cd02f2bdf0dfe27bb508f3', false);
+insert into user
+values (90000021, '藤村', '直幸', '1993/04/09', 90000006, 5, 7, 'bPKAUzOcHxvTnIgPKNr40iESre8dFYqA',
+        '8rHtoVpjIgrmr78BEJwP6KOwFwsOSKwl', '66deb33204b7e93209250cc8aef23668787175e01e8cb9bc41363868a8a943e9', false);
+insert into user
+values (90000251, '萩原', '玲', '1985/05/11', 90000021, 6, 7, 'PpV7Xo1CfuYZVNIpls5Qe1zRhWJzVjnv',
+        'GdWyjBBZbw9rQ4OitUn73JGqh5rOIDd5', '416556501a91c8358bb3c12319e2359fdec33a61c28017febef86dd1ff4d9f5c', false);
+insert into user
+values (90000252, '溝口', '芙美', '1992/04/11', 90000021, 6, 7, '2eVSNsee8uOaueRTwoIJNXK33vP4ybP8',
+        'TH3ht8AByx2qwxfiEE8P7dHGE88VDZK3', '2a3566006f3833fc214668af6d7d0fe7fa0ee12cbb69c37b3eff728c77be6a4a', false);
+insert into user
+values (90000253, '大塚', '祐美', '1973/08/06', 90000021, 6, 7, 'RtkXfbvALHOFSP5rx4fCVUACV34hPUK8',
+        'fzH9SszHivQcweG42BYNJKJlKwhdvlEU', 'fac398e84cf5ecf3d42c8dd3cb67cfede55e734d659111a6c6f09dcada94e82b', false);
+insert into user
+values (90000254, '町田', '千恵', '1989/02/03', 90000021, 6, 7, 'Y8tUSYFJLCdDTj1NSzIbVrhFsEDNFd0z',
+        '5N7SpN4jeWGEv6VDXdDmlP9jqJnoYnqz', '4fcc2f38b7d189a41393aba06a34bb28c31619aec1e841ca02fd31fb97936b6a', false);
+insert into user
+values (90000255, '新谷', '育雄', '1976/07/31', 90000021, 6, 7, 'rsAw4qPZ6WdhSKQSK0pynjHoNC9HuYis',
+        'iEZnBLlbHWiVXpXVgcQdxWsduJGvcYCE', '0d50f5580c516378f9f2c30c5ebc114253214e8d2ced2b1305f87b692d489f1e', false);
+insert into user
+values (90000256, '三宅', '邦美', '1991/11/19', 90000021, 6, 7, 'Efm716yCNz66UfsxvfSvYXHlHCqhDGYz',
+        '7zcERrxf8mfDPYf44VC45Hnfo3HpNeTI', '90a1634e1bfe0bde38de92c21016890f48823e0bf0acda7a5d435782be95208d', false);
+insert into user
+values (90000257, '中田', '美則', '1987/06/10', 90000021, 6, 7, 'GQvS5vvkokR5yLE4GRsWik60Mno61LwY',
+        '1kgsa2wYQhA0ParQrQtjD5T2x8yFEO1l', '77f1fc7b187aa063d78aeecd97035cc98318ccbbd892aaa1f3fda720c452cc22', false);
+insert into user
+values (90000258, '平田', '邦美', '1986/12/13', 90000021, 6, 7, '6a9tdwH5Y9pl5knK6ujbwgdKVy6HwPUE',
+        'rWCJ3NlKnfNNFLNQZOTgfR5txU8bdLzd', '908faaeb92ca350bd6cb1e5eedda3fae850124498a5f4bb16e10a3928de31b4f', false);
+insert into user
+values (90000259, '齋藤', '友', '1986/10/24', 90000021, 6, 7, '3vP0i9ozDF4CwuMymeqNb9PZKRVi7gDk',
+        'GEenMCbK8LtqBmrnrntsJOmHz2HcJuQ1', '8254923a4085a7fe546fcfcd7f542d304cc0b803ab610ce05e081f66c1a0ac77', false);
+insert into user
+values (90000260, '畠山', '眞八', '1971/12/27', 90000021, 6, 7, '4NEZwZhn4JAluJcjbJIMJOMvTkXNmIeb',
+        'fuclQA9cYtisDUDF0PWrDuarXUClwMuz', 'ffd0b24141addc00ad9ff6dc43778bf1f4cd8080950d4061841f325b80d4b8d7', false);
+insert into user
+values (90000022, '藤川', '心一', '1973/11/06', 90000006, 5, 7, 'stCnZwSFVEGn6pBVwnKzGo2gNLXty3E3',
+        'jYKWnW4dl5olktk7qp6myvmdg0ws99wT', 'c91af7cb1f8c07577317a257469b3412e12cdf65a6def8642360084bb1d5fbc7', false);
+insert into user
+values (90000262, '浅田', '茂義', '1971/12/27', 90000022, 6, 7, 'l7RvmJRcQgmz8yhZF0n6TbvE75kuWqyM',
+        'l0ijWA80IaZAiFkrsJkjCgVCEPAQdr6l', 'b597711455809de568a85361337241d096dc8848bc90aaf2f15770e82a376b99', false);
+insert into user
+values (90000263, '黒沢', '幸美', '1973/08/09', 90000022, 6, 7, '2RCgU5LDhYoQnQbwbVYwIyLmCkEcpPiD',
+        '3apxLHjcAIPJpqmKwoVYhTULk3irx4iG', 'c53b48e389805bd412f9858c187b252749936039eede49f2e650b652433bbd87', false);
+insert into user
+values (90000264, '入江', '成子', '1976/05/09', 90000022, 6, 7, 'DIMN79k12rwegcSAAkuqMFt06Wr7vyjE',
+        'oWV9ccwUjoB0lG8Ps5K7OxeNhQ4yt19H', '8dfb29798ab7797e4689fa5d7ab7f2dfb778099decbcf87b8b4b56186ab741b7', false);
+insert into user
+values (90000265, '新谷', '知生', '1974/06/24', 90000022, 6, 7, 'ieQrNGOtdBsUV50NsxvCDQSXb5WynJ3j',
+        'F3wD0ZrqW0hdSJdCgUPDAmGC6JD9cpMe', 'e4a8c40eaa76e84f0be7271e7196af09edbd1bc975cc43c7c6eb508b3dbce499', false);
+insert into user
+values (90000266, '西', '美智', '1980/06/15', 90000022, 6, 7, 'ooqEGGHKZmQ7aY20SewPC7iayCgTDQtV',
+        'Bltz6gFuQRl6U6WdqUqOKbbtxqyiqQe2', '750691421cb483508fc4ab4a4a21a9824d86b89c1a478a0f732fc91c1897d71c', false);
+insert into user
+values (90000267, '大内', '迪子', '1981/04/07', 90000022, 6, 7, 'W2JqRcbQttt1Cvxi0AnbDoqqhzJXgcT7',
+        'WVGaZdTgIGEtNx1gFRvOV8eqgwIzMvlH', '70abcfed77ddcfb2060c942777f3cba326241bebb90cc988d3a21d95487e9a83', false);
+insert into user
+values (90000268, '溝口', '聖弘', '1974/09/21', 90000022, 6, 7, 'Cm49wUcN9ux2w47MqzS6EgVnRzxqTeFe',
+        'iKMNsvvunWk7hFTaNjnrbfq6ZwHkUiO1', '1eb0e084cff44e328d84d2ca673d008c7f953be824cbbecdc9e7ec78d8af5994', false);
+insert into user
+values (90000269, '相馬', '芙美', '1986/12/13', 90000022, 6, 7, 'N6YcpkelXo5IhJVUzEH3TtZad4rTK7Zq',
+        'R37kcFE7l3jKBzlPk4ZaAzkedFgkxXTX', '473e96815edcef744b69d7ce8e93350c76fa902d0509def7deae0de4ae10d313', false);
+insert into user
+values (90000270, '古田', '千恵', '1984/12/30', 90000022, 6, 7, 'Jh5MijyOcvEMX4Zf1HB7PDWYkUUVfkfJ',
+        'ySz6s3BEXcD9cEEA66xSNxW6jWf2yT7p', '731886e909d5dbbd0af29e45c8baa309f347ce63df68801649e230d581356753', false);
+insert into user
+values (90000271, '三宅', '喜重', '1991/11/19', 90000022, 6, 7, 'S0Pc5EDN3nRKfqe9pg72v0jqWBSvB4au',
+        'DQPbOmDVEBiCjXAiqrIvQUXWBlj2Gzh9', '02309152ff7c376181a755687e28a6b745cbd3f60ecaf70d51a80f69dcfe5a40', false);
 
 
-select a.user_id as '社員ID', concat(a.last_name, a.first_name) as '社員名', b.position_name as '役職名', c.department_name as '部署名', concat(d.last_name ,d.first_name) as '上司名' from user as a inner join position as b on a.position_id = b.position_id inner join department as c on a.department_id = c.department_id inner join user as d on a.boss_id = d.user_id;
+select a.user_id as '社員ID', concat(a.last_name, a.first_name) as '社員名', b.position_name as '役職名', c.department_name as '部署名', concat(d.last_name ,d.first_name) as '上司名'
+from user as a
+         inner join position as b on a.position_id = b.position_id
+         inner join department as c on a.department_id = c.department_id
+         inner join user as d on a.boss_id = d.user_id;
+
+select department_name as '部署名', concat(user.last_name, user.first_name) as '社員名'
+from department as dep
+         inner join User as user
+on dep.department_id = user.department_id
+where user.position_id = 4;

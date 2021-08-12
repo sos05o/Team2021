@@ -313,7 +313,7 @@ array_birth = [
 
 def main():
     # file = open("usersql.txt", mode="w", encoding='utf-8')
-    startid = 90000001
+    startid = 90000002
     start_position_id = 2
     file = open("usersql.txt", mode="x", encoding='utf-8')
     b_pw = bytes('user', 'utf-8')

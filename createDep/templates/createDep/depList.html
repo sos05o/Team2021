@@ -24,11 +24,16 @@
         <div class="d-grid gap-2">
             <h1>部署一覧</h1>
             {% for dp in department %}
-                <button class="btn btn-primary" type="button">
-                    <div class="div_in_dep_name"><span>{{ dp.department_name }}</span>部</div>
+                <button class="btn btn-primary" type="button"
+                        onclick="location.href=&quot;{% url 'dep:position-list' dp.department_id %}&quot;">
+                    <div class="div_in_dep_name"><span>{{ dp.department.department_name }}</span>部</div>
                     <div class="div_in_text">
-                        <div class="director align-middle">部長 : <span></span></div>
-                        <div class="error align-middle"></div>
+                        <div class="director align-middle">部長 :
+                            <span>{% if dp.user_id %}{{ dp.last_name }}
+                                {{ dp.first_name }}{% else %}該当者なし{% endif %}</span>
+                        </div>
+                        <div class="error align-middle">{% if not dp.user_id %}
+                            部長が選択されていません{% elif 'duplicate' in alert %}部長が二人以上選択されています。{% endif %}</div>
                     </div>
                 </button>
             {% endfor %}

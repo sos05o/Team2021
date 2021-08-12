@@ -48,6 +48,8 @@
   width: 40%;
   border-right: solid 1px #707070;
   padding-left: 2.7%;
+  font-size: 18px;
+  line-height: 2.5;
 }
 
 .d-grid .justify-content-start div:nth-child(2) {

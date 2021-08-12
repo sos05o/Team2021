@@ -20,28 +20,29 @@
 
 <body>
 {% block body %}
-<div class="overflow">
+    <div class="overflow">
 
-    <div class="d-grid gap-2">
-        <h1>主任を選択してください</h1>
-        <div class="d-flex justify-content-start">
-            <div class="id">ID:<span>00000000</span></div>
-            <div class="name">有原隆乃介</div>
-        </div>
-        <div class="d-flex justify-content-start">
-            <div class="id">ID:<span>00000000</span></div>
-            <div class="name">有原隆乃介</div>
-        </div>
-        <div class="group_btn d-flex justify-content-end">
-            <button class="btn btn-primary back_btn">戻る</button>
-            <button class="btn btn-primary create_btn">決定</button>
+        <div class="d-grid gap-2">
+            <h1>主任を選択してください</h1>
+            {% for array in emp %}
+                <button class="d-flex justify-content-start"
+                        onclick="location.href=&quot;{% url 'dep:employee-2' array.user_id %}&quot;">
+                    <div class="id">ID : <span>{{ array.user_id }}</span></div>
+                    <div class="name">{{ array.last_name }}{{ array.first_name }}</div>
+                </button>
+            {% endfor %}
+            <form action="{% url 'dep:employee-1' dep_id %}" method="POST">{% csrf_token %}
+                <div class="group_btn d-flex justify-content-end">
+                    <button class="btn btn-primary back_btn" name="back">戻る</button>
+                    <button class="btn btn-primary create_btn" name="decision">決定</button>
+                </div>
+            </form>
         </div>
     </div>
-</div>
-    {% endblock %}
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../../static/createDep/js/bootstrap.min.js"></script>
-    <script src="../../static/createDep/js/bootstrap.min.js.map"></script>
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../static/createDep/js/bootstrap.min.js"></script>
+<script src="../../static/createDep/js/bootstrap.min.js.map"></script>
 </body>
 </html>

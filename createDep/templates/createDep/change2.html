@@ -23,38 +23,60 @@
 
 <body>
 {% block body %}
-<div class="overflow">
-
-    <div class="d-grid gap-2">
-        <h1>主任</h1>
-        <button class="btn btn-secondary">追加</button>
-        <table class="table table-bordered">
-            <thead>
-                <tr class="th_row">
-                    <th class="th_id th">社員ID</th>
-                    <th class="th_name th">名前</th>
-                    <th class="th_lift th">解除</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="tr_main">
-                    <td class="td_id">00000000</td>
-                    <td class="td_name">有原隆乃介</td>
-                    <td class="td_lift"><i class="fas fa-lock-open icon_disabled"></i><i class="fas fa-lock"></i></td>
-                </tr>
-            </tbody>
-        </table>
-        <button class="btn btn-secondary">決定</button>
+    <div class="overflow">
+        <form action="{% url 'dep:chief' dep_id %}" method="POST">
+            {% csrf_token %}
+            <div class="d-grid gap-2">
+                <h1>主任</h1>
+                <button class="btn btn-secondary" name="edit">追加</button>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="th_row">
+                        <th class="th_id th">社員ID</th>
+                        <th class="th_name th">名前</th>
+                        <th class="th_lift th">解除</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for array in chf %}
+                        <tr class="tr_main">
+                            <td class="td_id">{{ array.user_id }}</td>
+                            <td class="td_name">{{ array.last_name }}{{ array.first_name }}</td>
+                            <td class="td_lift"><i class="fas fa-lock-open icon_disabled"></i><i
+                                    class="fas fa-lock"></i>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="group_btn justify-content-end">
+                    <button class="btn btn-primary back_btn" name="back">戻る</button>
+                    <button class="btn btn-primary create_btn" name="decision" id="edit">決定</button>
+                </div>
+            </div>
+        </form>
     </div>
-</div>
-    {% endblock %}
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="../../static/createDep/js/bootstrap.min.js"></script>
 <script src="../../static/createDep/js/bootstrap.min.js.map"></script>
 <script src="../../static/createDep/js/change2.js"></script>
 {% block addJS %}
     <script src="{% static 'createDep/js/change2.js' %}"></script>
+    {% if alert %}
+        <script>
+            {% if 'no_checked' in alert %}
+                window.alert('主任が一人も選択されていません。');
+            {% endif %}
+            $(function () {
+                $("#edit").on('click', function (e) {
+                    window.alert('主任が選択されていません。\n主任を選択してください。');
+                    e.preventDefault();
+                })
+            })
+        </script>
+    {% endif %}
 {% endblock %}
 </body>
 

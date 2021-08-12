@@ -1,5 +1,7 @@
 {% load static %}
 
+{# static の後の、'createDep/,,, のcreateDepの部分は適宜アプリケーション名に変更して利用してください #}
+
 <html lang="ja">
 
 <head>
@@ -25,8 +27,6 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdown_button1">
                     <li><a class="dropdown-item" href="{% url 'dep:create' %}">部署</a></li>
-                </ul>
-                <ul class="dropdown-menu" aria-labelledby="dropdown_button1">
                     <li><a class="dropdown-item" href="#">アカウント</a></li>
                 </ul>
             </div>
