@@ -93,6 +93,11 @@
 <script src="{% static 'createDep/js/selectUser.js' %}"></script>
 <script>
     $(function () {
+        $(".tr_main").each(function (index, element) {
+            if (element.children[2].textContent === '未所属') {
+                $(this).addClass('disable_check');
+            }
+        })
         $("#search").on('click', function () {
             console.log('click');
             {#表示しないtrにdisable_listクラスを付与する#}
@@ -116,12 +121,14 @@
         $("#check_from").on("click", function () {
             if ($("#check_from").prop('checked') == true) {
                 $(".tr_main").each(function (index, element) {
-                    if (element.children[3].textContent !== '未所属') {
+                    if (element.children[2].textContent !== '未所属') {
                         $(this).addClass('disable_check');
+                    } else {
+                        $(this).toggleClass('disable_check');
                     }
                 })
             } else {
-                $(".tr_main").removeClass("disable_check");
+                $(".tr_main").toggleClass("disable_check");
             }
         })
     })

@@ -69,7 +69,7 @@ class User(models.Model):
     birthday = models.DateField()
     boss = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
     position = models.ForeignKey(Position, models.DO_NOTHING)
-    department = models.ForeignKey(Department, models.DO_NOTHING)
+    department = models.ForeignKey(Department, models.DO_NOTHING, related_name='dep_foreign_id')
     mail = models.CharField(unique=True, max_length=64)
     salt = models.CharField(max_length=32)
     pw = models.CharField(max_length=64)

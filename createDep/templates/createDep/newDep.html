@@ -34,7 +34,7 @@
                 {# onclick="location.href=&quot;{% url "dep:user-list" %}&quot;" #}
                 <div class=" group_btn d-flex justify-content-end">
                     <button class="btn btn-primary back_btn" name="back">戻る</button>
-                    <button class="btn btn-primary create_btn" name="create">作成</button>
+                    <button class="btn btn-primary create_btn" name="create" id="create">作成</button>
                 </div>
             </form>
         </div>
@@ -48,7 +48,17 @@
     {% if alert %}
         <script>
             $(function () {
-                window.alert("{% if 'no_name' in alert %}{{ '部署名が入力されていません。' }}{% elif 'no_checked' in alert %}{{ '一般社員が一人も選択されていません。' }}{% endif %}")
+                {% if 'no_name' in alert %}
+                    window.alert("{{ '部署名が入力されていません。' }}");
+                {% endif %}
+                {% if 'no_checked' in alert %}
+                    $("#create").on('click', function (e) {
+                        let bool = window.confirm('一般社員が選択されていません\n本当によろしいですか？');
+                        if (!bool) {
+                            e.preventDefault();
+                        }
+                    })
+                {% endif %}
             })
         </script>
     {% endif %}
