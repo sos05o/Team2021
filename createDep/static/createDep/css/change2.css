@@ -112,6 +112,10 @@
   font-size: 17px;
 }
 
+.d-grid .table .tr_main .td_id input {
+  display: none;
+}
+
 .d-grid .table .tr_main .td_lift {
   font-size: 22px;
 }

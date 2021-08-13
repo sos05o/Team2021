@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from common.models import *
+from Team2021 import slack_message as s_m_send
 
 
 # Create your views here.
@@ -45,7 +46,13 @@ def create(request):
                         data = Department.objects.order_by("department_id").last()
                         up_former = User.objects.filter(user_id__in=request.session['new_user_list']).update(
                             department=data)
-                        return render(request, 'createDep/sample.html', context)
+
+                    mail_message = [{'email': User.objects.get(pk='00000001').mail + '@morijyobi.ac.jp',
+                                     'message': new_dep.department_name + '部を作成しました。'}]
+
+                    s_m_send.send_message_for_email(mail_message)
+
+                    return render(request, 'createDep/sample.html', context)
                 elif 'dep_name' not in request.POST:
                     del request.session['del_name']
                     context['alert'] = 'no_name'
@@ -58,6 +65,11 @@ def create(request):
                         data = Department.objects.order_by("department_id").last()
                         up_former = User.objects.filter(user_id__in=request.session['new_user_list']).update(
                             department=data)
+                    mail_message = [{'email': User.objects.get(pk='00000001').mail + '@morijyobi.ac.jp',
+                                     'message': new_dep.department_name + '部を作成しました。'}]
+
+                    s_m_send.send_message_for_email(mail_message)
+
                     return render(request, 'createDep/sample.html', context)
     elif request.method == 'GET':
         if 'cb' in request.GET:
@@ -148,21 +160,33 @@ def director(request, num):
             # print(boss_id_ahead[0]['user_id'])  # 前部長id
             # print(request.session['next_dir_id'])  # 次部長id
             # print(num)
-            boss_former = User.objects.get(pk=boss_id_ahead[0]['user_id'])
-            boss_ahead = User.objects.get(pk=request.session['next_dir_id'])
             dep = Department.objects.get(pk=num)
-            # pos4, 6
             pos_4 = Position.objects.get(pk=4)
             pos_6 = Position.objects.get(pk=6)
-            # print(User.objects.filter(boss_id=boss_id_ahead[0]['user_id']))
+            boss_ahead = User.objects.get(pk=request.session['next_dir_id'])
+            if boss_id_ahead.first() is None:
+                chief_list = User.objects.filter(position_id=5, department_id=num)
+                if chief_list.first() is not None:
+                    User.objects.filter(boss_id=boss_id_ahead[0]['user_id']).update(boss=boss_ahead)
+                boss_ahead.position = pos_4
+                boss_ahead.department = dep
+                boss_ahead.save()
+            else:
+                boss_former = User.objects.get(pk=boss_id_ahead[0]['user_id'])
+                # pos4, 6
+                # print(User.objects.filter(boss_id=boss_id_ahead[0]['user_id']))
 
-            User.objects.filter(boss_id=boss_id_ahead[0]['user_id']).update(boss=boss_ahead)
+                User.objects.filter(boss_id=boss_id_ahead[0]['user_id']).update(boss=boss_ahead)
 
-            boss_former.position = pos_6
-            boss_former.save()
-            boss_ahead.position = pos_4
-            boss_ahead.department = dep
-            boss_ahead.save()
+                boss_former.position = pos_6
+                boss_former.save()
+                boss_ahead.position = pos_4
+                boss_ahead.department = dep
+                boss_ahead.save()
+            mail_message = [{'email': User.objects.get(pk='00000001').mail + '@morijyobi.ac.jp',
+                             'message': dep.department_name + '所属の部長を編集しました'}]
+
+            s_m_send.send_message_for_email(mail_message)
 
             return redirect('dep:position-list', num)
     elif request.method == 'GET':
@@ -209,20 +233,25 @@ def chief(request, num):
             #   変更リストのユーザのdep_id -> num
             if 'u-cb' in request.POST:
                 prev_list = request.POST.getlist('u-cb')  # 3, 4
+                pos_6 = Position.objects.get(pk=6)
+                pos_5 = Position.objects.get(pk=5)
+                dep = Department.objects.get(pk=num)
                 former_chief_list = User.objects.filter(position_id=5, department_id=num).values_list('user_id')
+
                 former_list = []
                 for array in former_chief_list:
                     former_list.append(str(array[0]))  # 現在の主任 - 取得した主任
                 result = list(filter(lambda x: x not in prev_list, former_list))  # 1, 2 ['99999999']
-                pos_6 = Position.objects.get(pk=6)
-                pos_5 = Position.objects.get(pk=5)
-                dep = Department.objects.get(pk=num)
 
                 User.objects.filter(boss_id__in=result).update(boss=None)
                 User.objects.filter(user_id__in=result).update(position=pos_6)
 
                 User.objects.filter(user_id__in=prev_list).update(position=pos_5)
                 User.objects.filter(user_id__in=prev_list).update(department=dep)
+                mail_message = [{'email': User.objects.get(pk='00000001').mail + '@morijyobi.ac.jp',
+                                 'message': dep.department_name + '部の主任を編集しました。'}]
+
+                s_m_send.send_message_for_email(mail_message)
             return redirect('dep:position-list', num)
     elif request.method == 'GET':
         if 'cb' in request.GET:
@@ -289,6 +318,11 @@ def employee_2(request, num):
                 User.objects.filter(user_id__in=prev_list).update(boss=boss)
                 User.objects.filter(user_id__in=prev_list).update(department=dep)
 
+                mail_message = [{'email': User.objects.get(pk='00000001').mail + '@morijyobi.ac.jp',
+                                 'message': dep.department_name + '部所属の' + boss.last_name + ' ' + boss.first_name + ' 主任を上司にもつ一般社員を編集しました。'}]
+
+                s_m_send.send_message_for_email(mail_message)
+
             return redirect('dep:employee-1', dep_id)
     elif request.method == 'GET':
         context = {}
@@ -319,11 +353,31 @@ def user_list(request, num):
         return render(request, 'createDep/selectUser.html')
     elif request.method == 'GET':
         if 'cb' in request.GET:
-            print(request.GET.getlist('cb'))
             # TODO: user_listで所属する一般社員をコントロールする
             #   要) 選択した社員リスト、選択しない社員リスト、所属部署
-            #   選択した社員リストと、現在所属している社員のリストの差分を元に、所属していない社員のdep_id -> num
+            #   選択した社員リストと、現在所属している社員のリストの差分を元に、選択している社員のdep_id -> num
             #   選択した社員リストと、現在所属している社員のリストの差分を元に、選択していない社員のdep_id -> 1, boss_id -> null
+            # num -> dep_id
+            prev_list = request.GET.getlist('cb')  # 2, 3 更新するユーザのリスト
+            prev_list.remove('00000000')
+            former_emp_list = User.objects.filter(position_id=6, department_id=num).values_list('user_id')
+            former_list = []
+            for array in former_emp_list:
+                former_list.append(str(array[0]))  # 現在の一般社員 - 取得した一般社員
+            result = list(filter(lambda x: x not in prev_list, former_list))  # 1 ['99999999']
+
+            dep_id = Department.objects.get(pk=num)
+            dep_none = Department.objects.get(pk=2)
+
+            User.objects.filter(user_id__in=prev_list).update(department=dep_id)
+            User.objects.filter(user_id__in=result).update(department=dep_none)
+            User.objects.filter(user_id__in=result).update(boss=None)
+            print(User.objects.get(pk='00000001').mail + '@morijyobi.ac.jp')
+            mail_message = [{'email': User.objects.get(pk='00000001').mail + '@morijyobi.ac.jp',
+                             'message': str(dep_id.department_name) + 'から、一般社員を未所属に移動しました'}]
+
+            s_m_send.send_message_for_email(mail_message)
+
             return redirect('dep:position-list', num)
         user_list_all = User.objects.filter(department_id=num, position_id=6)
         user_checked = User.objects.filter(department_id=num, position_id=6).values_list('user_id', flat=True)
