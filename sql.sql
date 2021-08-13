@@ -621,3 +621,7 @@ from department as dep
          inner join User as user
 on dep.department_id = user.department_id
 where user.position_id = 4;
+
+select dep.department_name as '部署名', concat(user.last_name, user.first_name) as '名前', user.position_id as '役職'
+from user
+         inner join department as dep on user.department_id = dep.department_id;

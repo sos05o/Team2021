@@ -39,7 +39,8 @@
                     <tbody>
                     {% for array in user_data %}
                         <tr class="tr_main">
-                            <td class="td_id">{{ array.user_id }}</td>
+                            <td class="td_id"><input type="checkbox" class="check-emp" checked name="u-cb"
+                                                     value="{{ array.user_id }}">{{ array.user_id }}</td>
                             <td class="td_name">{{ array.last_name }}{{ array.first_name }}</td>
                             <td class="td_lift"><i class="fas fa-lock-open icon_disabled"></i><i
                                     class="fas fa-lock"></i>

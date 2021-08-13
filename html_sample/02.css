@@ -19,9 +19,8 @@
         "remarks"
         "."
         "bottom_area"
-        "."
-        ;
-        
+        ".";
+
     margin: auto 72px;
     width: 722px;
 }
@@ -255,15 +254,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
 /* button部分 */
 .bottom_area {
     display: grid;
@@ -289,8 +279,9 @@
 .button {
     display: grid;
     grid-template-columns: 110px 1fr 110px;
-    grid-template-rows: 36px;
+    grid-template-rows: 1fr 1fr;
     gap: 0px 0px;
+    grid-gap: 6px;
     grid-template-areas: 
         ". . .";
     grid-area: button;
