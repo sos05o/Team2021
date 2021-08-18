@@ -1,0 +1,64 @@
+{% extends 'createRingisyo/base.html' %}
+{% load static %}
+
+<html lang="ja">
+{% block title %}
+    トップページ
+{% endblock %}
+
+<head>
+    {% block addCSS %}
+        <link rel="stylesheet" href="{% static 'createRingisyo/css/create.css' %}">
+    {% endblock %}
+
+    <title>トップページ</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/createRingisyo/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/createRingisyo/css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="../../static/createRingisyo/css/">
+
+</head>
+
+<body>
+{% block body %}
+    <div class="overflow">
+        <div class="d-grid gap-2">
+            <h2>稟議書作成画面</h2>
+            <div class="wrapper">
+                <div class="wrapper-wrapper">
+                    <div class="no_input no_input_wide">承認期限</div>
+                    <div class="no_input no_input_narrow">所属部署</div>
+                </div>
+                <div class="no_input no_input_narrow no_input_narrow_name">名前</div>
+            </div>
+            <div class="no_wrapper"><input type="text" name="title" class="input_narrow" id="title" placeholder="件名(表題)"></div>
+            <div class="no_wrapper"><input type="text" class="input_narrow" placeholder="物品またはサービス名"></div>
+            <div class="no_wrapper"><input type="text" class="input_narrow" placeholder="業者名"></div>
+            <div class="wrapper">
+                <div class="wrapper-wrapper">
+                    <input type="text" class="input_short" placeholder="数量">
+                    <input type="text" class="input_short" placeholder="単価">
+                </div>
+                <div class="no_input no_input_wide no_input_narrow_pay_all">支払総額</div>
+            </div>
+            <div class="no_wrapper"><input type="text" class="input_wide" placeholder="必要理由"></div>
+            <div class="no_wrapper"><input type="text" class="input_wide" placeholder="業者選定理由"></div>
+            <div class="no_wrapper"><input type="text" class="input_wide" placeholder="備考"></div>
+            <div class="wrapper_button">
+                <button type="submit" name="back" class="btn btn-secondary back">戻る</button>
+                <button type="submit" name="send" class="btn btn-secondary send">送信</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../static/createRingisyo/js/bootstrap.min.js"></script>
+<script src="../../static/createRingisyo/js/bootstrap.min.js.map"></script>
+{% block addJS %}
+
+{% endblock %}
+</body>
+
+</html>

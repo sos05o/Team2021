@@ -1,0 +1,100 @@
+{% extends 'login/base.html' %}
+{% load static %}
+
+<html lang="ja">
+{% block title %}
+    ログインページ
+{% endblock %}
+
+<head>
+    {% block addCSS %}
+        <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+    {% endblock %}
+
+    <title>ログインページ</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/login/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/login/css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="../../static/login/css/base.css">
+    <link rel="stylesheet" href="../../static/login/css/login.css">
+
+</head>
+
+<body>
+{% block body %}
+    <div class="overflow">
+        <form action="{% url 'login:login' %}" method="POST">{% csrf_token %}
+            <div class="d-grid gap-2">
+                <h2>ログイン</h2>
+                <input type="text" class="checkText" name="user_id" id="user_id" placeholder="社員ID" required>
+                <input type="password" class="checkText" name="user_password" id="user_password" placeholder="PW"
+                       required>
+                <button type="submit" id="sendButton" class="btn btn-secondary" name="send">送信</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../static/login/js/bootstrap.min.js"></script>
+<script src="../../static/login/js/bootstrap.min.js.map"></script>
+{% block addJS %}
+    <script>
+        $(function () {
+            let error = "";
+            $("#user_id").blur(function () {
+                checkID();
+                if (error !== "") {
+                    window.alert(error);
+                }
+            })
+
+            $("#user_password").blur(function () {
+                checkPW();
+                if (error !== "") {
+                    window.alert(error);
+                }
+            })
+
+            $("#sendButton").on('click', function (e) {
+                checkID();
+                checkPW();
+                if (error !== "") {
+                    window.alert(error);
+                    e.preventDefault();
+                }
+            })
+
+            function checkID() {
+                let user_id = $("#user_id").val();
+                if (user_id === "") {
+                    error = "入力されたIDが不正な長さです";
+                } else if (user_id.length != 8) {
+                    error = "id空白は無効です。";
+                } else if (!Number.isFinite(Number(user_id))) {
+                    error = "IDに数値以外が入力されています";
+                } else {
+                    error = "";
+                }
+            }
+
+            function checkPW() {
+                let password = $("#user_password").val();
+                if (password === "" || !password.match(/[^\s\t]/)) {
+                    error = "空白は無効です";
+                } else if (password.length < 1) {
+                    error = "1文字以上入力してください";
+                } else if (password.match(/[ぁ-ん]/)) {
+                    error = "平仮名が入力されています";
+                } else if (!password.match(/^[A-Za-z0-9]+$/)) {
+                    error = "半角英数字以外の文字が入力されています";
+                } else {
+                    error = "";
+                }
+            }
+        })
+    </script>
+{% endblock %}
+</body>
+
+</html>

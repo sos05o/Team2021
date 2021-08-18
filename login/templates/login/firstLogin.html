@@ -1,0 +1,121 @@
+{% extends 'login/base.html' %}
+{% load static %}
+
+<html lang="ja">
+{% block title %}
+    ログインページ
+{% endblock %}
+
+<head>
+    {% block addCSS %}
+        <link rel="stylesheet" href="{% static 'login/css/first.css' %}">
+    {% endblock %}
+
+    <title>ログインページ</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/login/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/login/css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="../../static/login/css/base.css">
+
+</head>
+
+<body>
+{% block body %}
+    <div class="overflow">
+        <form action="{% url 'login:first' %}" method="POST">
+            {% csrf_token %}
+            <div class="d-grid gap-2">
+                <h2>初回ログイン</h2>
+                <div class="dummy_btn max_width id" id="user_id">00000000</div>
+                <div class="outer_input max_width">
+                    <input type="password" class="inner_input pwCheck password" id="PW-first" name="pw"
+                           placeholder="PW">
+                    <button type="button" class="btn btn-secondary inner_button change_type">表示</button>
+                </div>
+                <div class="outer_input max_width">
+                    <input type="password" class="inner_input pwCheck password" id="PW-second" name="pw_re"
+                           placeholder="PW:Re">
+                    <button type="button" class="btn btn-secondary inner_button change_type">表示</button>
+                </div>
+                <div class="dummy_btn max_width" id="user_name">参画権左衛門平八</div>
+                <div class="dummy_btn max_width" id="mail">r.arihara.sys20@morijyobi.ac.jp</div>
+                <div class="outer_div max_width">
+                    <div class="dummy_btn div_50" id="department_name">システムエンジニアリング部</div>
+                    <div class="dummy_btn div_50" id="position_name">常務取締役</div>
+                </div>
+                <div class="outer_div max_width">
+                    <div class="dummy_btn div_30" id="age">30歳</div>
+                    <div class="dummy_btn div_70" id="birth">1999/12/12</div>
+                </div>
+                <button id="sendButton" class="btn btn-secondary send_button">送信</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../static/login/js/bootstrap.min.js"></script>
+<script src="../../static/login/js/bootstrap.min.js.map"></script>
+{% block addJS %}
+    <script>
+        $(function () {
+            let error = "";
+
+            function checkText(element) {
+                let value = element.val();
+                if (value === "" || !value.match(/[^\s\t]/)) {
+                    error = "空白は無効です";
+                } else if (value.length < 1) {
+                    error = "1文字以上入力してください";
+                } else if (value.match(/[ぁ-ん]/)) {
+                    error = "平仮名が入力されています";
+                } else if (!value.match(/^[A-Za-z0-9]+$/)) {
+                    error = "半角英数字以外の文字が入力されています";
+                } else {
+                    error = "";
+                }
+            }
+
+            $("#PW-first").blur(function () {
+                checkText($("#PW-first"));
+                if (error !== "") {
+                    window.alert(error);
+                }
+            })
+
+            $("#PW-second").blur(function () {
+                checkText($("#PW-second"));
+                if (error !== "") {
+                    window.alert(error);
+                }
+            })
+
+            $("#sendButton").on('click', function (e) {
+                let pw = $('#PW-first').val();
+                let pwRe = $('#PW-second').val();
+                if (error !== "") {
+                    window.alert(error);
+                    e.preventDefault();
+                } else if (pw !== pwRe) {
+                    window.alert("入力されたパスワードが一致しません。");
+                    console.log(pw, pwRe);
+                    e.preventDefault();
+                } else {
+                    window.alert("登録成功");
+                }
+            })
+            $(".change_type").on('click', function () {
+                if ($(this).prev().hasClass('password')) {
+                    $(this).prev().attr("type", "text");
+                    $(this).prev().removeClass("password");
+                } else {
+                    $(this).prev().attr("type", "password");
+                    $(this).prev().addClass("password");
+                }
+            })
+        })
+    </script>
+{% endblock %}
+</body>
+
+</html>
