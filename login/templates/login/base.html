@@ -1,0 +1,68 @@
+{% load static %}
+
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'createDep/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'createDep/css/bootstrap.min.css.map' %}">
+    <link rel="stylesheet" href="{% static 'createDep/css/base.css' %}">
+    {% block addCSS %}{% endblock %}
+</head>
+
+<body>
+<header id="header" class="sticky-top">
+    <div class="flex-row navbar align-items-center">
+        <div id="header_title" class="col">
+            <a href="#">稟議書システム</a>
+        </div>
+        <div class="ml-auto d-flex right_row">
+            <div class="col dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                        id="dropdown_button1" aria-expanded="false">
+                    作成
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdown_button1">
+                    <li><a class="dropdown-item" href="#">稟議書</a></li>
+                </ul>
+            </div>
+            <div class="col dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                        id="dropdown_button2" aria-expanded="false">
+                    一覧
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
+                    <li><a class="dropdown-item" href="#">稟議書</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <div class="info_1">user01</div>
+                <a href="#" class="info_2">ログアウト</a>
+            </div>
+        </div>
+    </div>
+</header>
+<main id="main">
+    {% block body %}{% endblock %}
+</main>
+<footer id="footer">
+    <div class="footer_toplink">
+        <a href="#header" class="d-flex flex-column justify-content-center">
+            トップへ戻る
+        </a>
+    </div>
+    <div class="footer_infodiv">
+        <div class="footer_copyright  position-relative">
+            <p class="position-absolute top-50 start-50 translate-middle">&copy;2021 morijyobi</p>
+            <a href="#" class="position-absolute top-50 end-0 translate-middle">ログアウト</a>
+        </div>
+    </div>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'createDep/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'createDep/js/bootstrap.min.js.map' %}"></script>
+{% block addJS %}{% endblock %}
+</body>
+
+</html>

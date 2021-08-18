@@ -5,5 +5,6 @@ app_name = 'login'
 
 urlpatterns = [
     # .../account/にアクセスがあった時、views.pyのindex関数を呼び出す
-    path('', views.index, name='login_index'),
+    path('', views.login, name='login'),
+    path('first/', views.first, name='first'),
 ]
