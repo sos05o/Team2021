@@ -1,7 +1,6 @@
 import hashlib
 
 from django.shortcuts import render, redirect
-from django.db.models import Q
 from common.models import *
 from Team2021 import slack_message as s_m_send
 
