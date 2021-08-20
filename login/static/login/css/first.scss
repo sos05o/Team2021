@@ -1,0 +1,104 @@
+.d-grid {
+    width: 400px;
+    border: solid 1px #707070;
+    border-radius: 8px;
+    padding: 40px 50px 50px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+    margin: auto;
+    justify-content: center;
+    h2 {
+        width: 300px;
+        color: #707070;
+        text-align: center;
+        margin: 0 0 40px 0;
+        font-size: 35px;
+    }
+    .max_width {
+        width: 100%;
+        margin-bottom: 25px;
+        height: 35px;
+        font-size: 14px;
+        color: #707070;
+        text-align: center;
+        &:nth-child() {
+            height: 100%;
+        }
+    }
+
+    .dummy_btn {
+        border: solid 1px #707070;
+        border-radius: 8px;
+        height: 35px;
+        line-height: 2.25;
+        padding-left: 5px;
+        padding-right: 5px;
+        overflow: hidden;
+    }
+
+    .outer_input, .outer_div {
+        * {
+
+            &:nth-child(1) {
+                float: left;
+                // margin: 0px auto 0px 0px!important;
+            }
+            &:nth-child(2) {
+                float: right;
+                // margin: 0px 0px 0px auto!important;
+            }
+        }
+    }
+
+    .inner_input {
+        width: 70%;
+        height: 35px;
+        border: solid 1px #707070;
+        border-radius: 8px;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+        padding-left: 10px;
+        &:focus {
+            outline: none;
+        }
+    }
+    
+    .inner_button {
+        width: 20%!important;
+        height: 35px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .div_30 {
+        width: 25%;
+    }
+
+    .div_50 {
+        width: 45%;
+    }
+
+    .div_70 {
+        width: 65%;
+    }
+
+    .btn-secondary {
+        font-size: 16px;
+        width: 30%;
+        color: #707070;
+        background-color: white;
+        &:hover {
+            color: white;
+            background-color: #707070;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    .id {
+        font-size: 21px;
+        line-height: 1.5;
+    }
+
+    .send_button {
+        margin: 0 0 0 auto;
+    }
+}
