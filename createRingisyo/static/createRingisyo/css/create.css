@@ -1,0 +1,178 @@
+.d-grid {
+  width: 860px;
+  border: solid 1px #707070;
+  border-radius: 8px;
+  padding: 40px 100px 50px;
+  -webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+  margin: auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.d-grid h2 {
+  width: 660px;
+  color: #707070;
+  text-align: center;
+  padding-bottom: 35px;
+  font-size: 45px;
+}
+
+.d-grid .no_wrapper {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.d-grid .no_wrapper:nth-child(1) {
+  width: 100%;
+}
+
+.d-grid .wrapper {
+  width: 100%;
+  margin-bottom: 45px;
+}
+
+.d-grid .wrapper .wrapper-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.d-grid .wrapper .wrapper-wrapper div:nth-child(1) {
+  margin: 0 auto 0 0;
+}
+
+.d-grid .wrapper .wrapper-wrapper div:nth-child(2) {
+  margin: 0 0 0 auto;
+}
+
+.d-grid .wrapper .wrapper-wrapper input:nth-child(1) {
+  margin: 0 auto 0 160px;
+}
+
+.d-grid .wrapper .wrapper-wrapper input:nth-child(2) {
+  margin: 0 0 0 auto;
+}
+
+.d-grid .wrapper .no_input_narrow_name, .d-grid .wrapper .no_input_narrow_pay_all {
+  margin: 0 0 0 auto;
+}
+
+.d-grid input:hover {
+  -webkit-box-shadow: 3px 3px 6px #00000050;
+          box-shadow: 3px 3px 6px #00000050;
+}
+
+.d-grid input:focus {
+  outline: none;
+  -webkit-box-shadow: 3px 3px 6px #00000050;
+          box-shadow: 3px 3px 6px #00000050;
+}
+
+.d-grid .input_short {
+  width: 200px;
+  height: 40px;
+}
+
+.d-grid .input_long {
+  width: 325px;
+  height: 40px;
+}
+
+.d-grid .input_narrow {
+  width: 100%;
+  height: 60px;
+}
+
+.d-grid .input_wide {
+  width: 100%;
+  height: 80px;
+}
+
+.d-grid .no_input_wide {
+  width: 330px;
+  height: 50px;
+  line-height: 2.5;
+}
+
+.d-grid .no_input_narrow {
+  width: 190px;
+  height: 40px;
+  line-height: 2;
+}
+
+.d-grid .no_input {
+  border: solid 1px #707070;
+  border-radius: 8px;
+  font-size: 19px;
+  color: #707070;
+  padding-left: 10px;
+}
+
+.d-grid #limit {
+  -webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.d-grid #limit:hover {
+  outline: none !important;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) !important;
+          box-shadow: rgba(0, 0, 0, 0.5) !important;
+}
+
+.d-grid #limit:focus {
+  outline: none !important;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) !important;
+          box-shadow: rgba(0, 0, 0, 0.5) !important;
+}
+
+.d-grid .input_narrow, .d-grid .input_wide, .d-grid .input_short, .d-grid .input_long {
+  border: solid 1px #707070;
+  border-radius: 8px;
+  font-size: 21px;
+  color: #707070;
+  -webkit-box-shadow: 3px 3px 6px #00000016;
+          box-shadow: 3px 3px 6px #00000016;
+  padding-left: 10px;
+}
+
+.d-grid .btn-secondary {
+  width: 110px;
+  height: 40px;
+  color: #707070;
+  background-color: white;
+  font-size: 21px;
+  border: solid 1px #707070;
+  border-radius: 8px;
+}
+
+.d-grid .btn-secondary:hover {
+  color: white;
+  background-color: #535353;
+}
+
+.d-grid .wrapper_button button:nth-child(1) {
+  margin-left: 400px;
+}
+
+.d-grid .wrapper_button button:nth-child(2) {
+  float: right;
+}
+
+.d-grid #datepicker {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  border: none;
+  color: #707070;
+}
+
+.d-grid #datepicker:hover, .d-grid #datepicker:focus {
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
+}
+/*# sourceMappingURL=create.css.map */
