@@ -1,0 +1,128 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  min-height: 100vh;
+}
+
+body header {
+  background-color: #232F3E;
+  color: white;
+}
+
+body header #header_title {
+  font-size: 50px;
+  font-weight: bold;
+  margin-left: 40px;
+}
+
+body header #header_title a {
+  color: white;
+  text-decoration: none;
+}
+
+body header .right_row * {
+  margin-right: 40px;
+}
+
+body header .dropdown {
+  width: 170px;
+  padding: 0;
+}
+
+body header .dropdown .dropdown-toggle {
+  width: 170px;
+  height: 65px;
+  font-size: 40px;
+  border: solid 1px #232F3E;
+  background-color: #232F3E;
+  padding: 1px 6px;
+}
+
+body header .dropdown .dropdown-toggle:hover {
+  border: solid 1px white;
+  background-color: #232F3E;
+}
+
+body header .dropdown .dropdown-menu li {
+  margin: 0;
+}
+
+body header .info_1,
+body header .info_2 {
+  font-size: 20px;
+}
+
+body header .info_2 {
+  text-decoration: none;
+  color: white;
+}
+
+body main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+body footer {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+body footer a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+body footer a:hover {
+  color: white;
+}
+
+body footer .footer_toplink {
+  background-color: #37475A;
+  height: 35px;
+}
+
+body footer .footer_toplink a {
+  height: 100%;
+  text-align: center;
+}
+
+body footer .footer_infodiv {
+  height: 55px;
+  background-color: #232F3E;
+}
+
+body footer .footer_infodiv .footer_copyright {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+body footer .footer_infodiv .footer_copyright p {
+  display: inline-block;
+  margin: auto;
+}
+
+body footer .footer_infodiv .footer_copyright div {
+  width: 70px;
+}
+
+body footer .footer_infodiv .footer_copyright div a {
+  display: inline-block;
+}
+/*# sourceMappingURL=base.css.map */
