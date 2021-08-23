@@ -4,5 +4,6 @@ from createRingisyo import views
 app_name = 'create'
 
 urlpatterns = [
-    path('', views.index, name='create_index'),
+    path('', views.create, name='create'),
+    path('check/', views.check, name='check'),
 ]

@@ -15,7 +15,7 @@
 <body>
 <div class="table_div">
     <h2>社員一覧</h2>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="user_list_table">
         <tr class="th_row">
             <th class="th_id th">社員ID</th>
             <th class="th_name th">名前</th>
@@ -23,9 +23,29 @@
             <th class="th_position th">役職</th>
             <th class="th_lift th">解除</th>
         </tr>
-        <form id="form" action="{% url 'dep:create' %}">
-
-            {% for array in user_array %}
+        {% if not flg %}
+            <form id="form" action="{% url 'dep:create' %}">
+        {% elif 'dr' in flg %}
+            <form id="form" action="{% url 'dep:director' num %}">
+        {% elif 'chf' in flg %}
+            <form id="form" action="{% url 'dep:chief' num %}">
+        {% elif 'emp' in flg %}
+            <form id="form" action="{% url 'dep:employee-2' num %}">
+        {% elif 'delete' in flg %}
+            <form id="form" action="{% url 'dep:user-list' num %}">
+        {% endif %}
+        {% for array in user_array %}
+            {% if array.user_id in checked %}
+                <tr class="tr_main tr_main_gray">
+                    <td class="td_id">{{ array.user_id }}</td>
+                    <td class="td_name">{{ array.last_name }}{{ array.first_name }}</td>
+                    <td class="td_dep">{{ array.department.department_name }}</td>
+                    <td class="td_position">{{ array.position.position_name }}</td>
+                    <td class="td_lift form-check"><input type="checkbox" class="form-check-input" name="cb"
+                                                          value="{{ array.user_id }}" checked>
+                    </td>
+                </tr>
+            {% else %}
                 <tr class="tr_main">
                     <td class="td_id">{{ array.user_id }}</td>
                     <td class="td_name">{{ array.last_name }}{{ array.first_name }}</td>
@@ -35,15 +55,16 @@
                                                           value="{{ array.user_id }}">
                     </td>
                 </tr>
-            {% endfor %}
-
+            {% endif %}
+        {% endfor %}
+        <input type="checkbox" name="cb" value="00000000" hidden checked>
         </form>
     </table>
 </div>
 <div class="search_div">
     <h2>検索</h2>
     <div class="form-check">
-        <input type="text" class="form-control form-control-lg input_text" placeholder="名前">
+        <input type="text" id="searchText" class="form-control form-control-lg input_text" placeholder="名前">
         <div class="input_checkbox">
             <input type="checkbox" name="" id="check_from" class="form-check-input input_checkbox">
             <label class="form-check-label" for="check_from">
@@ -51,7 +72,7 @@
             </label>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-1">
+    <button type="submit" class="btn btn-primary btn-1" id="search">
         検索
     </button>
     <button type="submit" class="btn btn-primary btn-2" form="form">
@@ -70,5 +91,47 @@
 <script src="{% static 'createDep/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'createDep/js/bootstrap.min.js.map' %}"></script>
 <script src="{% static 'createDep/js/selectUser.js' %}"></script>
+<script>
+    $(function () {
+        $(".tr_main").each(function (index, element) {
+            if (element.children[2].textContent === '未所属') {
+                $(this).addClass('disable_check');
+            }
+        })
+        $("#search").on('click', function () {
+            console.log('click');
+            {#表示しないtrにdisable_listクラスを付与する#}
+            let searchText = $("#searchText").val();
+            $(".tr_main").removeClass('disable_list');
+            if (searchText) {
+                console.log('ok');
+                $(".tr_main").each(function (index, element) {
+                    {#console.log($(this).children().children('.td_name'));#}
+                    console.log(element.children[1].textContent);
+                    if (element.children[1].textContent.indexOf(searchText)) {
+                        $(this).addClass('disable_list');
+                    }
+                })
+            } else {
+                $(".tr_main").removeClass("disable_list");
+                console.log("no match");
+            }
+        })
+        {#    checkbox の判定 #}
+        $("#check_from").on("click", function () {
+            if ($("#check_from").prop('checked') == true) {
+                $(".tr_main").each(function (index, element) {
+                    if (element.children[2].textContent !== '未所属') {
+                        $(this).addClass('disable_check');
+                    } else {
+                        $(this).toggleClass('disable_check');
+                    }
+                })
+            } else {
+                $(".tr_main").toggleClass("disable_check");
+            }
+        })
+    })
+</script>
 </body>
 </html>

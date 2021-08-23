@@ -1,5 +1,6 @@
 {% extends 'createDep/base.html' %}
 {% load static %}
+{% load utility %}
 <html lang="ja">
 
 {% block title %}
@@ -24,11 +25,16 @@
         <div class="d-grid gap-2">
             <h1>部署一覧</h1>
             {% for dp in department %}
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button"
+                        onclick="location.href=&quot;{% url 'dep:position-list' dp.department_id %}&quot;">
                     <div class="div_in_dep_name"><span>{{ dp.department_name }}</span>部</div>
                     <div class="div_in_text">
-                        <div class="director align-middle">部長 : <span></span></div>
-                        <div class="error align-middle"></div>
+                        <div class="director align-middle">部長 :
+                            <span class="director_span">{{ dp.dep_foreign_id|dep_list_filter }}
+                                {% if dp is None or dp is Null %}該当者なし{% endif %}</span>
+                        </div>
+                        <div class="error align-middle">
+                        </div>
                     </div>
                 </button>
             {% endfor %}
@@ -39,5 +45,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="../../static/createDep/js/bootstrap.min.js"></script>
 <script src="../../static/createDep/js/bootstrap.min.js.map"></script>
+{% block addJS %}
+    <script>
+        $(function () {
+            $(".director_span").each(function (index, element) {
+                let str = $(this).text().replace(/\(/g, '').replace(/\)/g, '').replace(/,/g, '').replace(/'/g, '').replace(/ /g, '');
+                $(this).text(str);
+                console.log(str)
+                if (str.indexOf('該当者なし') === 0) {
+                    $(this).text(str);
+                    $(this).parent().next().text('部長が選択されていません。');
+                }
+            })
+        })
+    </script>
+{% endblock %}
 </body>
 </html>

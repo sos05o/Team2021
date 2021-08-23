@@ -1,0 +1,39 @@
+{% extends 'login/base.html' %}
+{% load static %}
+
+<html lang="ja">
+{% block title %}
+    トップページ
+{% endblock %}
+
+<head>
+    {% block addCSS %}
+        {#    <link rel="stylesheet" href="">#}
+    {% endblock %}
+
+    <title>トップページ</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/login/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/login/css/bootstrap.min.css.map">
+    {#    <link rel="stylesheet" href="../../static/login/css/">#}
+
+</head>
+
+<body>
+{% block body %}
+    ここはサンプルトップページです
+    <div class="overflow">
+        <div class="d-gid gap-2"></div>
+    </div>
+
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../static/login/js/bootstrap.min.js"></script>
+<script src="../../static/login/js/bootstrap.min.js.map"></script>
+{% block addJS %}
+
+{% endblock %}
+</body>
+
+</html>

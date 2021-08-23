@@ -1,0 +1,166 @@
+@charset 'utf-8';
+body {
+    color: #4D4D4D;
+}
+
+input {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+}
+
+input:focus {
+    background-color: rgb(235, 235, 235);
+}
+
+.title_area {
+    margin: auto;
+}
+
+.title_area h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.writer_area {
+    font-size: 15px;
+}
+
+.docs_type div:nth-of-type(1) {
+    padding-left: 8px;
+    line-height: 2.5;
+}
+
+.docs_type div:nth-of-type(2) {
+    padding-left: 8px;
+    line-height: 1.8;
+}
+
+.date div {
+    padding-left: 15px;
+}
+
+.date div:nth-of-type(1) {
+    line-height: 1.8;
+}
+
+.date div:nth-of-type(2) {
+    line-height: 2.5;
+}
+
+.dep_title,
+.position_name {
+    font-size: 13px;
+}
+
+.dep_title {
+    text-align: center;
+    line-height: 1.5;
+}
+
+.dep_1,
+.dep_2 {
+    font-size: 15px;
+    text-align: center;
+    line-height: 3.5;
+}
+
+#dep_name_input {
+    width: 99%;
+    height: 100%;
+    font-size: 18px;
+    border: none;
+    margin: 0px;
+    outline: none;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.position_name > div {
+    text-align: center;
+}
+
+.position_person > div {
+    text-align: center;
+    font-size: 13px;
+}
+
+.position_person_1,
+.position_person_2 {
+    line-height: 0;
+}
+
+#sekinin_1_input,
+#sekinin_2_input {
+    width: 100%;
+    height: 35%;
+    border: none;
+    margin: 0 auto;
+    text-align: center;
+    outline: none;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+#sekinin_1_input {
+    padding-top: 20%;
+}
+
+#sekinin_2_input {
+    padding-bottom: 20%;
+}
+
+#sakusei_1_input,
+#sakusei_2_input {
+    width: 97%;
+    height: 35%;
+    border: none;
+    margin: 0;
+    text-align: center;
+    outline: none;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+#sakusei_1_input {
+    padding-top: 20%;
+}
+
+#sakusei_2_input {
+    padding-bottom: 20%;
+}
+
+
+/* #sekinin_1_input, #sakusei_1_input {
+    padding-top: 20%;
+} */
+
+.left_padding {
+    font-size: 14px;
+    padding-left: 15px;
+    padding-top: 2px;
+}
+
+.top_padding {
+    padding-top: 3.5px;
+}
+
+.position {
+    font-size: 14px;
+    text-align: center;
+    padding-top: 3px;
+}
+
+#remarks {
+    max-height: calc(100% - 25px);
+}
+
+#remarks textarea {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    border: none;
+    outline: none;
+    resize: none;
+}

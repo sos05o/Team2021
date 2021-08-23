@@ -100,6 +100,14 @@ body .table_div .table .tr_main_gray {
   background-color: rgba(94, 121, 154, 0.1);
 }
 
+body .table_div .table .disable_list {
+  display: none;
+}
+
+body .table_div .table .disable_check {
+  display: none;
+}
+
 body .search_div {
   width: 360px;
   height: 400px;

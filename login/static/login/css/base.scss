@@ -1,0 +1,117 @@
+body,
+html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+
+    header {
+        background-color: #232F3E;
+        color: white;
+
+        #header_title {
+            font-size: 50px;
+            font-weight: bold;
+            margin-left: 40px;
+            a {
+                color: white;
+                text-decoration: none;
+            }
+        }
+        .right_row {
+            * {
+                margin-right: 40px;
+            }
+        }
+
+        .dropdown {
+            width: 170px;
+            padding: 0;
+
+            .dropdown-toggle {
+                width: 170px;
+                height: 65px;
+                font-size: 40px;
+                border: solid 1px #232F3E;
+                background-color: #232F3E;
+                padding: 1px 6px;
+
+                &:hover {
+                    border: solid 1px white;
+                    background-color: #232F3E;
+                }
+            }
+            .dropdown-menu {
+                li {
+                    margin: 0;
+                }
+            }
+        }
+
+        .info_1,
+        .info_2 {
+            font-size: 20px;
+        }
+
+        .info_2 {
+            text-decoration: none;
+            color: white;
+        }
+    }
+
+    main {
+        flex: 1;
+        .overflow {
+            min-height: 100%;
+            margin: 50px auto;
+            .d-grid {
+                margin: 0 auto;
+            }
+        }
+    }
+
+    footer {
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            &:hover {
+                color: white;
+            }
+        }
+        .footer_toplink {
+            background-color: #37475A;
+            height: 35px;
+            a {
+                height: 100%;
+                text-align: center;
+            }
+        }
+        .footer_infodiv {
+            height: 55px;
+            background-color: #232F3E;
+            .footer_copyright {
+                display: flex;
+                height: 100%;
+                p {
+                    display: inline-block;
+                    margin: auto;
+                }
+                div {
+                    width: 70px;                    
+                    a {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}

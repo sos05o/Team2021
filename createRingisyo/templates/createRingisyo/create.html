@@ -1,0 +1,142 @@
+{% extends 'createRingisyo/base.html' %}
+{% load static %}
+
+<html lang="ja">
+{% block title %}
+    トップページ
+{% endblock %}
+
+<head>
+    {% block addCSS %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+        <link rel="stylesheet" href="{% static 'createRingisyo/css/create.css' %}">
+    {% endblock %}
+
+    <title>トップページ</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/createRingisyo/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/createRingisyo/css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="../../static/createRingisyo/css/">
+
+</head>
+
+<body>
+{% block body %}
+    <div class="overflow">
+        <div class="d-grid gap-2">
+            <h2>稟議書作成画面</h2>
+            <form id="form" action="{% url 'create:create' %}" method="GET" autocomplete="off">{% csrf_token %}
+                <div class="wrapper">
+                    <div class="wrapper-wrapper">
+                        <div class="no_input no_input_wide" id="limit">承認期限<span>
+                            <input type="text" id="datepicker" name="limit" required value="{{ limit }}">
+                        </span>
+                        </div>
+                        <div class="no_input no_input_narrow">{{ user_former.department.department_name }}</div>
+                    </div>
+                    <div class="no_input no_input_narrow no_input_narrow_name">
+                        {{ user_former.last_name }}{{ user_former.first_name }}</div>
+                </div>
+                <div class="no_wrapper"><input type="text" name="title" class="input_narrow" id="title"
+                                               placeholder="件名(表題)" required value="{{ title }}" maxlength="32"></div>
+                <div class="no_wrapper"><input type="text" name="product_name" class="input_narrow"
+                                               placeholder="物品またはサービス名" required value="{{ p_name }}"></div>
+                <div class="no_wrapper"><input type="text" name="trader_name" class="input_narrow" placeholder="業者名"
+                                               required value="{{ t_name }}">
+                </div>
+                <div class="wrapper">
+                    <div class="wrapper-wrapper">
+                        <input type="text" id="quantity" name="quantity" class="input_short pay_piece" placeholder="数量"
+                               required
+                               value="{{ quantity }}">
+                        <input type="text" id="unit_price" name="unit_price" class="input_short pay_piece"
+                               placeholder="単価"
+                               required
+                               value="{{ unit_price }}">
+                    </div>
+                    <div class="no_input no_input_wide no_input_narrow_pay_all" id="payAll">支払総額</div>
+                </div>
+                <div class="no_wrapper"><input type="text" name="reason" class="input_wide" placeholder="必要理由" required
+                                               value="{{ reason }}">
+                </div>
+                <div class="no_wrapper"><input type="text" name="trader_reason" class="input_wide" placeholder="業者選定理由"
+                                               required value="{{ t_reason }}">
+                </div>
+                <div class="no_wrapper"><input type="text" name="remarks" class="input_wide" placeholder="備考"
+                                               value="{{ remarks }}"></div>
+
+            </form>
+            <div class="wrapper_button">
+                <button type="submit" onclick="location.href='{{ request.META.HTTP_REFERER }}'" name="back"
+                        class="btn btn-secondary back">戻る
+                </button>
+                <button type="submit" form="form" name="edit" class="btn btn-secondary send">作成</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../static/createRingisyo/js/bootstrap.min.js"></script>
+<script src="../../static/createRingisyo/js/bootstrap.min.js.map"></script>
+{% block addJS %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://rawgit.com/jquery/jquery-ui/master/ui/i18n/datepicker-ja.js"></script>
+    <script src="{% static 'createRingisyo/js/user_add.js' %}"></script>
+    <script>
+        $(function () {
+            {% if alert is not None or alert is not Null %}
+                window.alert("{{ alert }}");
+            {% endif %}
+            setPayAll();
+
+            $(".pay_piece").blur(function () {
+                setPayAll();
+            });
+
+            $('.pay_piece').on('input', function (e) {
+                let value = $(e.currentTarget).val();
+                value = value
+                    .replace(/[０-９]/g, function (s) {
+                        return String.fromCharCode(s.charCodeAt(0) - 65248);
+                    })
+                    .replace(/[^0-9]/g, '');
+                $(e.currentTarget).val(value);
+            });
+
+            function setPayAll() {
+                let quantity;
+                let unit_price;
+                let get_quantity = $("#quantity").val();
+                let get_unit_price = $("#unit_price").val();
+
+                if (get_quantity === null || get_unit_price === null) {
+                    return;
+                }
+                if (get_quantity === "一式") {
+                    quantity = 1;
+                } else {
+                    quantity = parseInt(get_quantity, 10);
+                    if (isNaN(quantity)) {
+                        quantity = 0;
+                    }
+                }
+                if (typeof get_unit_price == "string") {
+                    unit_price = parseInt(get_unit_price, 10);
+                    if (isNaN(unit_price)) {
+                        unit_price = 0;
+                    }
+                } else if (typeof get_unit_price == "number") {
+                    unit_price = get_unit_price;
+                }
+                console.log(quantity);
+
+                $("#payAll").text(quantity * unit_price * 1.1);
+            }
+        })
+    </script>
+{% endblock %}
+</body>
+
+</html>

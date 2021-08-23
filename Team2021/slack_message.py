@@ -3,7 +3,7 @@ from slack_sdk.errors import SlackApiError
 import os
 
 try:
-    import slack_bot_token_file as token_file
+    from Team2021 import slack_bot_token_file as token_file
 except KeyError as e:
     print(e)
     exit()

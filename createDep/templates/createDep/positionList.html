@@ -20,35 +20,66 @@
 
 <body>
 {% block body %}
-<div class="overflow">
-    <div class="d-grid gap-2">
-        <h1>役職選択</h1>
-        <a href="#" class="link">社員の部署割り当てを解除する場合はこちら</a>
-        <button class="btn btn-primary" type="button">
-            <div class="div_in_position_name">部長 :</div>
-            <div class="div_in_text">
-                <div class="text align-middle"><span></span></div>
+    <div class="overflow">
+        <form action="{% url 'dep:position-list' num %}" method="POST">
+            <div class="d-grid gap-2">
+                <h1>役職選択</h1>
+                <a href="{% url 'dep:user-list' num %}" class="link"
+                   methods="POST">一般社員の部署割り当てを解除する場合はこちら</a>
+                {% csrf_token %}
+                <button class="btn btn-primary" name="director" value="director" id="director">
+                    <div class="div_in_position_name">部長 :</div>
+                    <div class="div_in_text">
+                        <div class="text align-middle"><span>{% if dr.last_name and dr.first_name %}{{ dr.last_name }}
+                            {{ dr.first_name }}{% else %}該当者なし{% endif %}</span></div>
+                    </div>
+                </button>
+                <button class="btn btn-primary" name="chief" value="chief" id="chief">
+                    <div class="div_in_position_name">主任 :</div>
+                    <div class="div_in_text">
+                        <div class="text align-middle">現在<span>{% if chf != 0 %}{{ chf }}名{% else %}
+                            該当者なし{% endif %}</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="btn btn-primary" name="employee" value="employee" id="employee">
+                    <div class="div_in_position_name">一般社員 :</div>
+                    <div class="div_in_text">
+                        <div class="text align-middle">現在<span>{% if emp != 0 %}{{ emp }}名{% else %}
+                            該当者なし{% endif %}</span></div>
+                    </div>
+                </button>
+                <button class="btn back_btn float-end" name="back">戻る
+                </button>
             </div>
-        </button>
-        <button class="btn btn-primary" type="button">
-            <div class="div_in_position_name">主任 :</div>
-            <div class="div_in_text">
-                <div class="text align-middle">現在<span></span>名</div>
-            </div>
-        </button>
-        <button class="btn btn-primary" type="button">
-            <div class="div_in_position_name">一般社員 :</div>
-            <div class="div_in_text">
-                <div class="text align-middle">現在<span></span>名</div>
-            </div>
-        </button>
-        <button class="btn back_btn float-end">戻る</button>
+        </form>
     </div>
-</div>
-    {% endblock %}
+{% endblock %}
 
 {#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>#}
 {#<script src="../../static/createDep/js/bootstrap.min.js"></script>#}
 {#<script src="../../static/createDep/js/bootstrap.min.js.map"></script>#}
+{% block addJS %}
+    <script>
+        $(function () {
+            $("#chief").on("click", function (e) {
+                if ({{ dr.last_name }} &&
+                {{ dr.first_name }})
+                {
+                    window.alert('部長が選択されていません。\n部長を選択してください。');
+                    e.preventDefault();
+                }
+            })
+            $("#employee").on('click', function (e) {
+                if ({{ chf }} == 0
+            )
+                {
+                    window.alert('主任が選択されていません。\n主任を選択してください。');
+                    e.preventDefault();
+                }
+            })
+        })
+    </script>
+{% endblock %}
 </body>
 </html>

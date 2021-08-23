@@ -313,7 +313,7 @@ array_birth = [
 
 def main():
     # file = open("usersql.txt", mode="w", encoding='utf-8')
-    startid = 90000001
+    startid = 90000002
     start_position_id = 2
     file = open("usersql.txt", mode="x", encoding='utf-8')
     b_pw = bytes('user', 'utf-8')
@@ -356,7 +356,25 @@ def main():
         boss_id += 1
 
 
-def create_salt(rd_list):
+def addBlank():
+    # 使用済み: 90000000~90000300
+    start_id = 90000400
+    pw = "user"
+    file = open("usersql.txt", mode="x", encoding='utf-8')
+    b_pw = bytes(pw, 'utf-8')
+    for i in range(1, 10):
+        salt = create_salt()
+        b_salt = bytes(salt, 'utf-8')
+        hashed_pw = hashlib.pbkdf2_hmac('sha256', b_pw, b_salt, 100).hex()
+        mail = create_salt()
+        text = f"insert into user values ({start_id}, '{rd.choice(array_last)}', '{rd.choice(array_first)}', " \
+               f"'{rd.choice(array_birth)}', null, 6, 1,  '{mail}', '{salt}', '{hashed_pw}', false);\n"
+        file.write(text)
+        start_id += 1
+
+
+def create_salt():
+    rd_list = string.digits + string.ascii_letters
     salt = "".join([rd.choice(rd_list) for i in range(32)])
     return salt
 
@@ -366,4 +384,6 @@ def create_hashed_pw(b_salt, b_pw):
     return hashed_pw
 
 
-main()
+# main()
+addBlank()
+# print(create_hashed_pw(bytes('Ka8WLaPBTzfwqFnsus91vpqLOpsjXZOW', 'utf-8'), bytes('user', 'utf-8')))
