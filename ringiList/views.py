@@ -76,7 +76,7 @@ def shouninzumi_list(request):
     login_user = request.session['user_data']
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     president = Approval.objects.all().filter(Q(p_president=1)).reverse()
-    mdirector = Approval.objects.all().filter(Q(p_mdirector=1)).reverse()
+    mdirector = Approval.objects.all().filter(Q(p_mdirectop=1)).reverse()
     director = Approval.objects.all().filter(Q(p_director=1)).reverse()
     chief = Approval.objects.filter(Q(p_chief=1)).reverse()
     context = {
@@ -98,6 +98,29 @@ def sakuseizumi_list(request):
     return render(request, 'ringiList/sakuseizumi_list.html', context)
 
 # 承認待ちはトップページにあるやつで代用できると思うから書かない。
+
+
+def shouninmati_list(request):
+    login_user = request.session['user_data']
+    user_data = User.objects.get(user_id=login_user)
+    request.session['position_id'] = user_data.position_id
+    president = Approval.objects.filter(Q(p_chief=1), Q(p_director=1), Q(p_mdirectop=1), Q(p_president=0),
+                                        ~Q(user__user_id=login_user)).reverse()
+    mdirector = Approval.objects.filter(Q(p_chief=1), Q(p_director=1), Q(p_mdirectop=0),
+                                        ~Q(user__user_id=login_user)).reverse()
+    director = Approval.objects.filter(Q(p_chief=1), Q(p_director=0), ~Q(user__user_id=login_user)).reverse()
+    chief = Approval.objects.filter(Q(p_chief=0), ~Q(user__user_id=login_user)).reverse()
+    employee = Approval.objects.all().filter(Q(p_chief=0), Q(user__user_id=login_user)).reverse()
+
+    context = {
+        'president': president,
+        'mdirector': mdirector,
+        'director': director,
+        'chief': chief,
+        'employee': employee,
+        'user_data': user_data,
+    }
+    return render(request, 'ringiList/shouninmati_list.html', context)
 
 
 def sakuseizumi_kobetu(request, ringi_id):

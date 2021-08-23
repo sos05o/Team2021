@@ -35,31 +35,21 @@
                         id="dropdown_button2" aria-expanded="false">
                     一覧
                 </button>
+                {% if request.session.position_id == 6 %}
                 <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
-                    <li><a class="dropdown-item" href="{% url 'dep:dep-list' %}">部署</a></li>
+                    <li><a class="dropdown-item" href="{% url 'ringiList:sakuseizumi' %}">作成物</a></li>
                 </ul>
 
-                {% if request.session['position_id'] == 6 %}
+                {% elif request.session.position_id == 5 %}
                 <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
-                    <li><a class="dropdown-item" href="{% url 'topPage:topPage_index' %}">作成済み</a></li>
-                </ul>
-
-                {% elif request.session['position_id'] == 5 %}
-                <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
-                    <li><a class="dropdown-item" href="{% url 'ringiList:sakuseizumi' %}">作成済み</a></li>
-                </ul>
-                <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
-                    <li><a class="dropdown-item" href="{% url 'topPage:topPage_index' %}">承認待ち</a></li>
-                </ul>
-                <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
+                    <li><a class="dropdown-item" href="{% url 'ringiList:sakuseizumi' %}">作成物</a></li>
+                    <li><a class="dropdown-item" href="{% url 'ringiList:shouninmati' %}">承認待ち</a></li>
                     <li><a class="dropdown-item" href="{% url 'ringiList:shouninzumi' %}">承認済み</a></li>
                 </ul>
 
-                {% elif request.session['position_id'] >= 4 %}
+                {% elif request.session.position_id <= 4 %}
                 <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
-                    <li><a class="dropdown-item" href="{% url 'topPage:topPage_index' %}">承認待ち</a></li>
-                </ul>
-                <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
+                    <li><a class="dropdown-item" href="{% url 'ringiList:shouninmati' %}">承認待ち</a></li>
                     <li><a class="dropdown-item" href="{% url 'ringiList:shouninzumi' %}">承認済み</a></li>
                 </ul>
                 {% endif %}

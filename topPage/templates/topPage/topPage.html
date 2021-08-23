@@ -5,7 +5,7 @@
 <div class="center">
     <div class="center">
         <!--　1, ログインしてきたユーザの役職はどうやって取得するのか？-->
-        {% if {{ user_data }} == 2 %} <!-- 社長だったら -->
+        {% if user_data == 2 %} <!-- 社長だったら -->
             <h1>承認待ち</h1>
             {% for array in president %}
                 <form>
@@ -17,7 +17,7 @@
                 </form>
             {% endfor %}
         {% endif %}
-        {% if {{ user_data }} == 3 %} <!-- 常務だったら -->
+        {% if user_data == 3 %} <!-- 常務だったら -->
             <h1>承認待ち</h1>
             {% for array in mdirector %}
                 <form>
@@ -29,7 +29,7 @@
                 </form>
             {% endfor %}
         {% endif %}
-        {% if {{ user_data }} == 4 %} <!-- 部長だったら -->
+        {% if user_data == 4 %} <!-- 部長だったら -->
             <h1>承認待ち</h1>
             {% for array in director %}
                 <form>
@@ -42,7 +42,7 @@
             {% endfor %}
         {% endif %}
 
-        {% if {{ user_data }} == 5 %} <!-- 主任だったら-->
+        {% if user_data == 5 %} <!-- 主任だったら-->
             <h1>承認待ち</h1>
             {% for array in chief %}
                 <form>
@@ -56,7 +56,7 @@
             {% endfor %}
         {% endif %}
 
-        {% if {{ user_data }} == 6 %} <!--　一般社員だったら　-->
+        {% if user_data == 6 %} <!--　一般社員だったら　-->
             <h1>作成済み</h1>
             {% for array in employee %}
                 <form>

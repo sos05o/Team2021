@@ -18,4 +18,5 @@ urlpatterns = [
     path('<int:ringi_id>', views.shouninzumi_kobetu, name='shouninzumikobetu'),
     path('<int:ringi_id>', views.tekkai , name='tekkai'),
     path('', views.remarks, name='remarks'),
+    path('', views.shouninmati_list, name='shouninmati')
 ]

@@ -20,7 +20,8 @@ def login(request):
                 if user_data.login_flag:
                     return redirect('login:first')
                 else:
-                    return render(request, 'login/sample.html')
+                    # return render(request, 'login/sample.html')
+                    return redirect('topPage:topPage_index')
             else:
                 return render(request, 'login/login.html')
         return redirect('login:login')
