@@ -1,18 +1,12 @@
-{% extends 'createDep/base.html' %}
-{% load static %}
+{% extends 'createDep/base.html' %} {% load static %}
 <html lang="ja">
 
-{% block title %}
-    一般社員2
-{% endblock %}
+{% block title %} 一般社員2 {% endblock %}
 
 <head>
     {% block addCSS %}
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
-              integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'createDep/css/change4.css' %}">
-    {% endblock %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'createDep/css/change4.css' %}"> {% endblock %}
 
     <title>list</title>
     <meta charset="UTF-8">
@@ -22,7 +16,7 @@
 </head>
 
 <body>
-{% block body %}
+    {% block body %}
     <div class="overflow">
         <form action="{% url 'dep:employee-2' boss_id %}" method="POST">{% csrf_token %}
             <div class="d-grid gap-2">
@@ -30,55 +24,57 @@
                 <button class="btn btn-secondary" name="edit">追加</button>
                 <table class="table table-bordered">
                     <thead>
-                    <tr class="th_row">
-                        <th class="th_id th">社員ID</th>
-                        <th class="th_name th">名前</th>
-                        <th class="th_lift th">解除</th>
-                    </tr>
+                        <tr class="th_row">
+                            <th class="th_id th">社員ID</th>
+                            <th class="th_name th">名前</th>
+                            <th class="th_lift th">解除</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {% for array in user_data %}
+                        {% for array in user_data %}
                         <tr class="tr_main">
-                            <td class="td_id"><input type="checkbox" class="check-emp" checked name="u-cb"
-                                                     value="{{ array.user_id }}">{{ array.user_id }}</td>
+                            <td class="td_id"><input type="checkbox" class="check-emp" checked name="u-cb" value="{{ array.user_id }}">{{ array.user_id }}</td>
                             <td class="td_name">{{ array.last_name }}{{ array.first_name }}</td>
-                            <td class="td_lift"><i class="fas fa-lock-open icon_disabled"></i><i
-                                    class="fas fa-lock"></i>
+                            <td class="td_lift"><i class="fas fa-lock-open icon_disabled"></i><i class="fas fa-lock"></i>
                             </td>
                         </tr>
-                    {% endfor %}
+                        {% endfor %}
                     </tbody>
                 </table>
-                <button class="btn btn-secondary" name="decision" id="edit">決定</button>
+                <div class="btn_div">
+                    <button class="btn btn-secondary" name="back" id="back">戻る</button>
+                    <button class="btn btn-secondary" name="decision" id="edit">決定</button>
+                </div>
             </div>
         </form>
     </div>
-{% endblock %}
+    {% endblock %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="../../static/createDep/js/bootstrap.min.js"></script>
-<script src="../../static/createDep/js/bootstrap.min.js.map"></script>
-<script src="../../static/createDep/js/change4.js"></script>
-{% block addJS %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../static/createDep/js/bootstrap.min.js"></script>
+    <script src="../../static/createDep/js/bootstrap.min.js.map"></script>
+    <script src="../../static/createDep/js/change4.js"></script>
+    {% block addJS %}
     <script src="{% static 'createDep/js/change4.js' %}"></script>
     {% if alert %}
-        <script>
-            {% if 'no_checked' in alert %}
-                window.alert('一般社員が一人も選択されていません。');
-            {% elif 'duplicate_director' %}
-                window.alert('部長が二人以上選択されています。');
-            {% endif %}
-            $(function () {
-                $("#edit").on('click', function (e) {
-                    let bool = window.confirm('一般社員が選択されていません。\n本当によろしいですか?');
-                    if (!bool) {
-                        e.preventDefault();
-                    }
-                })
+    <script>
+        { %
+            if 'no_checked' in alert %
+        }
+        window.alert('一般社員が一人も選択されていません。'); { % elif 'duplicate_director' %
+        }
+        window.alert('部長が二人以上選択されています。'); { % endif %
+        }
+        $(function() {
+            $("#edit").on('click', function(e) {
+                let bool = window.confirm('一般社員が選択されていません。\n本当によろしいですか?');
+                if (!bool) {
+                    e.preventDefault();
+                }
             })
-        </script>
-    {% endif %}
-{% endblock %}
+        })
+    </script>
+    {% endif %} {% endblock %}
 </body>
 
 </html>

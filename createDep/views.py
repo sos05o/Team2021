@@ -156,7 +156,7 @@ def director(request, num):
             #   前部長のpos_id -> 6,
             #   次部長のpos_id -> 4,
             #   次部長のdep_id -> num,
-            boss_id_ahead = User.objects.filter(position_id=4, department_id=num).values('user_id')
+            boss_before = User.objects.get(position_id=4, department_id=num)
             # print(boss_id_ahead[0]['user_id'])  # 前部長id
             # print(request.session['next_dir_id'])  # 次部長id
             # print(num)
@@ -164,22 +164,24 @@ def director(request, num):
             pos_4 = Position.objects.get(pk=4)
             pos_6 = Position.objects.get(pk=6)
             boss_ahead = User.objects.get(pk=request.session['next_dir_id'])
-            if boss_id_ahead.first() is None:
+            # 現在の部署の部長を取得できない(存在しない)場合
+            if boss_before is None:  # 現在の部長を取得できなかった時
                 chief_list = User.objects.filter(position_id=5, department_id=num)
+                # 現在の部署の部長を取得できた(存在する)場合
                 if chief_list.first() is not None:
-                    User.objects.filter(boss_id=boss_id_ahead[0]['user_id']).update(boss=boss_ahead)
+                    # 上司がいないアカウントを指定するとindexError indexoutofrange が発生する
+                    chief_list.update(boss=boss_ahead)
                 boss_ahead.position = pos_4
                 boss_ahead.department = dep
                 boss_ahead.save()
-            else:
-                boss_former = User.objects.get(pk=boss_id_ahead[0]['user_id'])
+            else:  # 現在の部長が存在した時
                 # pos4, 6
                 # print(User.objects.filter(boss_id=boss_id_ahead[0]['user_id']))
 
-                User.objects.filter(boss_id=boss_id_ahead[0]['user_id']).update(boss=boss_ahead)
+                User.objects.filter(boss_id=boss_before.user_id).update(boss=boss_ahead)
 
-                boss_former.position = pos_6
-                boss_former.save()
+                boss_before.position = pos_6
+                boss_before.save()
                 boss_ahead.position = pos_4
                 boss_ahead.department = dep
                 boss_ahead.save()
@@ -292,6 +294,9 @@ def employee_2(request, num):
             user_checked = list(user_checked)
             context = {'user_array': user_data, 'flg': 'emp', 'num': num, 'checked': user_checked}
             return render(request, 'createDep/selectUser.html', context)
+        elif 'back' in request.POST:
+            dep_id = User.objects.get(user_id=num)
+            return redirect('dep:employee-1', dep_id.department_id)
         elif 'decision' in request.POST:
             # TODO: employeeのDB登録、更新
             #   要) 主任ID, 変更する社員リスト、選択しない社員リスト、所属部署  ( User.boss_id -> num, request.post.getlist('u-cb'),
