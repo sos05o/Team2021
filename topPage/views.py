@@ -8,8 +8,7 @@ from django.db.models import Q
 
 
 def top_page(request):
-    # login_user = request.session['login_user']
-    login_user = 90000020
+    login_user = request.session['user_data']
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     president = Approval.objects.all().filter(Q(p_chief=1), Q(p_director=1), Q(p_mdirector=1),Q(p_president=0), ~Q(user__user_id=login_user)).reverse()
     mdirector = Approval.objects.all().filter(Q(p_chief=1), Q(p_director=1), Q(p_mdirector=0), ~Q(user__user_id=login_user)).reverse()

@@ -6,7 +6,7 @@ from django.db.models import Q
 
 
 def president_index(request, ringi_id):
-    login_user = request.session['login_user']
+    login_user = request.session['user_data']
     approval = Approval.objects.filter(approval_id=ringi_id).reverse()
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     remarks = Remarks.objects.filter(approval_id=ringi_id)
@@ -20,7 +20,7 @@ def president_index(request, ringi_id):
 
 
 def mdirector_index(request, ringi_id):
-    login_user = request.session['login_user']
+    login_user = request.session['user_data']
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     approval = Approval.objects.filter(approval_id=ringi_id).reverse()
     remarks = Remarks.objects.filter(approval_id=ringi_id)
@@ -34,7 +34,7 @@ def mdirector_index(request, ringi_id):
 
 
 def director_index(request, ringi_id):
-    login_user = request.session['login_user']
+    login_user = request.session['user_data']
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     approval = Approval.objects.filter(approval_id=ringi_id).reverse()
     remarks = Remarks.objects.filter(approval_id=ringi_id)
@@ -48,7 +48,7 @@ def director_index(request, ringi_id):
 
 
 def chief_index(request, ringi_id):
-    login_user = request.session['login_user']
+    login_user = request.session['user_data']
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     approval = Approval.objects.filter(approval_id=ringi_id).reverse()
     remarks = Remarks.objects.filter(approval_id=ringi_id)
@@ -62,7 +62,7 @@ def chief_index(request, ringi_id):
 
 
 def enployee_index(request, ringi_id):
-    login_user = request.session['login_user']
+    login_user = request.session['user_data']
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     approval = Approval.objects.filter(approval_id=ringi_id).reverse()
     context = {
@@ -73,7 +73,7 @@ def enployee_index(request, ringi_id):
     return render(request, 'ringiList/sakuseizumi_kobetu.html', context)
 
 def shouninzumi_list(request):
-    login_user = request.session['login_user']
+    login_user = request.session['user_data']
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     president = Approval.objects.all().filter(Q(p_president=1)).reverse()
     mdirector = Approval.objects.all().filter(Q(p_mdirector=1)).reverse()
@@ -90,7 +90,7 @@ def shouninzumi_list(request):
 
 def sakuseizumi_list(request):
     # この関数を使えるのは、一般社員と主任だけ、一般社員と主任のヘッダーの作成済みからだけにする。
-    login_user = request.session['login_user']
+    login_user = request.session['user_data']
     approval = Approval.objects.all().filter(user_id=login_user).reverse()
     context = {
         'approval': approval,  # 作成者がログインユーザと一致する稟議書データ
@@ -101,7 +101,7 @@ def sakuseizumi_list(request):
 
 
 def sakuseizumi_kobetu(request, ringi_id):
-    login_user = request.session['login_user']
+    login_user = request.session['user_data']
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     approval = Approval.objects.filter(approval_id=ringi_id).reverse()
     context = {
@@ -113,7 +113,7 @@ def sakuseizumi_kobetu(request, ringi_id):
 
 
 def shouninzumi_kobetu(request, ringi_id):
-    login_user = request.session['login_user']
+    login_user = request.session['user_data']
     user_data = User.objects.filter(user_id=login_user).values('position__position_id')
     approval = Approval.objects.filter(approval_id=ringi_id).reverse()
     remarks = Remarks.objects.filter(approval_id=ringi_id)
