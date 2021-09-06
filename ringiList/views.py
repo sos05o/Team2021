@@ -77,12 +77,9 @@ def employee_index(request, approval_id):
 def sakuseizumi_kobetu(request, approval_id):
     login_user = request.session['user_data']
     user_data = User.objects.get(user_id=login_user)
-    print(user_data)
     approval = Approval.objects.get(approval_id=approval_id)
     remarks = Remarks.objects.filter(approval_id=approval_id)
-    print(approval)
-    print(user_data.last_name)
-    print(user_data.first_name)
+    print(remarks)
     context = {
         'approval': approval,  # 受け取った稟議書idと一致する稟議書データ
         'ringi_id': approval_id,

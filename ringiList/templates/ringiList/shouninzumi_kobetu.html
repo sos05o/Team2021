@@ -108,7 +108,11 @@
             <div class="remarks">
                 <!-- 備考を自動入力 -->
                 <div class="left_padding"> 5, 備考</div>
-                <div id="remarks">{{ remarks.remarks }}</div>
+                <div id="remarks">
+                    {% for remark in remarks %}
+                    {{ remark.remarks }}
+                    {% endfor %}
+                </div>
                 <!-- 備考を自動入力 -->
             </div>
 

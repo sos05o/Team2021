@@ -18,6 +18,7 @@ from django.conf.urls import include
 from django.urls import path
 
 urlpatterns = [
+    path('', include('login.urls')),
     path('admin/', admin.site.urls),
     path('create/', include('createRingisyo.urls')),
     path('account/', include('createAccount.urls')),

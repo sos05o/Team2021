@@ -76,19 +76,19 @@
                 }
             }
 
-            $("#PW-first").blur(function () {
-                checkText($("#PW-first"));
-                if (error !== "") {
-                    window.alert(error);
-                }
-            })
-
-            $("#PW-second").blur(function () {
-                checkText($("#PW-second"));
-                if (error !== "") {
-                    window.alert(error);
-                }
-            })
+            {#$("#PW-first").blur(function () {#}
+            {#    checkText($("#PW-first"));#}
+            {#    if (error !== "") {#}
+            {#        window.alert(error);#}
+            {#    }#}
+            {#})#}
+            {##}
+            {#$("#PW-second").blur(function () {#}
+            {#    checkText($("#PW-second"));#}
+            {#    if (error !== "") {#}
+            {#        window.alert(error);#}
+            {#    }#}
+            {#})#}
 
             $("#sendButton").on('click', function (e) {
                 let pw = $('#PW-first').val();

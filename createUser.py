@@ -385,5 +385,11 @@ def create_hashed_pw(b_salt, b_pw):
 
 
 # main()
-addBlank()
+# addBlank()
 # print(create_hashed_pw(bytes('Ka8WLaPBTzfwqFnsus91vpqLOpsjXZOW', 'utf-8'), bytes('user', 'utf-8')))
+b_pw = bytes('user', 'utf-8')
+salt = create_salt()
+b_salt = bytes(salt, 'utf-8')
+hashed_pw = create_hashed_pw(b_salt, b_pw)
+print(salt)
+print(hashed_pw)

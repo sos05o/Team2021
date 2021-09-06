@@ -42,19 +42,19 @@
     <script>
         $(function () {
             let error = "";
-            $("#user_id").blur(function () {
-                checkID();
-                if (error !== "") {
-                    window.alert(error);
-                }
-            })
-
-            $("#user_password").blur(function () {
-                checkPW();
-                if (error !== "") {
-                    window.alert(error);
-                }
-            })
+            {#$("#user_id").blur(function () {#}
+            {#    checkID();#}
+            {#    if (error !== "") {#}
+            {#        window.alert(error);#}
+            {#    }#}
+            {#})#}
+            {##}
+            {#$("#user_password").blur(function () {#}
+            {#    checkPW();#}
+            {#    if (error !== "") {#}
+            {#        window.alert(error);#}
+            {#    }#}
+            {#})#}
 
             $("#sendButton").on('click', function (e) {
                 checkID();

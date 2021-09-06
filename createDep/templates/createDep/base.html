@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'createDep/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'createDep/css/bootstrap.min.css.map' %}">
-    <link rel="stylesheet" href="{% static 'createDep/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'topPage/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'topPage/css/bootstrap.min.css.map' %}">
+    <link rel="stylesheet" href="{% static 'topPage/css/base.css' %}">
     {% block addCSS %}{% endblock %}
 </head>
 
@@ -15,7 +15,7 @@
 <header id="header" class="sticky-top">
     <div class="flex-row navbar align-items-center">
         <div id="header_title" class="col">
-            <a href="{% url 'dep:top' %}">稟議書システム</a>
+            <a href="{% url 'topPage:topPage_index' %}">稟議書システム</a>
         </div>
         <div class="ml-auto d-flex right_row">
             <div class="col dropdown">
@@ -23,29 +23,60 @@
                         id="dropdown_button1" aria-expanded="false">
                     作成
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdown_button1">
-                    <li><a class="dropdown-item" href="{% url 'dep:create' %}">部署</a></li>
-                    <li><a class="dropdown-item" href="#">アカウント</a></li>
-                </ul>
+                {% if request.session.user_info.position_id == 6 or request.session.user_info.position_id == 5 %}
+                    <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
+                        <li><a class="dropdown-item" href="{% url 'create:create' %}">稟議書</a></li>
+                    </ul>
+
+                {% elif request.session.user_info.position_id == 1 %}
+                    <ul class="dropdown-menu" aria-labelledby="dropdown_button1">
+                        <li><a class="dropdown-item" href="{% url 'dep:create' %}">部署</a></li>
+                    </ul>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown_button1">
+                        <li><a class="dropdown-item" href="#">アカウント</a></li>
+                    </ul>
+                {% endif %}
+
+
             </div>
             <div class="col dropdown">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                         id="dropdown_button2" aria-expanded="false">
                     一覧
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
-                    <li><a class="dropdown-item" href="{% url 'dep:dep-list' %}">部署</a></li>
-                </ul>
+                {% if request.session.user_info.position_id == 6 %}
+                    <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
+                        <li><a class="dropdown-item" href="{% url 'ringiList:list' "create" %}">作成物</a></li>
+                    </ul>
+                {% elif request.session.user_info.position_id == 5 %}
+                    <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
+                        <li><a class="dropdown-item" href="{% url 'ringiList:list' "create" %}">作成物</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ringiList:list' "pend" %}">承認待ち</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ringiList:list' "pended" %}">承認済み</a></li>
+                    </ul>
+
+                {% elif request.session.user_info.position_id <= 4 %}
+                    <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
+                        <li><a class="dropdown-item" href="{% url 'ringiList:list' "pend" %}">承認待ち</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ringiList:list' "pended" %}">承認済み</a></li>
+                    </ul>
+                {% elif request.session.user_info.position_id == 1 %}
+                    <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
+                        <li><a class="dropdown-item" href="{% url 'dep:dep-list' %}">部署一覧</a></li>
+                    </ul>
+                {% endif %}
             </div>
             <div class="col">
-                <div class="info_1">user01</div>
-                <a href="#" class="info_2">ログアウト</a>
+                <div class="info_1">{{ request.session.user_name }}</div>
+                <a href="{% url 'login:logout' %}" class="info_2">ログアウト</a>
             </div>
         </div>
     </div>
 </header>
 <main id="main">
-    {% block body %}{% endblock %}
+    {% block body %}
+        {{ request.session.user_info }}
+    {% endblock %}
 </main>
 <footer id="footer">
     <div class="footer_toplink">
@@ -61,8 +92,8 @@
     </div>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="{% static 'createDep/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'createDep/js/bootstrap.min.js.map' %}"></script>
+<script src="{% static 'topPage/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'topPage/js/bootstrap.min.js.map' %}"></script>
 {% block addJS %}{% endblock %}
 </body>
 

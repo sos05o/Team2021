@@ -4,76 +4,64 @@
 {% block body %}
     <div class="center">
         <div class="center">
-        {{ user_data }}
-        {{ user_data.position_id }}
             {% if user_data.position_id == 2 %} <!-- 社長だったら -->
                 <h1>承認待ち</h1>
-                <form>
-                    {% for array in model.get_president_approval %}
-                        <button onclick="location.href=&quot;{% url 'ringiList:president' array.approval_id %}&quot;">
-                            作成者: {{ array.user.last_name }}{{ array.user.first_name }}
-                            件名: {{ array.title }}
-                        </button>
-                        <br>
-                    {% endfor %}
-                </form>
+                {% for array in model.get_president_approval %}
+                    <button onclick="location.href=&quot;{% url 'ringiList:president' array.approval_id %}&quot;">
+                        作成者: {{ array.user.last_name }}{{ array.user.first_name }}
+                        件名: {{ array.title }}
+                    </button>
+                    <br>
+                {% endfor %}
             {% endif %}
             {% if user_data.position_id == 3 %} <!-- 常務だったら -->
                 <h1>承認待ち</h1>
-                <form>
-                    {% for array in model.get_mdirector_approval %}
-                        <br>
-                        <button onclick="location.href=&quot;{% url 'ringiList:mdirector' array.approval_id %}&quot;">
-                            作成者: {{ array.user.last_name }}{{ array.user.first_name }}
-                            件名: {{ array.title }}
-                        </button>
-                        <br>
+                {% for array in model.get_mdirector_approval %}
+                    <br>
+                    <button onclick="location.href=&quot;{% url 'ringiList:mdirector' array.approval_id %}&quot;">
+                        作成者: {{ array.user.last_name }}{{ array.user.first_name }}
+                        件名: {{ array.title }}
+                    </button>
+                    <br>
 
-                    {% endfor %}
-                </form>
+                {% endfor %}
             {% endif %}
             {% if user_data.position_id == 4 %} <!-- 部長だったら -->
                 <h1>承認待ち</h1>
-                <form>
-                    {% for array in model.get_director_approval %}
-                        <br>
-                        <button onclick="location.href=&quot;{% url 'ringiList:director' array.approval_id %}&quot;">
-                            作成者: {{ array.user.last_name }}{{ array.user.first_name }}
-                            件名: {{ array.title }}
-                        </button>
-                        <br>
+                {% for array in model.get_director_approval %}
+                    <br>
+                    <button onclick="location.href=&quot;{% url 'ringiList:director' array.approval_id %}&quot;">
+                        作成者: {{ array.user.last_name }}{{ array.user.first_name }}
+                        件名: {{ array.title }}
+                    </button>
+                    <br>
 
-                        </form>
-                    {% endfor %}
+                {% endfor %}
 
             {% endif %}
 
             {% if user_data.position_id == 5 %} <!-- 主任だったら-->
                 <h1>承認待ち</h1>
-                <form>
-                    {% for array in model.get_chief_approval %}
-                        <br>
-                        <button onclick="location.href=&quot;{% url 'ringiList:chief' array.approval_id %}&quot;">
-                            作成者: {{ array.user.last_name }}{{ array.user.first_name }}
-                            件名: {{ array.title }}
-                        </button>
-                        </form>
+                {% for array in model.get_chief_approval %}
+                    <br>
+                    <button onclick="location.href=&quot;{% url 'ringiList:chief' array.approval_id %}&quot;">
+                        作成者: {{ array.user.last_name }}{{ array.user.first_name }}
+                        件名: {{ array.title }}
+                    </button>
 
-                    {% endfor %}
+                {% endfor %}
             {% endif %}
 
             {% if user_data.position_id == 6 %} <!--　一般社員だったら　-->
                 <h1>作成済み</h1>
-                <form>
-                    {% for array in approval %}　　<!--model.get_employee_approval-->
-                        <br>
-                        <button onclick="location.href=&quot;{% url 'ringiList:employee' array.approval_id %}&quot;">
-                            作成者: {{ array.user.last_name }}{{ array.user.first_name }}
-                            件名: {{ array.title }}
-                        </button>
-                        <br>
-                    {% endfor %}
-                </form>
+                {% for array in approval %}　　<!--model.get_employee_approval-->
+                    <br>
+                    <button onclick="location.href=&quot;{% url 'ringiList:sakuseizumikobetu' array.approval_id %}&quot;">
+                        作成者: {{ array.user.last_name }}{{ array.user.first_name }}
+                        件名: {{ array.title }}
+                    </button>
+                    <br>
+                {% endfor %}
             {% endif %}
         </div>
     </div>

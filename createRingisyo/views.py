@@ -88,7 +88,7 @@ def create(request):
 
                 if '一式' == quantity:
                     quantity = 1
-                pay_all = int(quantity) * int(unit_price) * 1.1
+                pay_all = int(quantity) * int(unit_price)
                 context['pay_all'] = pay_all
 
                 request.session['title'] = title

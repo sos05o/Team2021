@@ -15,7 +15,7 @@
 <header id="header" class="sticky-top">
     <div class="flex-row navbar align-items-center">
         <div id="header_title" class="col">
-            <a href="{% url 'dep:top' %}">稟議書システム</a>
+            <a href="{% url 'topPage:topPage_index' %}">稟議書システム</a>
         </div>
         <div class="ml-auto d-flex right_row">
             <div class="col dropdown">
@@ -67,8 +67,8 @@
                 {% endif %}
             </div>
             <div class="col">
-                <div class="info_1">user01</div>
-                <a href="#" class="info_2">ログアウト</a>
+                <div class="info_1">{{ request.session.user_name }}</div>
+                <a href="{% url 'login:logout' %}" class="info_2">ログアウト</a>
             </div>
         </div>
     </div>

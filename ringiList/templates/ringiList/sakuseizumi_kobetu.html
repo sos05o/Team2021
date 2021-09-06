@@ -42,7 +42,7 @@
                     </div>
                     <div class="person_name">
                         <div class="position_name">
-                            <div class="position_1">責任者</div>
+                            <div class="position_1">責任者<br>{{  }}</div>
                             <div></div>
                             <div></div>
                             <div class="position_2">記入者<br>{{ last_name }}<br>{{ first_name }}</div>
@@ -108,7 +108,11 @@
             <div class="remarks">
                 <!-- 備考を自動入力 -->
                 <div class="left_padding"> 5, 備考</div>
-                <div id="remarks"><!-- ここに備考が入る-->{{ remarks }}</div>
+                <div id="remarks"><!-- ここに備考が入る-->
+                {% for remark in remarks %}
+                    {{ remark.remarks }}
+                {% endfor %}
+                </div>
                 <!-- 備考を自動入力 -->
             </div>
 

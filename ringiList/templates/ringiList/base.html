@@ -36,6 +36,8 @@
                         <li><a class="dropdown-item" href="#">アカウント</a></li>
                     </ul>
                 {% endif %}
+
+
             </div>
             <div class="col dropdown">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
@@ -46,7 +48,6 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
                         <li><a class="dropdown-item" href="{% url 'ringiList:list' "create" %}">作成物</a></li>
                     </ul>
-
                 {% elif request.session.user_info.position_id == 5 %}
                     <ul class="dropdown-menu" aria-labelledby="dropdown_button2">
                         <li><a class="dropdown-item" href="{% url 'ringiList:list' "create" %}">作成物</a></li>
@@ -64,18 +65,18 @@
                         <li><a class="dropdown-item" href="{% url 'dep:dep-list' %}">部署一覧</a></li>
                     </ul>
                 {% endif %}
-
-
             </div>
             <div class="col">
-                <div class="info_1">user01</div>
-                <a href="#" class="info_2">ログアウト</a>
+                <div class="info_1">{{ request.session.user_name }}</div>
+                <a href="{% url 'login:logout' %}" class="info_2">ログアウト</a>
             </div>
         </div>
     </div>
 </header>
 <main id="main">
-    {% block body %}{% endblock %}
+    {% block body %}
+        {{ request.session.user_info }}
+    {% endblock %}
 </main>
 <footer id="footer">
     <div class="footer_toplink">
