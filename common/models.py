@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.db.models import Q
 
 
 class Approval(models.Model):
@@ -28,6 +29,38 @@ class Approval(models.Model):
     class Meta:
         managed = True
         db_table = 'approval'
+
+
+class get_Approval_query():
+    class Meta:
+        proxy = True
+
+    def __init__(self, args):
+        self.__login_user = args
+
+    def get_president_approval(self):
+        approval = Approval.objects.filter(Q(p_chief=1), Q(p_director=1),
+                                           Q(p_mdirectop=1), Q(p_president=0), Q(user__user_id=self.__login_user))
+        return approval
+
+    def get_mdirector_approval(self):
+        approval = Approval.objects.filter(Q(p_chief=1), Q(p_director=1))
+        return approval
+
+    def get_director_approval(self):
+        approval = Approval.objects.filter(Q(p_chief=1),
+                                           Q(p_director=0), ~Q(user__user_id=self.__login_user),
+                                           Q(user__department_id=User.objects.get(pk=self.__login_user).department_id))
+        return approval
+
+    def get_chief_approval(self):
+        approval = Approval.objects.filter(Q(p_chief=0), ~Q(user__user_id=self.__login_user),
+                                           Q(user__department_id=User.objects.get(pk=self.__login_user).department_id))
+        return approval
+
+    def get_employee_approval(self):
+        approval = Approval.objects.filter(Q(p_chief=0), Q(user__user_id=self.__login_user))
+        return approval
 
 
 class Department(models.Model):

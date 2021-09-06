@@ -1,17 +1,17 @@
 {% extends "ringiList/base.html" %}
 {% load static %}
 
-{% block content %}
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'ringiList/css/02.css' %}">
-    <link rel="stylesheet" href="{% static 'ringiList/css/02_border.css' %}">
-    <link rel="stylesheet" href="{% static 'ringiList/css/02_sub.css' %}">
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
-    <title>Document</title>
-</head>
+{% block body %}
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'ringiList/css/02.css' %}">
+        <link rel="stylesheet" href="{% static 'ringiList/css/02_border.css' %}">
+        <link rel="stylesheet" href="{% static 'ringiList/css/02_sub.css' %}">
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+        <title>Document</title>
+    </head>
 
-<body>
+    <body>
     <div class="main_div_ringisyo">
         <div class="ringisyo_area">
             <div class="title_area">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="date">
                         <div>承認期限</div>
-                        <div id="date">{{ approval.limit }}</div>
+                        <div id="date">{{ approval.limited }}</div>
                         <!-- 承認期限を自動入力 -->
                     </div>
                 </div>
@@ -109,11 +109,11 @@
                 <!-- 備考を自動入力 -->
                 <div class="left_padding"> 5, 備考</div>
                 <div id="remarks">
-                    <form action='{% url "remarks" %}' method='get'> <!-- 備考のremarksのurlをurls.pyに書く。あと関数 -->
                     <input type="text" size="40" maxlength="30" values="memo">
                     <button type='submit'>記入</button>
-                    </form>
-                    {{ remarks.remarks }}
+                    {% for remark in remarks %}
+                        {{ remark.remarks }}
+                    {% endfor %}
                 </div>
                 <!-- 備考を自動入力 -->
             </div>
@@ -128,48 +128,50 @@
                     <div class="position">社長</div>
                     <div class="decision_1">
                         {% if approval.p_chief == 1 %}
-                            〇
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
                         {% elif approval.p_chief == 2 %}
-                            ✖
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
                         {% endif %}
                     </div>
                     <div class="decision_2">
                         {% if approval.p_director == 1 %}
-                            〇
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
                         {% elif approval.p_director == 2 %}
-                            ✖
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
                         {% endif %}
                     </div>
                     <div class="decision_3">
-                        {% if approval.p_mdirector == 1 %}
-                            〇
-                        {% elif approval.p_mdirector == 2 %}
-                            ✖
+                        {% if approval.p_mdirectop == 1 %}
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
+                        {% elif approval.p_mdirectop == 2 %}
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
                         {% endif %}
                     </div>
                     <div class="decision_4">
                         {% if approval.p_president == 1 %}
-                            〇
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
                         {% elif approval.p_president == 2 %}
-                            ✖
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
                         {% endif %}
                     </div>
                 </div>
                 <!-- 作成時、作成者確認時には不要 -->
                 <div></div>
                 <div class="button">
-                    <div class="docs_button"><button onclick="location.href=&quot;{% url 'ringiList:hiketu' user_data.position_id , approval.approval_id %}&quot"> # i.your-argsのところには稟議書のIdが入る。
-                        否決
-                      </button></div>
-                    <div></div>
-                    <div class="docs_button"><button onclick="location.href=&quot;{% url 'ringiList:shounin' user_data.position_id , approval.approval_id %}&quot"> # i.your-argsのところには稟議書のIdが入る。
-                        承認
-                    </button></div>
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:hiketu' approval.approval_id %}'"
+                           value="   否決   " style="font-size:25px;">
+                    </div>
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:shounin' approval.approval_id %}'"
+                           value="   承認   " style="font-size:25px;">
+                    </div>
                 </div>
+
             </div>
             <div></div>
         </div>
     </div>
-</body>
+    </body>
 
 {% endblock %}

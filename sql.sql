@@ -1,8 +1,7 @@
 create
 database djangoTeam2021;
 
-use
-djangoTeam2021;
+use djangoTeam2021;
 
 create table position
 (

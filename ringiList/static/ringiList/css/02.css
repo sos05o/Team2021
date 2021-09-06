@@ -21,7 +21,7 @@
         "bottom_area"
         "."
         ;
-        
+
     margin: auto 72px;
     width: 722px;
 }
@@ -128,7 +128,7 @@
     grid-template-columns: 396px;
     grid-template-rows: 32px 1fr;
     gap: 8px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "."
         ".";
     grid-area: docs_type;
@@ -151,7 +151,7 @@
     grid-template-columns: 600.5px 121.5px;
     grid-template-rows: 1fr;
     gap: 0px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "docs_title_input docs_title_space";
     grid-area: docs_title_area;
 }
@@ -161,7 +161,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 25px 1fr;
     gap: 8px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "."
         "docs_input";
     grid-area: docs_title_input;
@@ -172,7 +172,7 @@
     grid-template-columns: 117.5px;
     grid-template-rows: 1fr 1fr;
     gap: 0px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "docs_space"
         "docs_space";
     grid-area: docs_title_space;
@@ -183,7 +183,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 30px;
     gap: 0px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "pay_all"
         "pay_product";
     grid-area: pay_info_area;
@@ -194,7 +194,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 25px 1fr;
     gap: 5px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "."
         ".";
     grid-area: pay_all;
@@ -205,7 +205,7 @@
     grid-template-columns: 60px 1fr;
     grid-template-rows: 1fr;
     gap: 0px 10px;
-    grid-template-areas: 
+    grid-template-areas:
         ". .";
     grid-area: pay_product;
 }
@@ -215,7 +215,7 @@
     grid-template-columns: 240px 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 0px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         ". product_name"
         ". trader_name";
     grid-area: trader_info_area;
@@ -226,7 +226,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 25px 1fr;
     gap: 5px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "."
         ".";
     grid-area: reason_area;
@@ -237,7 +237,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 25px 1fr;
     gap: 5px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "."
         ".";
     grid-area: trader_reason_area;
@@ -248,7 +248,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 25px 1fr;
     gap: 5px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "."
         ".";
     grid-area: remarks;
@@ -265,12 +265,13 @@
 
 
 /* button部分 */
+
 .bottom_area {
     display: grid;
     grid-template-columns: 310px 1fr 270px;
     grid-template-rows: 90px;
     gap: 0px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         "approval . button";
     grid-area: bottom_area;
 }
@@ -280,18 +281,23 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 28px 1fr;
     gap: 0px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         ". . . ."
         "decision_1 decision_2 decision_3 decision_4";
     grid-area: approval;
 }
 
+
 .button {
     display: grid;
     grid-template-columns: 110px 1fr 110px;
     grid-template-rows: 36px;
-    gap: 0px 0px;
-    grid-template-areas: 
+    gap: 0px 20px;
+    grid-template-areas:
         ". . .";
     grid-area: button;
 }
+
+
+
+
