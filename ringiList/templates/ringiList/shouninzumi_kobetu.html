@@ -1,0 +1,200 @@
+{% extends "ringiList/base.html" %}
+{% load static %}
+
+{% block body %}
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'ringiList/css/02.css' %}">
+        <link rel="stylesheet" href="{% static 'ringiList/css/02_border.css' %}">
+        <link rel="stylesheet" href="{% static 'ringiList/css/02_sub.css' %}">
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+        <title>Document</title>
+    </head>
+
+    <body>
+    <div class="main_div_ringisyo">
+        <div class="ringisyo_area">
+            <div class="title_area">
+                <h1>承認済み稟議書</h1>
+            </div>
+            <div class="info_area">
+                <div class="writer_area">
+                    <!-- dateに作成日付を自動入力 -->
+                    <div class="docs_type">
+                        <div>文書種別</div>
+                        <div>支払 社長 総額100万円以上、常務取締 総額30万円以上、部長30万円未満</div>
+                    </div>
+                    <div class="date">
+                        <div>承認期限</div>
+                        <div id="date">{{ approval.limited }}</div>
+                        <!-- 承認期限を自動入力 -->
+                    </div>
+                </div>
+                <div class="info_space"></div>
+                <div class="auth_area">
+                    <!-- 作成者から所属部署、部長を自動入力 -->
+                    <div class="dep_title">起案部署</div>
+                    <div class="dep_name">
+                        <div class="dep_1">部署名</div>
+                        <div class="dep_2" id="dep_name">
+                        </div>
+                        <!--部署名を入力-->
+                    </div>
+                    <div class="person_name">
+                        <div class="position_name">
+                            <div class="position_1">責任者</div>
+                            <div></div>
+                            <div></div>
+                            <div class="position_2">記入者</div>
+                        </div>
+                        <div class="position_person">
+                            <div class="position_person_1">
+                            </div>
+                            <!--所属部署の部長名を入力-->
+                            <div></div>
+                            <div></div>
+                            <div class="position_person_2">
+                                <!-- 作成者が入る -->
+                            </div>
+                            <!--作成者名を入力-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+            <div class="docs_title_area">
+                <!-- 稟議書の件名(タイトル) -->
+                <div class="docs_title_input">
+                    <div class="left_padding">件名</div>
+                    <div class="docs_input">{{ approval.title }}</div>
+                </div>
+                <div class="docs_title_space">
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="pay_info_area">
+                <!-- 賞品総額と商品名を自動入力 -->
+                <div class="pay_all">
+                    <div class="left_padding">支払総額</div>
+                    <div id="pay_all">{{ approval.price }}</div>
+                </div>
+                <div class="pay_product">
+                    <div class="left_padding top_padding">内容:</div>
+                    <div id="pay_product"></div>
+                </div>
+            </div>
+            <div class="trader_info_area">
+                <!-- 商品名と業者名を自動入力 -->
+                <div class="left_padding top_padding"> 1, 商品名:</div>
+                <div class="product_name">{{ approval.goods }}</div>
+                <!-- 商品名を入力 -->
+                <div class="left_padding top_padding"> 2, 業者名:</div>
+                <div class="trader_name">{{ approval.trader }}</div>
+                <!-- 業者名を入力 -->
+            </div>
+            <div class="reason_area">
+                <!-- 必要理由を自動入力 -->
+                <div class="left_padding">3, 必要理由</div>
+                <div id="reason_text">{{ approval.necessity_reason }}</div>
+                <!-- 必要理由を自動入力 -->
+            </div>
+            <div class="trader_reason_area">
+                <!-- 業者選定理由を入力 -->
+                <div class="left_padding"> 4, 業者選定理由</div>
+                <div id="trader_reason_area">{{ approval.trader_reason }}</div>
+                <!-- 業者選定理由を入力 -->
+            </div>
+            <div class="remarks">
+                <!-- 備考を自動入力 -->
+                <div class="left_padding"> 5, 備考</div>
+                <div id="remarks">
+                    {% for remark in remarks %}
+                    {{ remark.remarks }}
+                    {% endfor %}
+                </div>
+                <!-- 備考を自動入力 -->
+            </div>
+
+            <!-- ボタン部分 -->
+            <div></div>
+            <div class="bottom_area">
+                <div class="approval">
+                    <div class="position">主任</div>
+                    <div class="position">部長</div>
+                    <div class="position">常務取締役</div>
+                    <div class="position">社長</div>
+                    <div class="decision_1">
+                        {% if approval.p_chief == 1 %}
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
+                        {% elif approval.p_chief == 2 %}
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
+                        {% endif %}
+                    </div>
+                    <div class="decision_2">
+                        {% if approval.p_director == 1 %}
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
+                        {% elif approval.p_director == 2 %}
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
+                        {% endif %}
+                    </div>
+                    <div class="decision_3">
+                        {% if approval.p_mdirectop == 1 %}
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
+                        {% elif approval.p_mdirectop == 2 %}
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
+                        {% endif %}
+                    </div>
+                    <div class="decision_4">
+                        {% if approval.p_president == 1 %}
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
+                        {% elif approval.p_president == 2 %}
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- 作成時、作成者確認時には不要 -->
+                <div></div>
+                <!--
+                    <div class="docs_button"><button onclick="history.back()">戻る</button></div>
+                    -->
+
+                <div></div>
+                {% if position_id == 5 and approval.p_director == 0 %}
+                    <div class="button">
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:back' %}'" value="  戻る  "
+                               style="font-size:25px;"></div>
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:tekkai' approval.approval_id %}'"
+                               value="  撤回  " style="font-size:25px;"></div>
+                    </div>
+                {% elif position_id == 4 and approval.p_mdirector == 0 %}
+                    <div class="button">
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:back' %}'" value="  戻る  "
+                               style="font-size:25px;"></div>
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:tekkai' approval.approval_id %}'"
+                               value="  撤回  " style="font-size:25px;"></div>
+                    </div>
+
+                {% elif position_id == 3 and approval.p_president == 0 %}
+                    <div class="button">
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:back' %}'" value="  戻る  "
+                               style="font-size:25px;"></div>
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:tekkai' approval.approval_id %}'"
+                               value="  撤回  " style="font-size:25px;"></div>
+                    </div>
+                {% endif %}
+
+
+            </div>
+            <div></div>
+        </div>
+    </div>
+    </body>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "ringiList/base.html" %}
+{% load static %}
+
+{% block body %}
+<div class="center">
+    <div class="center">
+            <h1>作成済み一覧</h1>
+    <!-- form -->
+            <p>　</p>
+            {% for array in approval %}
+                <button onclick="location.href=&quot;{% url 'ringiList:sakuseizumikobetu' array.approval_id %}&quot">
+                    作成者:  {{ array.user.last_name }}{{ array.user.first_name }}
+                    件名:  {{ array.title }}
+                </button>
+                <br>
+                <br>
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}

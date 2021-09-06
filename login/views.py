@@ -14,15 +14,16 @@ def login(request):
             user_id = request.POST['user_id']
             password = request.POST['user_password']
             user_data = User.objects.get(pk=user_id)
-            # マッチしないユーザ検索の例外処理
             hashed_pw = create_hashed_pw(pw=password, salt=user_data.salt)
             if hashed_pw == user_data.pw:  # トップページに遷移
                 request.session['user_data'] = user_data.user_id
+                request.session['user_info'] = User.objects.get(pk=user_data.user_id)
                 if user_data.login_flag:
                     return redirect('login:first')
                 else:
-                    return render(request, 'login/sample.html')
-                    # return redirect('topPage:topPage_index')
+                    # return render(request, 'login/sample.html')
+                    request.session['user_name'] = user_data.last_name + user_data.first_name
+                    return redirect('topPage:topPage_index')
             else:
                 return render(request, 'login/login.html')
         return redirect('login:login')
@@ -40,13 +41,20 @@ def first(request):
                 user_data.pw = hashed_pw
                 user_data.login_flag = False
                 user_data.save()
-                return render(request, 'login/sample.html')
+                print(user_data.last_name, user_data.first_name)
+                request.session['user_name'] = user_data.last_name + user_data.first_name
+                return redirect('topPage:topPage_index')
         return redirect('login:login')
     elif request.method == 'GET':
         if request.session['user_data']:
             return render(request, 'login/firstLogin.html')
         else:
             return redirect('login:login')
+        
+        
+def logout(request):
+    request.session.clear()
+    return redirect('login:login')
 
 
 def create_hashed_pw(pw, salt):

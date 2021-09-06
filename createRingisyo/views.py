@@ -10,12 +10,12 @@ from datetime import datetime, timedelta
 
 def create(request):
     # ここの機能でのみ、user_formerセッションを使用する
-    user_former = User.objects.get(pk=90000200)
-    request.session['user_former'] = user_former
+    # user_former = User.objects.get(pk=90000200)
+    # request.session['user_former'] = user_former
 
     # 結合時に上をコメントアウト
-    # user_former = User.objects.get(pk=request.session['user_data'])
-    # request.session['user_former'] = user_former
+    user_former = User.objects.get(pk=request.session['user_data'])
+    request.session['user_former'] = user_former
     context = {'user_former': user_former}
 
     if 'context' in request.session:
@@ -88,7 +88,7 @@ def create(request):
 
                 if '一式' == quantity:
                     quantity = 1
-                pay_all = int(quantity) * int(unit_price) * 1.1
+                pay_all = int(quantity) * int(unit_price)
                 context['pay_all'] = pay_all
 
                 request.session['title'] = title
@@ -142,7 +142,7 @@ def check(request):
                 )
                 print('create all')
                 # トップに戻る
-                return render(request, 'createRingisyo/create.html')
+                return redirect('topPage:topPage_index')
 
 
 def is_not_int(s):

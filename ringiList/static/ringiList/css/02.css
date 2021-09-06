@@ -1,0 +1,303 @@
+@charset 'utf-8';
+
+.ringisyo_area {
+    display: grid;
+    grid-template-columns: 722px;
+    grid-template-rows: repeat(2, 160px) 30px 85px 100px 60px repeat(3, 70px) 40px minmax(50px, 90px) 40px;
+    /*                  title, info      .    docs pay   trader re, tr, rm    .    bottom             . */
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-template-areas:
+        "title_area"
+        "info_area"
+        "."
+        "docs_title_area"
+        "pay_info_area"
+        "trader_info_area"
+        "reason_area"
+        "trader_reason_area"
+        "remarks"
+        "."
+        "bottom_area"
+        "."
+        ;
+
+    margin: auto 72px;
+    width: 722px;
+}
+
+.title_area {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ".";
+    grid-area: title_area;
+}
+
+.info_area {
+    display: grid;
+    grid-template-columns: 400px 79px 243px;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "writer_area info_space auth_area";
+    grid-area: info_area;
+}
+
+.auth_area {
+    display: grid;
+    grid-template-columns: 243px;
+    grid-template-rows: 17px 50px 92px;
+    gap: 0px 0px;
+    grid-template-areas:
+        "dep_title"
+        "dep_name"
+        "person_name";
+    grid-area: auth_area;
+}
+
+.dep_name {
+    display: grid;
+    grid-template-columns: 58.5px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "dep_1"
+        "dep_2";
+    grid-area: dep_name;
+}
+
+.person_name {
+    display: grid;
+    grid-template-columns: 243px;
+    grid-template-rows: 18px 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "position_name"
+        "position_person";
+    grid-area: person_name;
+}
+
+.position_name {
+    display: grid;
+    grid-template-columns: 58.5px 63px 63px 58.5px;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "position_1"
+        "."
+        "."
+        "position_2";
+    grid-area: position_name;
+}
+
+.position_person {
+    display: grid;
+    grid-template-columns: 58.5px 63px 63px 58.5px;
+    grid-template-rows: 75px;
+    gap: 0px 0px;
+    grid-template-areas: "position_person_1 . . position_person_2";
+    grid-area: position_person;
+}
+
+.info_space {
+    display: grid;
+    grid-template-columns: 78px;
+    grid-template-rows: 160px;
+    gap: 0px 0px;
+    grid-template-areas:
+        ".";
+    grid-area: info_space;
+}
+
+.writer_area {
+    display: grid;
+    grid-template-columns: 396px;
+    grid-template-rows: 100px 60px;
+    gap: 0px 0px;
+    grid-template-areas:
+        "docs_type"
+        "date";
+    grid-area: writer_area;
+}
+
+.docs_type {
+    display: grid;
+    grid-template-columns: 396px;
+    grid-template-rows: 32px 1fr;
+    gap: 8px 0px;
+    grid-template-areas:
+        "."
+        ".";
+    grid-area: docs_type;
+}
+
+.date {
+    display: grid;
+    grid-template-columns: 396px;
+    grid-template-rows: 25px 35px;
+    gap: 0px 0px;
+    grid-template-areas:
+        "."
+        ".";
+    grid-area: date;
+}
+
+/* 中身 */
+.docs_title_area {
+    display: grid;
+    grid-template-columns: 600.5px 121.5px;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "docs_title_input docs_title_space";
+    grid-area: docs_title_area;
+}
+
+.docs_title_input {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25px 1fr;
+    gap: 8px 0px;
+    grid-template-areas:
+        "."
+        "docs_input";
+    grid-area: docs_title_input;
+}
+
+.docs_title_space {
+    display: grid;
+    grid-template-columns: 117.5px;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "docs_space"
+        "docs_space";
+    grid-area: docs_title_space;
+}
+
+.pay_info_area {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 30px;
+    gap: 0px 0px;
+    grid-template-areas:
+        "pay_all"
+        "pay_product";
+    grid-area: pay_info_area;
+}
+
+.pay_all {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25px 1fr;
+    gap: 5px 0px;
+    grid-template-areas:
+        "."
+        ".";
+    grid-area: pay_all;
+}
+
+.pay_product {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 10px;
+    grid-template-areas:
+        ". .";
+    grid-area: pay_product;
+}
+
+.trader_info_area {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". product_name"
+        ". trader_name";
+    grid-area: trader_info_area;
+}
+
+.reason_area {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25px 1fr;
+    gap: 5px 0px;
+    grid-template-areas:
+        "."
+        ".";
+    grid-area: reason_area;
+}
+
+.trader_reason_area {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25px 1fr;
+    gap: 5px 0px;
+    grid-template-areas:
+        "."
+        ".";
+    grid-area: trader_reason_area;
+}
+
+.remarks {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25px 1fr;
+    gap: 5px 0px;
+    grid-template-areas:
+        "."
+        ".";
+    grid-area: remarks;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* button部分 */
+
+.bottom_area {
+    display: grid;
+    grid-template-columns: 310px 1fr 270px;
+    grid-template-rows: 90px;
+    gap: 0px 0px;
+    grid-template-areas:
+        "approval . button";
+    grid-area: bottom_area;
+}
+
+.approval {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 28px 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". . . ."
+        "decision_1 decision_2 decision_3 decision_4";
+    grid-area: approval;
+}
+
+
+.button {
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    grid-template-rows: 36px;
+    gap: 0px 20px;
+    grid-template-areas:
+        ". . .";
+    grid-area: button;
+}
+
+
+
+
