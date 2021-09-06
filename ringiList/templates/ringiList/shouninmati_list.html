@@ -1,57 +1,61 @@
 {% extends "ringiList/base.html" %}
 {% load static %}
 
-{% block content %}
-<div class="center">
+{% block body %}
     <div class="center">
+        <div class="center">
             <h1>承認待ち一覧</h1>
-        {% if user_data == 5 %} <!-- 主任だったら -->
-            {% for array in chief %}
-                <form>
-                <button onclick="location.href=&quot;{% url 'ringiList:chief' array.approval_id %}&quot">
-                    作成者:  {{ array.user.last_name }}{{ array.user.first_name }}
-                    件名:  {{ array.title }}
-                </button>
-                <br>
-                </form>
-            {% endfor %}
-        {% endif %}
+            <p>　</p>
+            {% if user_data == 5 %} <!-- 主任だったら -->
 
-        {% if user_data == 4 %} <!-- 部長だったら -->
-            {% for array in director %}
-                <form>
-                <button onclick="location.href=&quot;{% url 'ringiList:director' array.approval_id %}&quot">
-                    作成者:  {{ array.user.last_name }}{{ array.user.first_name }}
-                    件名:  {{ array.title }}
-                </button>
-                <br>
-                </form>
-            {% endfor %}
-        {% endif %}
+                {% for array in chief %}
+                    <form action="{% url 'ringiList:chief' array.approval_id %}" method="get">
+                        <button type="submit">
+                            作成者: {{ array.user.last_name }}{{ array.user.first_name }}
+                            件名: {{ array.title }}
+                        </button>
+                        <br>
+                        <br>
+                    </form>
+                {% endfor %}
+            {% endif %}
 
-        {% if user_data == 3 %} <!-- 常務だったら -->
-            {% for array in mdirector %}
-                <form>
-                <button onclick="location.href=&quot;{% url 'ringiList:mdirector' array.approval_id %}&quot">
-                    作成者:  {{ array.user.last_name }}{{ array.user.first_name }}
-                    件名:  {{ array.title }}
-                </button>
-                <br>
-                </form>
-            {% endfor %}
-        {% endif %}
+            {% if user_data == 4 %} <!-- 部長だったら -->
 
-        {% if user_data == 2 %} <!-- 社長だったら -->
-            {% for array in president %}
-                <form>
-                <button onclick="location.href=&quot;{% url 'ringiList:president' array.approval_id %}&quot">
-                    作成者:  {{ array.user.last_name }}{{ array.user.first_name }}
-                    件名:  {{ array.title }}
-                </button>
-                <br>
-                </form>
-            {% endfor %}
-        {% endif %}
+                {% for array in director %}
+                    <form action="{% url 'ringiList:director' array.approval_id %}" method="get">
+                        <button type="submit">
+                            作成者: {{ array.user.last_name }}{{ array.user.first_name }}
+                            件名: {{ array.title }}
+                        </button>
+                        <br>
+                    </form>
+                {% endfor %}
+            {% endif %}
+
+            {% if user_data == 3 %} <!-- 常務だったら -->
+                {% for array in mdirector %}
+                    <form action="{% url 'ringiList:mdirector' array.approval_id %}" method="get">
+                        <button type="submit">
+                            作成者: {{ array.user.last_name }}{{ array.user.first_name }}
+                            件名: {{ array.title }}
+                        </button>
+                        <br>
+                    </form>
+                {% endfor %}
+            {% endif %}
+
+            {% if user_data == 2 %} <!-- 社長だったら -->
+                {% for array in president %}
+                    <form action="{% url 'ringiList:president' array.approval_id %}" method="get">
+                        <button type="submit">
+                            作成者: {{ array.user.last_name }}{{ array.user.first_name }}
+                            件名: {{ array.title }}
+                        </button>
+                        <br>
+                    </form>
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
-</div>
 {% endblock %}

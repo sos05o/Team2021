@@ -17,6 +17,7 @@ def login(request):
             hashed_pw = create_hashed_pw(pw=password, salt=user_data.salt)
             if hashed_pw == user_data.pw:  # トップページに遷移
                 request.session['user_data'] = user_data.user_id
+                request.session['user_info'] = User.objects.get(pk=user_data.user_id)
                 if user_data.login_flag:
                     return redirect('login:first')
                 else:

@@ -8,22 +8,15 @@ from django.db.models import Q
 
 
 def top_page(request):
-    login_user = request.session['user_data']
-    user_data = User.objects.get(user_id=login_user)
-    request.session['position_id'] = user_data.position_id
-    president = Approval.objects.filter(Q(p_chief=1), Q(p_director=1), Q(p_mdirectop=1), Q(p_president=0), ~Q(user__user_id=login_user)).reverse()
-    mdirector = Approval.objects.filter(Q(p_chief=1), Q(p_director=1), Q(p_mdirectop=0), ~Q(user__user_id=login_user)).reverse()
-    director = Approval.objects.filter(Q(p_chief=1), Q(p_director=0), ~Q(user__user_id=login_user)).reverse()
-    chief = Approval.objects.filter(Q(p_chief=0), ~Q(user__user_id=login_user)).reverse()
-    employee = Approval.objects.all().filter(Q(p_chief=0), Q(user__user_id=login_user)).reverse()
-
+    user_data = User.objects.get(user_id=request.session['user_data'])
+    data = Approval.objects.all()
+    approval = Approval.objects.filter(user_id=user_data)
+    print(user_data)
     context = {
-        'president': president,
-        'mdirector': mdirector,
-        'director': director,
-        'chief': chief,
-        'employee': employee,
-        'user_data': user_data,
+        'approval': approval,  # ユーザidと作成者idが一致する稟議書
+        'user_data': user_data,  # ログインユーザのユーザデータ
+        'data': data,  # 稟議書の全データ
+        'model': get_Approval_query(request.session['user_data'])
     }
-    print(request.session['user_data'], type(request.session['user_data']))
+
     return render(request, 'topPage/topPage.html', context)

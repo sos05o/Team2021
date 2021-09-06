@@ -1,17 +1,17 @@
 {% extends "ringiList/base.html" %}
 {% load static %}
 
-{% block content %}
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'ringiList/css/02.css' %}">
-    <link rel="stylesheet" href="{% static 'ringiList/css/02_border.css' %}">
-    <link rel="stylesheet" href="{% static 'ringiList/css/02_sub.css' %}">
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
-    <title>Document</title>
-</head>
+{% block body %}
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'ringiList/css/02.css' %}">
+        <link rel="stylesheet" href="{% static 'ringiList/css/02_border.css' %}">
+        <link rel="stylesheet" href="{% static 'ringiList/css/02_sub.css' %}">
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+        <title>Document</title>
+    </head>
 
-<body>
+    <body>
     <div class="main_div_ringisyo">
         <div class="ringisyo_area">
             <div class="title_area">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="date">
                         <div>承認期限</div>
-                        <div id="date">{{ approval.limit }}</div>
+                        <div id="date">{{ approval.limited }}</div>
                         <!-- 承認期限を自動入力 -->
                     </div>
                 </div>
@@ -120,35 +120,77 @@
                     <div class="position">部長</div>
                     <div class="position">常務取締役</div>
                     <div class="position">社長</div>
-                    <div class="decision_1"></div>
-                    <div class="decision_2"></div>
-                    <div class="decision_3"></div>
-                    <div class="decision_4"></div>
+                    <div class="decision_1">
+                        {% if approval.p_chief == 1 %}
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
+                        {% elif approval.p_chief == 2 %}
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
+                        {% endif %}
+                    </div>
+                    <div class="decision_2">
+                        {% if approval.p_director == 1 %}
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
+                        {% elif approval.p_director == 2 %}
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
+                        {% endif %}
+                    </div>
+                    <div class="decision_3">
+                        {% if approval.p_mdirectop == 1 %}
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
+                        {% elif approval.p_mdirectop == 2 %}
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
+                        {% endif %}
+                    </div>
+                    <div class="decision_4">
+                        {% if approval.p_president == 1 %}
+                            <p style="font-size:35px">&nbsp&nbsp〇</p>
+                        {% elif approval.p_president == 2 %}
+                            <p style="font-size:35px">&nbsp&nbsp✖</p>
+                        {% endif %}
+                    </div>
                 </div>
                 <!-- 作成時、作成者確認時には不要 -->
                 <div></div>
-                <div class="button">
+                <!--
                     <div class="docs_button"><button onclick="history.back()">戻る</button></div>
-                    <div></div>
-                    {% if user_data == 5 and approval.p_director == 0 %}
-                        <div class="docs_button"><button onclick="location.href=&quot;{% url 'ringiList:tekkai' approval.approval_id %}&quot">
-                        撤回
-                        </button></div>
-                    {% elseif user_data == 4 and approval.p_mdirector == 0 %}
-                        <div class="docs_button"><button onclick="location.href=&quot;{% url 'ringiList:tekkai' approval.approval_id %}&quot">
-                        撤回
-                        </button></div>
-                    {%  elseif user_data == 3 and approval.p_president == 0 %}
-                        <div class="docs_button"><button onclick="location.href=&quot;{% url 'ringiList:tekkai' approval.approval_id %}&quot">
-                        撤回
-                        </button></div>
-                    {% endif %}
-                    <div class="docs_button"></div>
-                </div>
+                    -->
+
+                <div></div>
+                {% if position_id == 5 and approval.p_director == 0 %}
+                    <div class="button">
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:back' %}'" value="  戻る  "
+                               style="font-size:25px;"></div>
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:tekkai' approval.approval_id %}'"
+                               value="  撤回  " style="font-size:25px;"></div>
+                    </div>
+                {% elif position_id == 4 and approval.p_mdirector == 0 %}
+                    <div class="button">
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:back' %}'" value="  戻る  "
+                               style="font-size:25px;"></div>
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:tekkai' approval.approval_id %}'"
+                               value="  撤回  " style="font-size:25px;"></div>
+                    </div>
+
+                {% elif position_id == 3 and approval.p_president == 0 %}
+                    <div class="button">
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:back' %}'" value="  戻る  "
+                               style="font-size:25px;"></div>
+                    <div class="docs_button">
+                        <input type="button" onclick="location.href='{% url 'ringiList:tekkai' approval.approval_id %}'"
+                               value="  撤回  " style="font-size:25px;"></div>
+                    </div>
+                {% endif %}
+
+
             </div>
             <div></div>
         </div>
     </div>
-</body>
+    </body>
 
 {% endblock %}
