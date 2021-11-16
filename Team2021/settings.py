@@ -11,9 +11,15 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from . import local_secret_key as secret
+from pathlib import Path
+import environ
 
-from . import dbUserData
+env = environ.Env()
+env.read_env('.env')
+
+# from . import local_secret_key as secret
+#
+# from . import dbUserData
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,9 +31,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # Application definition
 # アプリケーションを追加した際に、ここに記述を追加しないと認識されない
@@ -88,14 +94,7 @@ WSGI_APPLICATION = 'Team2021.wsgi.application'
 dbData = dbUserData.beanDBUser()
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        # 作成したdbの名前を入力
-        'NAME': dbData.getName(),
-        'USER': dbData.getUser(),
-        'PASSWORD': dbData.getPassword(),
-        'HOST': dbData.getHost(),
-    }
+    'default': env.db(),
 }
 
 # Password validation
@@ -119,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'ja'
+LANGUAGE_CODE = 'ja-JP'
 
 TIME_ZONE = 'Asia/Tokyo'
 
@@ -142,4 +141,4 @@ STATIC_ROOT = '../static'
 #     os.path.join(BASE_DIR+'../static/'),
 # )
 
-SECRET_KEY = secret.SECRET_KEY
+SECRET_KEY = env('SECRET_KEY')

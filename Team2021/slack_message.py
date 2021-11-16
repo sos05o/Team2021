@@ -1,15 +1,13 @@
 from slack_bolt import App
 from slack_sdk.errors import SlackApiError
-import os
+import environ
 
-try:
-    from Team2021 import slack_bot_token_file as token_file
-except KeyError as e:
-    print(e)
-    exit()
+env = environ.Env()
+env.read_env('.env')
+
 
 app = App(
-    token=token_file.token,
+    token=env('TOKEN'),
 )
 
 
