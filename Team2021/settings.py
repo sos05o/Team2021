@@ -28,7 +28,6 @@ DEBUG = os.environ['DEBUG']
 
 ALLOWED_HOSTS = os.environ['ARROWED_HOSTS']
 
-django_heroku.settings(locals())
 
 # Application definition
 # アプリケーションを追加した際に、ここに記述を追加しないと認識されない
@@ -135,3 +134,4 @@ STATIC_ROOT = '../static'
 # )
 
 SECRET_KEY = os.environ['SECRET_KEY']
+django_heroku.settings(locals())
