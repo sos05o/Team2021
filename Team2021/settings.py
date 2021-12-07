@@ -12,12 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from pathlib import Path
-import environ
-
-# env = environ.Env()
-
-if not HEROKU_ENV:
-    env.read_env('.env')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = os.environ('DEBUG')
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+ALLOWED_HOSTS = os.environ('ALLOWED_HOSTS')
 
 # Application definition
 # アプリケーションを追加した際に、ここに記述を追加しないと認識されない
@@ -90,7 +84,7 @@ WSGI_APPLICATION = 'Team2021.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db(),
+    'default': os.environ["DATABASE_URL"],
 }
 
 # Password validation
@@ -137,4 +131,4 @@ STATIC_ROOT = '../static'
 #     os.path.join(BASE_DIR+'../static/'),
 # )
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.environ('SECRET_KEY')
