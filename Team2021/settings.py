@@ -87,8 +87,6 @@ WSGI_APPLICATION = 'Team2021.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-dbData = dbUserData.beanDBUser()
-
 DATABASES = {
     'default': env.db(),
 }
@@ -114,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'ja-JP'
+LANGUAGE_CODE = 'ja'
 
 TIME_ZONE = 'Asia/Tokyo'
 
