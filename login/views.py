@@ -4,9 +4,7 @@ from django.shortcuts import render, redirect
 from common.models import *
 from Team2021 import slack_message as s_m_send
 
-
 # Create your views here.
-
 
 def login(request):
     if request.method == 'POST':
@@ -15,6 +13,10 @@ def login(request):
             password = request.POST['user_password']
             user_data = User.objects.get(pk=user_id)
             hashed_pw = create_hashed_pw(pw=password, salt=user_data.salt)
+
+            if not isint(user_id):
+                return redirect('login:first')
+
             if hashed_pw == user_data.pw:  # トップページに遷移
                 request.session['user_data'] = user_data.user_id
                 request.session['user_info'] = User.objects.get(pk=user_data.user_id)
@@ -62,3 +64,11 @@ def create_hashed_pw(pw, salt):
     b_salt = bytes(salt, 'utf-8')
     hashed_pw = hashlib.pbkdf2_hmac('sha256', b_pw, b_salt, 100).hex()
     return hashed_pw
+
+def isint(s):
+    try:
+        int(s, 10)
+    except ValueError:
+        return False
+    else:
+        return True
